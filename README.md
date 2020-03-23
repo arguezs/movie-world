@@ -1,5 +1,7 @@
 # Movie Theater Manager
+
 *[Leer en español](README.es.md)*
+
 A web application for the management of a movie theater, developed with Vue.js for the client side, and Express.js for the server side.
 
 This application is beign developed as final project for the Web Application Development course.

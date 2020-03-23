@@ -1,5 +1,7 @@
-#Gestor de Salas de Cine
+# Gestor de Salas de Cine
+
 *[Read in English](README.md)*
+
 Una aplicación web para la gestión de unas salas de cine, desarrollada con Vue.js para la parte cliente, y Express.js para la parte servidor.
 
 Esta apliación está siendo desarrollada como proyecto final del CFGS Desarrollo de Aplicaciones Web.
