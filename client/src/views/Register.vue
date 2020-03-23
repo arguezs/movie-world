@@ -1,8 +1,8 @@
 <template>
     <div>
         <h1>Register</h1>
-        <input type="email" placeholder="email">
-        <input type="password" placeholder="Password">
+        <input type="email" placeholder="email"><br>
+        <input type="password" placeholder="Password"><br>
         <button>Submit</button>
     </div>
 </template>
