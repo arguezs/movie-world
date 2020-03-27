@@ -6,6 +6,7 @@
 
 <script>
 import MoviePreview from '@/components/MoviePreview'
+import MovieService from '@/services/MovieService'
 
 export default {
     data () {
@@ -19,7 +20,10 @@ export default {
             ]
         }
     },
-    components: { MoviePreview }
+    components: { MoviePreview },
+    async mounted () {
+        this.movies = (await MovieService.fetch()).data
+    }
 }
 </script>
 

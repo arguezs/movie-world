@@ -1,6 +1,16 @@
 const {Movie} = require('../models')
 
 module.exports = {
+  async fetch (req, res) {
+    try {
+      const movies = await Movie.findAll()
+      res.send(movies)
+    } catch (error) {
+      res.status(500).send({
+        error: error
+      })
+    }
+  },
   async create (req, res) {
     try {
       const movie = await Movie.create(req.body)
