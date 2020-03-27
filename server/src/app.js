@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 
+const {sequelize} = require('./models')
+
 const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
@@ -14,4 +16,8 @@ app.get('/status', (req, res) => {
     })
 })
 
-app.listen(8081)
+sequelize.sync()
+    .then( () => {
+        app.listen(8081)
+        console.log(`\nServer started on port 8081`);
+    })
