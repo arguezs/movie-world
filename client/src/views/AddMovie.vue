@@ -58,15 +58,20 @@
         v-model="movie.cast"
         label="Reparto"></v-textarea>
     </v-form>
+    <span
+      v-if="error"
+      class="red--text">{{error}}</span>
     <v-btn
       color="primary"
       dark
       class="align-self-center"
-      >Añadir</v-btn>
+      @click="add">Añadir</v-btn>
   </v-container>
 </template>
 
 <script>
+import MovieService from '@/services/MovieService'
+
 export default {
     data () {
         return {
@@ -79,11 +84,23 @@ export default {
                 director: '',
                 sinopsis: '',
                 cast: ''
-            }
+            },
+            error: null
         }
     },
     methods: {
-      
+      async add () {
+        this.error = null
+
+        try {
+          await MovieService.post(this.movie)
+          this.$router.push({
+            name: 'Movies'
+          })
+        } catch (error) {
+          this.error = "Error al añadir la película"
+        }
+      }
     }
 }
 </script>
