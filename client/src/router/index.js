@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Register from '../views/Register'
 import Movies from '@/views/Movies'
+import AddMovie from '@/views/AddMovie'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
     path: '/movies',
     name: 'Movies',
     component: Movies
+  },
+  {
+    path: '/movies/add',
+    name: 'AddMovie',
+    component: AddMovie
   }
 ]
 
