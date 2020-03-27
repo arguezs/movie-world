@@ -11,13 +11,7 @@ import MovieService from '@/services/MovieService'
 export default {
     data () {
         return {
-            movies: [
-                {
-                    id: 1,
-                    title: 'Onward',
-                    poster: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRz-fNS2DjNUMTtC9HIhP6haHeMzjjKZVeaII0Rl3yeiKEhZmB0'
-                }
-            ]
+            movies: []
         }
     },
     components: { MoviePreview },
