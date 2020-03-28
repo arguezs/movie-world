@@ -11,6 +11,17 @@ module.exports = {
       })
     }
   },
+  async singleFetch (req, res){
+    try {
+      console.log(req.params.movieId)
+      const movie = await Movie.findByPk(req.params.movieId)
+      res.send(movie)
+    } catch (error) {
+      res.status(500).send({
+        error: error
+      })
+    }
+  },
   async create (req, res) {
     try {
       const movie = await Movie.create(req.body)

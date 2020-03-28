@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Register from '../views/Register'
 import Movies from '@/views/Movies'
 import AddMovie from '@/views/AddMovie'
+import SingleMovie from '@/views/SingleMovie'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/movies/add',
     name: 'AddMovie',
     component: AddMovie
+  },
+  {
+    path: '/movies/:movieId',
+    name: 'SingleMovie',
+    component: SingleMovie
   }
 ]
 
