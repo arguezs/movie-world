@@ -5,8 +5,11 @@
       class="white--text align-end"
       height="300px"
       :src="movie.poster">
-      <v-card-title>{{movie.title}}</v-card-title>
     </v-img>
+    <v-btn
+      text
+      block
+      :to="{name:'SingleMovie', params: {movieId: movie.id}}">{{movie.title}}</v-btn>
   </v-card>
 </template>
 
@@ -18,6 +21,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.text-truncate{
+  max-width: 200px;
+}
 </style>
