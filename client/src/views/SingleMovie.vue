@@ -8,14 +8,23 @@
         {{movie.director}} -
         {{movie.genre}}
       </v-card-subtitle>
-      <div class="d-flex">
-        <v-card-text>{{movie.sinopsis}}</v-card-text>
-        <v-img
-          class="ma-2"
-          max-height="300px"
-          contain
-          :src="movie.poster"></v-img>
-      </div>
+      <v-row dense>
+        <v-col>
+          <v-card-text>{{movie.sinopsis}}</v-card-text>
+          <v-card-text>
+            <div class="overline">Reparto</div>
+            {{movie.cast}}
+          </v-card-text>
+        </v-col>
+        <v-col cols="auto">
+          <v-img
+            class="ma-2"
+            max-height="300px"
+            max-width="250px"
+            contain
+            :src="movie.poster"></v-img>
+        </v-col>
+      </v-row>
     </v-card>
   </v-container>
 </template>
