@@ -3,7 +3,7 @@
     width="200">
     <v-img
       class="white--text align-end"
-      contain
+      height="300px"
       :src="movie.poster">
       <v-card-title>{{movie.title}}</v-card-title>
     </v-img>

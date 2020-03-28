@@ -1,7 +1,14 @@
 <template>
-  <div>
-      <movie-preview v-for="movie in movies" :key="movie.id" :movie="movie" />
-  </div>
+  <v-container>
+    <v-row>
+      <v-col
+        cols="auto"
+        v-for="movie in movies"
+        :key="movie.id" >
+        <movie-preview :movie="movie" />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
