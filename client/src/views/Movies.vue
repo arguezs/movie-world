@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <v-btn
+      :to="{name: 'AddMovie'}"
+      color="primary">
+      <v-icon left>add</v-icon>
+      Añadir
+    </v-btn>
     <v-row>
       <v-col
         cols="auto"
