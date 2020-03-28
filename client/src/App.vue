@@ -30,6 +30,7 @@
       <v-toolbar-items>
         <v-btn
           text
+          exact
           :to="{name: 'Movies'}">Películas</v-btn>
       </v-toolbar-items>
     </v-app-bar>
