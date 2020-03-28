@@ -7,9 +7,12 @@
       :src="movie.poster">
     </v-img>
     <v-btn
+      small
       text
       block
-      :to="{name:'SingleMovie', params: {movieId: movie.id}}">{{movie.title}}</v-btn>
+      :to="{name:'SingleMovie', params: {movieId: movie.id}}">
+      <span class="text-truncate">{{movie.title}}</span>
+    </v-btn>
   </v-card>
 </template>
 
