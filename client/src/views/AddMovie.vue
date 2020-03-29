@@ -24,9 +24,10 @@
             label="Duración"></v-text-field>
         </v-col>
         <v-col>
-          <v-text-field
+          <v-select
+            :items="ratings"
             v-model="movie.rating"
-            label="Rating"></v-text-field>
+            label="Rating"></v-select>
         </v-col>
         <v-col>
           <v-text-field
@@ -48,7 +49,7 @@
         <v-col>
           <v-text-field
             v-model="movie.director"
-            label="Director"></v-text-field>
+            label="Dirección"></v-text-field>
         </v-col>
       </v-row>
       <v-textarea
@@ -85,6 +86,7 @@ export default {
                 sinopsis: '',
                 cast: ''
             },
+            ratings: [ 'TP', 'M-7', 'M-12', 'M-16', 'M-18' ],
             error: null
         }
     },
