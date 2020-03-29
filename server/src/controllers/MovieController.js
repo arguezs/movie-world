@@ -3,7 +3,9 @@ const {Movie} = require('../models')
 module.exports = {
   async fetch (req, res) {
     try {
-      const movies = await Movie.findAll()
+      const movies = await Movie.findAll({
+        order: [['title', 'ASC']]
+      })
       res.send(movies)
     } catch (error) {
       res.status(500).send({
