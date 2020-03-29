@@ -38,6 +38,12 @@
       <v-row>
         <v-col>
           <v-text-field
+            type="number"
+            v-model="movie.year"
+            label="Año"></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field
             v-model="movie.trailer"
             label="Trailer"></v-text-field>
         </v-col>
@@ -79,6 +85,7 @@ export default {
             movie: {
                 title: '',
                 duration: '',
+                year: '',
                 rating: '',
                 trailer: '',
                 poster: '',
