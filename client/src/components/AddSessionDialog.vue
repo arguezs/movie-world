@@ -19,10 +19,16 @@
         class="text-center">
         <v-row>
           <v-col>
-            <v-select
+            <v-text-field
+              v-model="session.theaterId"
+              type="number"
+              min="1"
+              max="13"
+              label="Sala"></v-text-field>
+            <!-- <v-select
               v-model="session.theaterId"
               label="Sala"
-              :items="theaters"></v-select>
+              :items="theaters"></v-select> -->
           </v-col>
         </v-row>
         <v-row>
@@ -55,7 +61,6 @@
           <v-col>
             <v-menu
               ref="menu2"
-              v-model="menu2"
               :close-on-content-click="false"
               :nudge-right="40"
               :return-value.sync="time"
@@ -81,6 +86,11 @@
             </v-menu>
           </v-col>
         </v-row>
+        <v-row
+          v-if="error"
+          align="space-between">
+          <v-col class="red--text">{{error}}</v-col>
+        </v-row>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -90,13 +100,16 @@
           @click="dialog = false">Cerrar</v-btn>
         <v-btn
           color="primary"
-          text>Añadir</v-btn>
+          text
+          @click="newSession">Añadir</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import SessionService from '@/services/SessionService'
+
 export default {
   data () {
     return {
@@ -108,14 +121,12 @@ export default {
       },
       theaters: [],
       date: '',
-      time: ''
+      time: '',
+      error: null
     }
   },
   props: {
     movie: {}
-  },
-  mounted () {
-    this.session.movieId = this.movie.id
   },
   watch: {
     date: function (val) {
@@ -123,6 +134,25 @@ export default {
     },
     time: function (val) {
       this.session.date = `${this.date} ${val}`
+    },
+    movie: function (val) {
+      this.session.movieId = val.id
+    }
+  },
+  methods: {
+    async newSession () {
+      this.error = null
+
+      try {
+        await SessionService.post(this.session)
+
+        this.dialog = false
+        this.date = ''
+        this.time = ''
+        this.session.theaterId = ''
+      } catch (error) { 
+        this.error = "Error al crear la sesión"
+      }
     }
   }
 }

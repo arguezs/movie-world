@@ -10,5 +10,15 @@ module.exports = {
         error: error
       })
     }
+  },
+  async create (req, res) {
+    try {
+      const session = await Session.create(req.body)
+      res.send(session)
+    } catch (error) {
+      res.status(500).send({
+        error: 'Se ha producido un error al añadir la sesión'
+      })
+    }
   }
 }
