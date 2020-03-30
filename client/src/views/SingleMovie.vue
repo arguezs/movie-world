@@ -35,7 +35,15 @@
         <v-col
           cols="auto"
           class="pa-6">
-          <add-session-dialog :movie="movie"></add-session-dialog>
+          <add-session-dialog :movie="movie" />
+        </v-col>
+      </v-row>
+      <v-row class="mx-1">
+        <v-col
+          v-for="session in sessions"
+          :key="session.id"
+          cols="auto">
+          <session-chip :session="session" />
         </v-col>
       </v-row>
       
@@ -45,20 +53,26 @@
 
 <script>
 import MovieService from '@/services/MovieService'
+import SessionService from '@/services/SessionService'
+
 import AddSessionDialog from '@/components/AddSessionDialog'
+import SessionChip from '@/components/SessionChip'
 
 export default {
   data () {
     return {
-      movie: {}
+      movie: {},
+      sessions: []
     }
   },
   async mounted () {
     const movieId = this.$route.params.movieId
     this.movie = (await MovieService.fetch(movieId)).data
+    this.sessions = (await SessionService.fetch(movieId)).data
   },
   components: {
-    AddSessionDialog
+    AddSessionDialog,
+    SessionChip
   }
 }
 </script>

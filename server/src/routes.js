@@ -9,6 +9,8 @@ module.exports = (app) => {
   app.post('/movies',
     MovieController.create)
 
+  app.get('/session/:movieId',
+    SessionController.fetch)
   app.post('/session',
     SessionController.create)
 }

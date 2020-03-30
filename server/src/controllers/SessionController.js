@@ -3,7 +3,13 @@ const {Session} = require('../models')
 module.exports = {
   async fetch (req, res) {
     try {
-      const sessions = await Session.findAll()
+      console.log(req.body)
+      const sessions = await Session.findAll({
+        where: {
+          movieId: req.params.movieId
+        },
+        order: [['date']]
+      })
       res.send(sessions)
     } catch (error) {
       res.status(500).send({
