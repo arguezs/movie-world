@@ -1,7 +1,8 @@
 <template>
   <v-dialog
     v-model="dialog"
-    persistent>
+    persistent
+    width="600">
 
     <template v-slot:activator="{ on }">
       <v-btn
@@ -26,15 +27,71 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-date-picker
-              v-model="date"></v-date-picker>
+            <v-menu
+              ref="menu"
+              :close-on-content-click="false"
+              :return-value.sync="date"
+              transition="scale-transition"
+              offset-y
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="date"
+                  label="Día"
+                  prepend-icon="event"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="date"
+                no-title
+                scrollable
+                @click:date="$refs.menu.save(date)"></v-date-picker>
+            </v-menu>
           </v-col>
+
           <v-col>
-            <v-time-picker
-              v-model="time"></v-time-picker>
+            <v-menu
+              ref="menu2"
+              v-model="menu2"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              :return-value.sync="time"
+              transition="scale-transition"
+              offset-y
+              max-width="290px"
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="time"
+                  label="Hora"
+                  prepend-icon="access_time"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-time-picker
+                format="24hr"
+                v-model="time"
+                @click:minute="$refs.menu2.save(time)"
+              ></v-time-picker>
+            </v-menu>
           </v-col>
         </v-row>
       </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          color="error"
+          text
+          @click="dialog = false">Cerrar</v-btn>
+        <v-btn
+          color="primary"
+          text>Añadir</v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>

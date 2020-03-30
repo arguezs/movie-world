@@ -32,7 +32,9 @@
         <v-col>
           <v-card-title>Sesiones</v-card-title>
         </v-col>
-        <v-col cols="auto">
+        <v-col
+          cols="auto"
+          class="pa-6">
           <add-session-dialog :movie="movie"></add-session-dialog>
         </v-col>
       </v-row>
