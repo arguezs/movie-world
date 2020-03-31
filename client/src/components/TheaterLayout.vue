@@ -6,6 +6,7 @@
       v-for="row in seats"
       :key="seats.indexOf(row)">
       <v-col
+        class="pa-1"
         cols="auto"
         v-for="seat in row"
         :key="seat.id">
