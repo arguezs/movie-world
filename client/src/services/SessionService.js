@@ -6,5 +6,8 @@ export default {
   },
   post (session) {
     return Api().post('session', session)
+  },
+  fetchSeats (sessionId) {
+    return Api().get(`session/${sessionId}/seats`)
   }
 }
