@@ -26,5 +26,16 @@ module.exports = {
         error: 'Se ha producido un error al añadir la sesión'
       })
     }
+  },
+  async fetchSessionSeat(req, res) {
+    try {
+      const session = await Session.findByPk(req.params.sessionId),
+            seats = await session.getSeats()
+      res.send(seats)
+    } catch (error) {
+      res.status(500).send({
+        error: 'Se ha producido un error'
+      })
+    }
   }
 }
