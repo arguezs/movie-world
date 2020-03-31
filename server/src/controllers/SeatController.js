@@ -14,5 +14,33 @@ module.exports = {
         error: error
       })
     }
+  },
+  async fetchTheater (req, res) {
+    try {
+      const rowCount = (await Seat.count({
+        where: {
+          theaterId: req.params.theaterId
+        },
+        group: 'row'
+      })).length
+
+      let rows = []
+
+      for (let i=1; i<=rowCount; i++) {
+        rows.push(await Seat.findAll({
+          where: {
+            theaterId: req.params.theaterId,
+            row: i
+          }
+        }))
+      }
+
+      res.send(rows)
+
+    } catch (error) {
+      res.status(500).send({
+        error: 'Se ha producido un error'
+      })
+    }
   }
 }
