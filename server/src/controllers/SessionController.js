@@ -1,4 +1,4 @@
-const {Session} = require('../models')
+const {Session, Seat} = require('../models')
 
 module.exports = {
   async fetch (req, res) {
@@ -32,6 +32,24 @@ module.exports = {
       const session = await Session.findByPk(req.params.sessionId),
             seats = await session.getSeats()
       res.send(seats)
+    } catch (error) {
+      res.status(500).send({
+        error: 'Se ha producido un error'
+      })
+    }
+  },
+  async addSessionSeats(req, res) {
+    try {
+      const session = await Session.findByPk(req.params.sessionId)
+      let seats = req.body
+
+      for (let seat of seats) {
+        seat = await Seat.findByPk(seat)
+      }
+
+      const addedSeats = await session.addSeats(seats)
+
+      res.send(addedSeats)
     } catch (error) {
       res.status(500).send({
         error: 'Se ha producido un error'

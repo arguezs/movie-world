@@ -12,8 +12,10 @@ module.exports = (app) => {
 
   app.get('/session/:movieId',
     SessionController.fetch)
-  app.get('/session/seats/:sessionId',
+  app.get('/session/:sessionId/seats',
     SessionController.fetchSessionSeat)
+  app.post('/session/:sessionId/seats',
+    SessionController.addSessionSeats)
   app.post('/session',
     SessionController.create)
 
