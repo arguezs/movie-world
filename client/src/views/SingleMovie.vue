@@ -68,7 +68,7 @@ export default {
   async mounted () {
     const movieId = this.$route.params.movieId
     this.movie = (await MovieService.fetch(movieId)).data
-    this.sessions = (await SessionService.fetch(movieId)).data
+    this.sessions = (await SessionService.fetchAll(movieId)).data
   },
   components: {
     AddSessionDialog,

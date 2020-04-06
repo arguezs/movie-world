@@ -1,7 +1,7 @@
 const {Session, Seat} = require('../models')
 
 module.exports = {
-  async fetch (req, res) {
+  async fetchAll (req, res) {
     try {
       console.log(req.body)
       const sessions = await Session.findAll({
