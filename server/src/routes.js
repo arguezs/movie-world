@@ -12,6 +12,8 @@ module.exports = (app) => {
 
   app.get('/movies/:movieId/sessions',
     SessionController.fetchAll)
+  app.get('/session/:sessionId',
+    SessionController.fetchOne)
   app.get('/session/:sessionId/seats',
     SessionController.fetchSessionSeat)
   app.post('/session/:sessionId/seats',

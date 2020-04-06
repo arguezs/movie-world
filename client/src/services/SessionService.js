@@ -9,5 +9,8 @@ export default {
   },
   fetchSeats (sessionId) {
     return Api().get(`session/${sessionId}/seats`)
+  },
+  fetchOne (sessionId) {
+    return Api().get(`session/${sessionId}`)
   }
 }
