@@ -18,14 +18,16 @@ import SessionService from '@/services/SessionService'
 export default {
   data () {
     return {
+      session: {},
       theater: [],
       sessionSeats: []
     }
   },
   async mounted () {
-    const theaterId = this.$route.params.theaterId
-    this.theater = (await TheaterService.fetchTheater(theaterId)).data
-    this.sessionSeats = (await SessionService.fetchSeats(2)).data
+    const sessionId = this.$route.params.sessionId
+    this.session = (await SessionService.fetchOne(sessionId)).data
+    this.theater = (await TheaterService.fetchTheater(this.session.theaterId)).data
+    this.sessionSeats = (await SessionService.fetchSeats(sessionId)).data
   },
   components: { TheaterLayout }
 }

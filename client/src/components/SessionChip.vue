@@ -1,5 +1,8 @@
 <template>
-  <v-chip>
+  <v-chip
+    :to="{
+      name: 'Session',
+      params: {sessionId: session.id} }">
     {{dateString}}
   </v-chip>
 </template>

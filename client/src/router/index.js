@@ -47,6 +47,11 @@ const routes = [
     path: '/theater/:theaterId',
     name: 'Theater',
     component: Theater
+  },
+  {
+    path: '/session/:sessionId',
+    name: 'Session',
+    component: Theater
   }
 ]
 
