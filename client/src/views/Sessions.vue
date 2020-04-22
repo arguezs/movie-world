@@ -44,7 +44,8 @@
         <v-row
           v-for="session in sessions"
           :key="session.id">
-          <v-col>{{session.time}}</v-col>
+          <v-col
+            cols="auto">{{session.time}}</v-col>
           <v-col>{{session.movieId}}</v-col>
         </v-row>
       </v-container>
@@ -75,13 +76,11 @@ export default {
   watch: {
     date: async function () {
       if (this.theater) {
-        console.log('Hola estoy funcionando (date)')
         this.sessions = (await SessionService.fetchWithDayAndTheater(this.date, this.theater)).data
       }
     },
     theater: async function () {
       if (this.date) {
-        console.log('Hola estoy funcionando (theater)')
         this.sessions = (await SessionService.fetchWithDayAndTheater(this.date, this.theater)).data
       }
     }
