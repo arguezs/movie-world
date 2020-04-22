@@ -22,7 +22,7 @@ module.exports = (app) => {
   app.post('/session',
     SessionController.create)
 
-  app.get('/sessions',
+  app.get('/sessions/:date/:theaterId',
     SessionController.fetchWithDayAndTheater)
 
   app.get('/seats/:theaterId',

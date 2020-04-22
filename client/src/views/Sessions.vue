@@ -36,6 +36,23 @@
           v-model="theater"></v-select>
       </v-col>
     </v-row>
+
+    <v-row
+      v-if="theater && date">
+      <v-container
+        v-if="sessions.length">
+        <v-row
+          v-for="session in sessions"
+          :key="session.id">
+          <v-col>{{session.time}}</v-col>
+          <v-col>{{session.movieId}}</v-col>
+        </v-row>
+      </v-container>
+      <v-container
+        v-else>
+        No se han encontrado sesiones
+      </v-container>
+    </v-row>
   </v-container>
 </template>
 
@@ -58,12 +75,14 @@ export default {
   watch: {
     date: async function () {
       if (this.theater) {
-        this.sessions = (await SessionService.fetchWithDayAndTheater()).data
+        console.log('Hola estoy funcionando (date)')
+        this.sessions = (await SessionService.fetchWithDayAndTheater(this.date, this.theater)).data
       }
     },
     theater: async function () {
       if (this.date) {
-        this.sessions = (await SessionService.fetchWithDayAndTheater()).data
+        console.log('Hola estoy funcionando (theater)')
+        this.sessions = (await SessionService.fetchWithDayAndTheater(this.date, this.theater)).data
       }
     }
   }

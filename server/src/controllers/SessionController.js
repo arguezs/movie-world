@@ -67,10 +67,11 @@ module.exports = {
   },
   async fetchWithDayAndTheater(req, res) {
     try {
+      console.log(req.params)
       const sessions = await Session.findAll({
         where: {
-          date: req.body.date,
-          theaterId: req.body.theaterId
+          date: req.params.date,
+          theaterId: req.params.theaterId
         }
       })
       res.send(sessions)
