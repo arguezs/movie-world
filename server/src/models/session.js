@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Session = sequelize.define('Session', {
-    date: DataTypes.DATE,
+    date: DataTypes.DATEONLY,
+    time: DataTypes.TIME
   })
 
   Session.associate = function(models) {
