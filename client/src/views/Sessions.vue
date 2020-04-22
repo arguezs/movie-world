@@ -41,13 +41,10 @@
       v-if="theater && date">
       <v-container
         v-if="sessions.length">
-        <v-row
+        <session-preview
           v-for="session in sessions"
-          :key="session.id">
-          <v-col
-            cols="auto">{{session.time}}</v-col>
-          <v-col>{{session.movieId}}</v-col>
-        </v-row>
+          :key="session.id"
+          :session="session" />
       </v-container>
       <v-container
         v-else>
@@ -58,6 +55,7 @@
 </template>
 
 <script>
+import SessionPreview from '@/components/SessionPreview'
 import SessionService from '@/services/SessionService'
 import TheaterService from '@/services/TheaterService'
 
@@ -70,6 +68,7 @@ export default {
       theaters: []
     }
   },
+  components: { SessionPreview },
   async mounted () {
     this.theaters = (await TheaterService.fetchTheaters()).data
   },
