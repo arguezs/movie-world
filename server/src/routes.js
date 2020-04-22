@@ -1,6 +1,7 @@
 const MovieController = require('./controllers/MovieController')
 const SessionController = require('./controllers/SessionController')
 const SeatController = require('./controllers/SeatController')
+const TheaterController = require('./controllers/TheaterController')
 
 module.exports = (app) => {
   app.get('/movies',
@@ -23,4 +24,7 @@ module.exports = (app) => {
 
   app.get('/seats/:theaterId',
     SeatController.fetchTheater)
+
+  app.get('/theaters',
+    TheaterController.fetch)
 }

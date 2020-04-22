@@ -31,15 +31,28 @@
       <v-col>
         <h2>Sala</h2>
         <v-select
-          label="Sala"></v-select>
+          label="Sala"
+          v-model="theater"></v-select>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-export default {
+import TheaterService from '@/services/TheaterService'
 
+export default {
+  data () {
+    return {
+      sessions: [],
+      date: null,
+      theater: null,
+      theaters: []
+    }
+  },
+  async mounted () {
+    this.theaters = (await TheaterService.fetchTheaters()).data
+  }
 }
 </script>
 
