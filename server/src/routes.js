@@ -22,6 +22,9 @@ module.exports = (app) => {
   app.post('/session',
     SessionController.create)
 
+  app.get('/sessions',
+    SessionController.fetchWithDayAndTheater)
+
   app.get('/seats/:theaterId',
     SeatController.fetchTheater)
 

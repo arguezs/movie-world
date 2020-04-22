@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import SessionService from '@/services/SessionService'
 import TheaterService from '@/services/TheaterService'
 
 export default {
@@ -53,6 +54,18 @@ export default {
   },
   async mounted () {
     this.theaters = (await TheaterService.fetchTheaters()).data
+  },
+  watch: {
+    date: async function () {
+      if (this.theater) {
+        this.sessions = (await SessionService.fetchWithDayAndTheater()).data
+      }
+    },
+    theater: async function () {
+      if (this.date) {
+        this.sessions = (await SessionService.fetchWithDayAndTheater()).data
+      }
+    }
   }
 }
 </script>

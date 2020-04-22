@@ -64,5 +64,20 @@ module.exports = {
         error: 'Se ha producido un error'
       })
     }
+  },
+  async fetchWithDayAndTheater(req, res) {
+    try {
+      const sessions = await Session.findAll({
+        where: {
+          date: req.body.date,
+          theaterId: req.body.theaterId
+        }
+      })
+      res.send(sessions)
+    } catch (error) {
+      res.status(500).send({
+        error: error
+      })
+    }
   }
 }
