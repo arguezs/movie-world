@@ -3,7 +3,6 @@
     <h1>Sesiones</h1>
     <v-row>
       <v-col>
-        <h2>Día</h2>
         <v-menu
           ref="menu"
           :close-on-content-click="false"
@@ -29,9 +28,11 @@
         </v-menu>
       </v-col>
       <v-col>
-        <h2>Sala</h2>
         <v-select
           label="Sala"
+          :items="theaters"
+          item-text="name"
+          item-value="id"
           v-model="theater"></v-select>
       </v-col>
     </v-row>
