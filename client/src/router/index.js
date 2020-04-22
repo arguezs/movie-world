@@ -6,6 +6,7 @@ import Movies from '@/views/Movies'
 import AddMovie from '@/views/AddMovie'
 import SingleMovie from '@/views/SingleMovie'
 import Theater from '@/views/Theater'
+import Sessions from '@/views/Sessions'
 
 Vue.use(VueRouter)
 
@@ -52,6 +53,11 @@ const routes = [
     path: '/session/:sessionId',
     name: 'Session',
     component: Theater
+  },
+  {
+    path: '/sessions',
+    name: 'Sessions',
+    component: Sessions
   }
 ]
 
