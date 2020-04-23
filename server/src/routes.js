@@ -21,6 +21,8 @@ module.exports = (app) => {
     SessionController.addSessionSeats)
   app.post('/session',
     SessionController.create)
+  app.delete('/session/:sessionId',
+    SessionController.remove)
 
   app.get('/sessions/:date/:theaterId',
     SessionController.fetchWithDayAndTheater)

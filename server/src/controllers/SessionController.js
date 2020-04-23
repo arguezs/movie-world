@@ -79,5 +79,20 @@ module.exports = {
         error: error
       })
     }
+  },
+  async remove (req, res) {
+    try {
+      Session.destroy({
+        where: {
+          id: req.params.sessionId
+        }
+      }).then(() => {
+        res.send(true)
+      })
+    } catch (error) {
+      res.status(500).send({
+        error: error
+      })
+    }
   }
 }

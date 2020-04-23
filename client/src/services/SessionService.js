@@ -15,5 +15,8 @@ export default {
   },
   fetchWithDayAndTheater (date, theaterId) {
     return Api().get(`sessions/${date}/${theaterId}`)
+  },
+  remove (sessionId) {
+    return Api().delete(`session/${sessionId}`)
   }
 }
