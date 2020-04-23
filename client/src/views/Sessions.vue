@@ -62,12 +62,20 @@
           </v-banner>
         </v-col>
       </v-row>
+
+      <v-row>
+        <add-session
+          :date="date"
+          :theater="theater" />
+      </v-row>
     </v-container>
   </v-container>
 </template>
 
 <script>
 import SessionPreview from '@/components/SessionPreview'
+import AddSession from '@/components/AddSession'
+
 import SessionService from '@/services/SessionService'
 import TheaterService from '@/services/TheaterService'
 
@@ -80,7 +88,7 @@ export default {
       theaters: []
     }
   },
-  components: { SessionPreview },
+  components: { SessionPreview, AddSession },
   async mounted () {
     this.theaters = (await TheaterService.fetchTheaters()).data
   },
