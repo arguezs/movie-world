@@ -37,20 +37,32 @@
       </v-col>
     </v-row>
 
-    <v-row
+    <v-container
       v-if="theater && date">
-      <v-container
+
+      <v-row
         v-if="sessions.length">
         <session-preview
           v-for="session in sessions"
           :key="session.id"
           :session="session" />
-      </v-container>
-      <v-container
-        v-else>
-        No se han encontrado sesiones
-      </v-container>
-    </v-row>
+      </v-row>
+
+      <v-row v-else>
+        <v-col>
+          <v-banner
+            single-line
+            class="text-center">
+            <v-icon
+              color="error">
+              error_outline
+            </v-icon>
+
+            No se han encontrado sesiones
+          </v-banner>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-container>
 </template>
 
