@@ -65,6 +65,7 @@
 
       <v-row>
         <add-session
+          v-on:resync-sessions="resyncSessions"
           :date="date"
           :theater="theater" />
       </v-row>
@@ -95,13 +96,18 @@ export default {
   watch: {
     date: async function () {
       if (this.theater) {
-        this.sessions = (await SessionService.fetchWithDayAndTheater(this.date, this.theater)).data
+        this.resyncSessions()
       }
     },
     theater: async function () {
       if (this.date) {
-        this.sessions = (await SessionService.fetchWithDayAndTheater(this.date, this.theater)).data
+        this.resyncSessions()
       }
+    }
+  },
+  methods: {
+    async resyncSessions () {
+      this.sessions = (await SessionService.fetchWithDayAndTheater(this.date, this.theater)).data
     }
   }
 }

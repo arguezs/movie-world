@@ -37,7 +37,8 @@
         <v-btn
           tile
           color="primary"
-          outlined>Añadir</v-btn>
+          outlined
+          @click="create">Añadir</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -45,6 +46,7 @@
 
 <script>
 import MovieService from '@/services/MovieService'
+import SessionService from '@/services/SessionService'
 
 export default {
   data () {
@@ -55,12 +57,26 @@ export default {
         time: null,
         movieId: null,
         theaterId: this.theater
-      }
+      },
+      error: null
     }
   },
   props: ['theater', 'date'],
   async mounted () {
     this.movies = (await MovieService.fetch()).data
+  },
+  methods: {
+    async create () {
+      try {
+        await SessionService.post(this.session)
+        
+        this.$emit('resync-sessions')
+        this.session.time = null
+        this.session.movieId = null
+      } catch (error) {
+        this.error = 'No se pudo crear la sesión'
+      }
+    }
   }
 }
 </script>
