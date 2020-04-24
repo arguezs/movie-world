@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <v-row
+      v-if="error"
+      align="space-between">
+      <v-col class="red--text">{{error}}</v-col>
+    </v-row>
+
     <v-row>
       <v-col cols="auto">
         <v-menu
