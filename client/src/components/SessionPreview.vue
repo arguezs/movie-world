@@ -35,7 +35,9 @@ export default {
       const confirm = window.confirm('¿Deseas eliminar esta sesión?')
 
       if (confirm) {
-        SessionService.remove(this.session.id)
+        await SessionService.remove(this.session.id)
+
+        this.$emit('resync-sessions')
       }
     }
   }

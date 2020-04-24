@@ -43,6 +43,7 @@
       <v-row
         v-if="sessions.length">
         <session-preview
+          @resync-sessions="resyncSessions"
           v-for="session in sessions"
           :key="session.id"
           :session="session" />
