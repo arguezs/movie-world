@@ -71,7 +71,8 @@ module.exports = {
         where: {
           date: req.params.date,
           theaterId: req.params.theaterId
-        }
+        },
+        order: [['time']]
       })
       res.send(sessions)
     } catch (error) {
