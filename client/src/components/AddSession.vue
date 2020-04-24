@@ -6,23 +6,23 @@
           ref="menu"
           :close-on-content-click="false"
           :nudge-right="40"
-          :return-value.sync="time"
+          :return-value.sync="session.time"
           transition="scale-transition"
           offset-y
           max-width="290px"
           min-width="290px">
           <template v-slot:activator="{ on }">
             <v-text-field
-              v-model="time"
+              v-model="session.time"
               label="Hora"
               prepend-icon="access_time"
               readonly
               v-on="on"></v-text-field>
           </template>
           <v-time-picker
+            v-model="session.time"
             format="24hr"
-            v-model="time"
-            @click:minute="$refs.menu.save(time)"></v-time-picker>
+            @click:minute="$refs.menu.save(session.time)"/>
         </v-menu>
       </v-col>
       <v-col>
@@ -30,7 +30,8 @@
           label="Película"
           :items="movies"
           item-text="title"
-          item-value="id"></v-select>
+          item-value="id"
+          v-model="session.movieId" />
       </v-col>
       <v-col cols="auto">
         <v-btn
@@ -53,7 +54,7 @@ export default {
         date: this.date,
         time: null,
         movieId: null,
-        theaterId: this.theaterId
+        theaterId: this.theater
       }
     }
   },
