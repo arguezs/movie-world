@@ -14,7 +14,7 @@ export default {
   },
   computed: {
     dateString: function () {
-      const date = new Date(this.session.date)
+      const date = new Date(this.session.date + ' ' + this.session.time) 
       return (date.toLocaleDateString(undefined, {
         day: 'numeric',
         month: 'short'
