@@ -38,7 +38,8 @@
           tile
           color="primary"
           outlined
-          @click="create">Añadir</v-btn>
+          @click="create"
+          :disabled="!session.time || !session.movieId">Añadir</v-btn>
       </v-col>
     </v-row>
   </v-container>
