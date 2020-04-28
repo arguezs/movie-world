@@ -2,7 +2,7 @@
 
 *[Read in English](README.md)*
 
-Una aplicación web para la gestión de unas salas de cine, desarrollada con Vue.js para la parte cliente, y Express.js para la parte servidor.
+Una aplicación web para la gestión de unas salas de cine, desarrollada con [Vue.js](https://vuejs.org/) para la parte cliente, y [Express.js](https://expressjs.com/) para la parte servidor.
 
 Esta apliación está siendo desarrollada como proyecto final del CFGS Desarrollo de Aplicaciones Web.
 
@@ -10,4 +10,4 @@ La apliación permitirá a los usuarios ver las carteleras de distintos días,  
 
 También permitirá a los administradores modificar las carteleras y sesiones, y ver estadísticas las mismas.
 
-Este proyecto está actualmente en desarrollo.
+**Este proyecto está actualmente en desarrollo.**
