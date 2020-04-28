@@ -66,7 +66,7 @@
 
       <v-row>
         <add-session
-          v-on:resync-sessions="resyncSessions"
+          @resync-sessions="resyncSessions"
           :date="date"
           :theater="theater" />
       </v-row>
