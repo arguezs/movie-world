@@ -38,12 +38,7 @@ module.exports = {
   async fetchTodayListing (req, res) {
     try {
       const today = new Date(Date.now())
-      /* const sessions = await Session.findAll({
-        attributes: ['movieId'],
-        where: {
-          date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDay()
-        }
-      }) */
+      
       const listing = await Movie.findAll({
         include: [{
           model: Session,
