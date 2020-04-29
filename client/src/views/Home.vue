@@ -15,6 +15,8 @@
 <script>
 import MovieRow from '@/components/MovieRow'
 
+import MovieService from '@/services/MovieService'
+
 export default {
   name: 'Home',
   data () {
@@ -23,6 +25,9 @@ export default {
       nextReleases: []
     }
   },
-  components: { MovieRow }
+  components: { MovieRow },
+  async mounted () {
+    this.currentListing = (await MovieService.fetchListing()).data
+  }
 }
 </script>
