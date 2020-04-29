@@ -12,8 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     genre: DataTypes.STRING,
     sinopsis: DataTypes.TEXT
   }, {});
-  /* Movie.associate = function(models) {
-    // associations can be defined here
-  }; */
+
+  Movie.associate = function(models) {
+    Movie.hasMany(models.Session)
+  };
   return Movie;
 };

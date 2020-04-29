@@ -3,5 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   })
 
+  Theater.associate = function(models) {
+    Theater.hasMany(models.Session)
+    Theater.hasMany(models.Seat)
+  }
+
   return Theater
 }
