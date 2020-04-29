@@ -1,4 +1,5 @@
-const {Movie} = require('../models')
+const {Movie, Session} = require('../models')
+const Sequelize = require('sequelize')
 
 module.exports = {
   async fetch (req, res) {
@@ -31,6 +32,31 @@ module.exports = {
     } catch (error) {
       res.status(500).send({
         error: 'Se ha producido un error al añadir la película'
+      })
+    }
+  },
+  async fetchTodayListing (req, res) {
+    try {
+      const today = new Date(Date.now())
+      /* const sessions = await Session.findAll({
+        attributes: ['movieId'],
+        where: {
+          date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDay()
+        }
+      }) */
+      const listing = await Movie.findAll({
+        include: [{
+          model: Session,
+          where: {
+            date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDay(),
+            movieId: Sequelize.col('Movie.id')
+          }
+        }]
+      })
+      res.send(listing)
+    } catch (error) {
+      res.status(500).send({
+        error: error
       })
     }
   }

@@ -10,6 +10,8 @@ module.exports = (app) => {
     MovieController.singleFetch)
   app.post('/movies',
     MovieController.create)
+  app.get('/movie-listing',
+    MovieController.fetchTodayListing)
 
   app.get('/movies/:movieId/sessions',
     SessionController.fetchAll)
