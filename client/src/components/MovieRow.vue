@@ -1,5 +1,13 @@
 <template>
   <v-container>
+    <v-row>
+      <v-toolbar flat>
+        <v-toolbar-title>
+          <slot name="row-title"></slot>
+        </v-toolbar-title>
+      </v-toolbar>
+    </v-row>
+
     <v-row v-if="movies.length">
       <v-col
         v-for="movie in movies"
@@ -7,9 +15,13 @@
         <movie-preview movie="movie" />
       </v-col>
     </v-row>
+
     <v-row v-else>
       <v-col>
-        <slot name="empty-message"></slot>
+        <v-banner>
+          <v-icon slot="icon" color="warning">priority_high</v-icon>
+          <slot name="empty-message"></slot>
+        </v-banner>
       </v-col>
     </v-row>
   </v-container>

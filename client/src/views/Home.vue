@@ -1,9 +1,13 @@
 <template>
   <v-container>
     <movie-row :movies="currentListing">
-      <v-banner slot="empty-message">
-        No hay películas
-      </v-banner>
+      <span slot="row-title">Cartelera</span>
+      <span slot="empty-message">No hay películas</span>
+    </movie-row>
+
+    <movie-row :movies="nextReleases">
+      <span slot="row-title">Próximos estrenos</span>
+      <span slot="empty-message">No hay próximos estrenos</span>
     </movie-row>
   </v-container>
 </template>
