@@ -8,7 +8,9 @@
       </v-col>
     </v-row>
     <v-row v-else>
-      <slot name="empty-message"></slot>
+      <v-col>
+        <slot name="empty-message"></slot>
+      </v-col>
     </v-row>
   </v-container>
 </template>

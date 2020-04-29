@@ -1,18 +1,24 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-container>
+    <movie-row :movies="currentListing">
+      <v-banner slot="empty-message">
+        No hay películas
+      </v-banner>
+    </movie-row>
+  </v-container>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import MovieRow from '@/components/MovieRow'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
-  }
+  data () {
+    return {
+      currentListing: [],
+      nextReleases: []
+    }
+  },
+  components: { MovieRow }
 }
 </script>
