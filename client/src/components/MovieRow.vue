@@ -12,7 +12,7 @@
       <v-col
         v-for="movie in movies"
         :key="movie.id">
-        <movie-preview movie="movie" />
+        <movie-preview :movie="movie" />
       </v-col>
     </v-row>
 

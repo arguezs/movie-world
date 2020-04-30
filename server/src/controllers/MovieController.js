@@ -43,7 +43,7 @@ module.exports = {
         include: [{
           model: Session,
           where: {
-            date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDay(),
+            date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
             MovieId: Sequelize.col('Movie.id')
           }
         }]
