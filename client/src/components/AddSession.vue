@@ -37,7 +37,7 @@
           :items="movies"
           item-text="title"
           item-value="id"
-          v-model="session.movieId" />
+          v-model="session.MovieId" />
       </v-col>
       <v-col cols="auto">
         <v-btn
@@ -45,7 +45,7 @@
           color="primary"
           outlined
           @click="create"
-          :disabled="!session.time || !session.movieId">Añadir</v-btn>
+          :disabled="!session.time || !session.MovieId">Añadir</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -62,8 +62,8 @@ export default {
       session: {
         date: this.date,
         time: null,
-        movieId: null,
-        theaterId: this.theater
+        MovieId: null,
+        TheaterId: this.theater
       },
       error: null
     }
@@ -79,7 +79,7 @@ export default {
         
         this.$emit('resync-sessions')
         this.session.time = null
-        this.session.movieId = null
+        this.session.MovieId = null
       } catch (error) {
         this.error = 'No se pudo crear la sesión'
       }

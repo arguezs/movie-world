@@ -20,7 +20,7 @@
         <v-row>
           <v-col>
             <v-text-field
-              v-model="session.theaterId"
+              v-model="session.TheaterId"
               type="number"
               min="1"
               max="13"
@@ -116,8 +116,8 @@ export default {
       dialog: false,
       session: {
         date: '',
-        theaterId: '',
-        movieId: ''
+        TheaterId: '',
+        MovieId: ''
       },
       theaters: [],
       date: '',
@@ -136,7 +136,7 @@ export default {
       this.session.date = `${this.date} ${val}`
     },
     movie: function (val) {
-      this.session.movieId = val.id
+      this.session.MovieId = val.id
     }
   },
   methods: {
@@ -149,7 +149,7 @@ export default {
         this.dialog = false
         this.date = ''
         this.time = ''
-        this.session.theaterId = ''
+        this.session.TheaterId = ''
       } catch (error) { 
         this.error = "Error al crear la sesión"
       }

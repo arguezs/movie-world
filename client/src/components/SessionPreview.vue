@@ -28,7 +28,7 @@ export default {
   },
   props: ['session'],
   async mounted () {
-    this.movie = (await MovieService.fetch(this.session.movieId)).data
+    this.movie = (await MovieService.fetch(this.session.MovieId)).data
   },
   methods: {
     async deleteSession () {

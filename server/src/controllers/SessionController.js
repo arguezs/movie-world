@@ -5,7 +5,7 @@ module.exports = {
     try {
       const sessions = await Session.findAll({
         where: {
-          movieId: req.params.movieId
+          MovieId: req.params.movieId
         },
         order: [['date']]
       })
@@ -70,7 +70,7 @@ module.exports = {
       const sessions = await Session.findAll({
         where: {
           date: req.params.date,
-          theaterId: req.params.theaterId
+          TheaterId: req.params.theaterId
         },
         order: [['time']]
       })

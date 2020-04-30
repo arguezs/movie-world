@@ -44,7 +44,7 @@ module.exports = {
           model: Session,
           where: {
             date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDay(),
-            movieId: Sequelize.col('Movie.id')
+            MovieId: Sequelize.col('Movie.id')
           }
         }]
       })
