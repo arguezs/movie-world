@@ -1,4 +1,4 @@
-const {Movie, Session} = require('../models')
+const {Movie, Session, sequelize} = require('../models')
 const Sequelize = require('sequelize')
 
 module.exports = {
@@ -49,6 +49,23 @@ module.exports = {
         }]
       })
       res.send(listing)
+    } catch (error) {
+      res.status(500).send({
+        error: error
+      })
+    }
+  },
+  async fetchNextReleases (req, res) {
+    try {
+      const today = new Date(Date.now())
+      const todayString = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+
+      const nextReleases = await sequelize.query(`SELECT movie.* FROM movies AS movie
+      INNER JOIN sessions ON sessions.MovieId = movie.id
+      WHERE sessions.date IN (SELECT min(date) FROM sessions GROUP BY MovieId)
+      AND sessions.date > '${todayString}'`, {type: Sequelize.QueryTypes.SELECT})
+
+      res.send(nextReleases)
     } catch (error) {
       res.status(500).send({
         error: error

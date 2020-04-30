@@ -12,6 +12,8 @@ module.exports = (app) => {
     MovieController.create)
   app.get('/movie-listing',
     MovieController.fetchTodayListing)
+  app.get('/next-releases',
+    MovieController.fetchNextReleases)
 
   app.get('/movies/:movieId/sessions',
     SessionController.fetchAll)
