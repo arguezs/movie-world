@@ -10,6 +10,7 @@
 
     <v-row v-if="movies.length">
       <v-col
+        cols="auto"
         v-for="movie in movies"
         :key="movie.id">
         <movie-preview :movie="movie" />
