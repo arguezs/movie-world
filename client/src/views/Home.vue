@@ -28,6 +28,7 @@ export default {
   components: { MovieRow },
   async mounted () {
     this.currentListing = (await MovieService.fetchListing()).data
+    this.nextReleases = (await MovieService.fetchNextReleases()).data
   }
 }
 </script>

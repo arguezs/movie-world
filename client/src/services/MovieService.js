@@ -10,6 +10,9 @@ export default {
   fetchListing () {
     return Api().get('movie-listing')
   },
+  fetchNextReleases () {
+    return Api().get('next-releases')
+  },
   post (movie) {
     return Api().post('movies', movie)
   }
