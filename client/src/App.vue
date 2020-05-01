@@ -31,6 +31,10 @@
         <v-btn
           text
           exact
+          :to="{name: 'Home'}">Inicio</v-btn>
+        <v-btn
+          text
+          exact
           :to="{name: 'Movies'}">Películas</v-btn>
         <v-btn
           text
