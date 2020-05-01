@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="auto">{{ session.time }}</v-col>
-      <v-col>{{ movie.title }}</v-col>
+      <v-col>{{ session.Movie.title }}</v-col>
       <v-col cols="auto">
         <v-btn
           outlined
@@ -17,18 +17,11 @@
 </template>
 
 <script>
-import MovieService from '@/services/MovieService'
 import SessionService from '@/services/SessionService'
 
 export default {
-  data () {
-    return {
-      movie: {}
-    }
-  },
-  props: ['session'],
-  async mounted () {
-    this.movie = (await MovieService.fetch(this.session.MovieId)).data
+  props: {
+    session: {}
   },
   methods: {
     async deleteSession () {

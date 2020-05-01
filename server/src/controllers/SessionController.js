@@ -1,4 +1,4 @@
-const {Session, Seat} = require('../models')
+const {Movie, Session, Seat} = require('../models')
 
 module.exports = {
   async fetchAll (req, res) {
@@ -72,7 +72,10 @@ module.exports = {
           date: req.params.date,
           TheaterId: req.params.theaterId
         },
-        order: [['time']]
+        order: [['time']],
+        include: [{
+          model: Movie
+        }]
       })
       res.send(sessions)
     } catch (error) {
