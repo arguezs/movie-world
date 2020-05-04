@@ -6,10 +6,16 @@ const TheaterController = require('./controllers/TheaterController')
 module.exports = (app) => {
   app.get('/movies',
     MovieController.fetch)
-  app.get('/movies/:movieId',
-    MovieController.singleFetch)
+
   app.post('/movies',
     MovieController.create)
+  app.get('/movies/:movieId',
+    MovieController.read)
+  app.put('/movies/:movieId/update',
+    MovieController.update)
+  app.delete('/movie/:movieId',
+    MovieController.delete)
+  
   app.get('/movie-listing',
     MovieController.fetchTodayListing)
   app.get('/next-releases',
