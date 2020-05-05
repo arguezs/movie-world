@@ -15,21 +15,6 @@
       <span v-else>Error al registrar</span>
     </v-alert>
 
-    <!-- <v-banner v-if="result">
-      <template v-if="result.success">
-        <v-icon
-          slot="icon"
-          color="green accent-3">done</v-icon>
-        Registro completo
-      </template>
-      <template v-else>
-        <v-icon
-          slot="icon"
-          color="error">priority_high</v-icon>
-        Error al registrar
-      </template>
-    </v-banner> -->
-
     <v-form
       class="mx-12">
       <v-text-field
