@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
 
   Seat.associate = function(models) {
     Seat.belongsTo(models.Theater)
+
+    Seat.belongsToMany(models.Session, {through: 'SessionSeat'})
+    Seat.belongsToMany(models.Session, {through: 'TransactionSeat'})
   }
 
   return Seat

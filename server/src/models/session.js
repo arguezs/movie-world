@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     Session.belongsTo(models.Movie)
     
     Session.belongsToMany(models.Seat, {through: 'SessionSeat'})
+
+    Session.hasMany(models.Transaction)
   }
 
   return Session

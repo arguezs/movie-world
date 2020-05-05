@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     mail: {
@@ -18,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'USER'
     }
   }, {})
+
+  User.associate = (models) => {
+    User.hasMany(models.Transaction)
+  }
 
   return User
 }
