@@ -8,8 +8,8 @@ module.exports = {
       req.body.password = hash
 
       User.create(req.body)
-      .then((user) => {
-        res.send(user)
+      .then(() => {
+        res.send({success: true})
       },
       (error) => {
         res.status(500).send({error:error})

@@ -4,6 +4,22 @@
     <v-toolbar flat>
       <v-toolbar-title>Registro</v-toolbar-title>
     </v-toolbar>
+
+    <v-banner v-if="result">
+      <template v-if="result.success">
+        <v-icon
+          slot="icon"
+          color="green accent-3">done</v-icon>
+        Registro completo
+      </template>
+      <template v-else>
+        <v-icon
+          slot="icon"
+          color="error">priority_high</v-icon>
+        Error al registrar
+      </template>
+    </v-banner>
+
     <v-form
       class="mx-12">
       <v-text-field
@@ -30,15 +46,19 @@ export default {
       user: {
         mail: null,
         password: null
-      }
+      },
+      result: null
     }
   },
   methods: {
     async register () {
       try {
-        await UserService.register(this.user)
+        this.result = (await UserService.register(this.user)).data
+
+        this.user.mail = null
+        this.user.password = null
       } catch (error) {
-        console.log(error)
+        this.result = {error: error}
       }
     }
   }
