@@ -22,40 +22,33 @@ module.exports = {
       })
     }
   },
-  async update (req, res) {
+  update (req, res) {
     try {
-      const movie = await Movie.findByPk(req.params.movieId)
-      const updatedMovie = req.body
-
-      movie.title = updatedMovie.title
-      movie.duration = updatedMovie.duration
-      movie.year = updatedMovie.year
-      movie.rating = updatedMovie.rating
-      movie.trailer = updatedMovie.trailer
-      movie.poster = updatedMovie.poster
-      movie.director = updatedMovie.director
-      movie.cast = updatedMovie.cast
-      movie.genre = updatedMovie.genre
-
-      await movie.save()
-      await movie.reload()
-      
-      res.send(movie)
-    } catch (error) {
-      res.status(500).send({
-        error: error
+      Movie.update(
+        req.body,
+        {
+          where: {
+            id: req.params.movieId
+          }
+        }
+      ).then((updatedRows) => {
+        res.send(updatedRows)
       })
+    } catch (error) {
+      res.status(500).send({error: error})
     }
   },
-  async delete (req, res) {
+  delete (req, res) {
     try {
-      const movie = await Movie.findByPk(req.params.movieId)
-
-      await movie.delete()
-    } catch (error){
-      res.status(500).send({
-        error: error
+      Movie.delete({
+        where: {
+          id: req.params.movieId
+        }
+      }).then(() => {
+        res.send(true)
       })
+    } catch (error){
+      res.status(500).send({error: error})
     }
   },
   async fetch (req, res) {
