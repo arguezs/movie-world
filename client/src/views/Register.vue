@@ -5,7 +5,17 @@
       <v-toolbar-title>Registro</v-toolbar-title>
     </v-toolbar>
 
-    <v-banner v-if="result">
+    <v-alert
+      v-if="result"
+      class="mx-12 mb-6"
+      outlined
+      dense
+      :type="result.success?'success':'error'">
+      <span v-if="result.success">Registro completo</span>
+      <span v-else>Error al registrar</span>
+    </v-alert>
+
+    <!-- <v-banner v-if="result">
       <template v-if="result.success">
         <v-icon
           slot="icon"
@@ -18,7 +28,7 @@
           color="error">priority_high</v-icon>
         Error al registrar
       </template>
-    </v-banner>
+    </v-banner> -->
 
     <v-form
       class="mx-12">
