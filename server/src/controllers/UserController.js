@@ -1,14 +1,20 @@
 const {User} = require('../models')
+const bcrypt = require('bcrypt')
+const saltRounds = 10
 
 module.exports = {
   create (req, res) {
-    User.create(req.body)
+    bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+      req.body.password = hash
+
+      User.create(req.body)
       .then((user) => {
         res.send(user)
       },
       (error) => {
         res.status(500).send({error:error})
       })
+    })
   },
   read (req, res) {
     User.findByPk(req.params.userId)
