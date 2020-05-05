@@ -15,18 +15,30 @@
         v-model="user.password"
         type="password"
         required />
-      <v-btn>Crear cuenta</v-btn>
+      <v-btn
+        @click="register">Crear cuenta</v-btn>
     </v-form>
   </v-container>
 </template>
 
 <script>
+import UserService from '@/services/UserService'
+
 export default {
   data() {
     return {
       user: {
         mail: null,
         password: null
+      }
+    }
+  },
+  methods: {
+    async register () {
+      try {
+        await UserService.register(this.user)
+      } catch (error) {
+        console.log(error)
       }
     }
   }

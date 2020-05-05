@@ -2,6 +2,7 @@ const MovieController = require('./controllers/MovieController')
 const SessionController = require('./controllers/SessionController')
 const SeatController = require('./controllers/SeatController')
 const TheaterController = require('./controllers/TheaterController')
+const UserController = require('./controllers/UserController')
 
 module.exports = (app) => {
   app.get('/movies',
@@ -36,8 +37,6 @@ module.exports = (app) => {
   app.post('/session/:sessionId/seats',
     SessionController.addSessionSeats)
   
-  
-
   app.get('/sessions/:date/:theaterId',
     SessionController.fetchWithDayAndTheater)
 
@@ -46,4 +45,7 @@ module.exports = (app) => {
 
   app.get('/theaters',
     TheaterController.fetch)
+
+  app.post('/register',
+    UserController.create)
 }
