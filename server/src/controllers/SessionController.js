@@ -1,6 +1,51 @@
 const {Movie, Session, Seat} = require('../models')
 
 module.exports = {
+  async create (req, res) {
+    try {
+      const session = await Session.create(req.body)
+      res.send(session)
+    } catch (error) {
+      res.status(500).send({error: error})
+    }
+  },
+  async read (req, res) {
+    try {
+      const session = await Session.findByPk(req.params.sessionId)
+      res.send(session)
+    } catch (error) {
+      res.status(500).send({error: error})
+    }
+  },
+  update (req, res) {
+    try {
+      Session.update(
+        req.body,
+        {
+          where: {
+            id: req.params.sessionId
+          }
+        }
+      ).then( (rowsUpdated) => {
+        res.send(rowsUpdated)
+      })
+    } catch (error) {
+      res.status(500).send({error: error})
+    }
+  },
+  delete (req, res) {
+    try {
+      Session.destroy({
+        where: {
+          id: req.params.sessionId
+        }
+      }).then(() => {
+        res.send(true)
+      })
+    } catch (error) {
+      res.status(500).send({error: error})
+    }
+  },
   async fetchAll (req, res) {
     try {
       const sessions = await Session.findAll({
@@ -13,26 +58,6 @@ module.exports = {
     } catch (error) {
       res.status(500).send({
         error: error
-      })
-    }
-  },
-  async fetchOne (req, res) {
-    try {
-      const session = await Session.findByPk(req.params.sessionId)
-      res.send(session)
-    } catch (error) {
-      res.status(500).send({
-        error: error
-      })
-    }
-  },
-  async create (req, res) {
-    try {
-      const session = await Session.create(req.body)
-      res.send(session)
-    } catch (error) {
-      res.status(500).send({
-        error: 'Se ha producido un error al añadir la sesión'
       })
     }
   },
@@ -84,19 +109,4 @@ module.exports = {
       })
     }
   },
-  async remove (req, res) {
-    try {
-      Session.destroy({
-        where: {
-          id: req.params.sessionId
-        }
-      }).then(() => {
-        res.send(true)
-      })
-    } catch (error) {
-      res.status(500).send({
-        error: error
-      })
-    }
-  }
 }

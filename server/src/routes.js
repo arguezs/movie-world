@@ -23,16 +23,20 @@ module.exports = (app) => {
 
   app.get('/movies/:movieId/sessions',
     SessionController.fetchAll)
+
   app.get('/session/:sessionId',
-    SessionController.fetchOne)
+    SessionController.read)
+  app.post('/session',
+    SessionController.create)
+  app.delete('/session/:sessionId',
+    SessionController.delete)
+
   app.get('/session/:sessionId/seats',
     SessionController.fetchSessionSeat)
   app.post('/session/:sessionId/seats',
     SessionController.addSessionSeats)
-  app.post('/session',
-    SessionController.create)
-  app.delete('/session/:sessionId',
-    SessionController.remove)
+  
+  
 
   app.get('/sessions/:date/:theaterId',
     SessionController.fetchWithDayAndTheater)
