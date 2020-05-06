@@ -3,6 +3,7 @@ const SessionController = require('./controllers/SessionController')
 const SeatController = require('./controllers/SeatController')
 const TheaterController = require('./controllers/TheaterController')
 const UserController = require('./controllers/UserController')
+const AuthenticationController = require('./controllers/AuthenticationController')
 
 module.exports = (app) => {
   app.get('/movies',
@@ -48,4 +49,11 @@ module.exports = (app) => {
 
   app.post('/register',
     UserController.create)
+
+  app.post('/login',
+    AuthenticationController.login)
+  app.get('/logout',
+    AuthenticationController.logout)
+  app.get('/user',
+    AuthenticationController.fetchUser)
 }
