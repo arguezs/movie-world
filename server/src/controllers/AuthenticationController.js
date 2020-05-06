@@ -63,8 +63,6 @@ module.exports = {
   fetchUser (req, res) {
     User.findByPk(req.user.id, { attributes: ['mail', 'name', 'birthday'] })
       .then(user => {
-        // console.log([user, req.session])
-
         res.send(user)
       })
   }
