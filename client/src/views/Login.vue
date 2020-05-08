@@ -5,6 +5,15 @@
       <v-toolbar-title>Inicio de sesión</v-toolbar-title>
     </v-toolbar>
 
+    <v-alert
+      v-if="error"
+      class="mx-12 mb-6"
+      outlined
+      dense
+      type="error">
+      Email o contraseña incorrectos
+    </v-alert>
+
     <v-form
       class="mx-12">
       <v-text-field
@@ -32,16 +41,17 @@ export default {
         mail: null,
         password: null
       },
-      error: null,
-      success: null
+      error: null
     }
   },
   methods: {
     async login () {
       try {
-        this.success = (await AuthenticationService.login(this.user)).data
+        await AuthenticationService.login(this.user)
+
+        this.$router.push({name: "Home"})
       } catch (error) {
-        this.error = "error"
+        this.error = error
       }
     }
   }
