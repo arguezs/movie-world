@@ -16,12 +16,14 @@
         v-model="user.password"
         type="password"
         required />
-      <v-btn>Iniciar sesión</v-btn>
+      <v-btn @click="login">Iniciar sesión</v-btn>
     </v-form>
   </v-container>
 </template>
 
 <script>
+import AuthenticationService from '@/services/AuthenticationService'
+
 export default {
   name: 'Login',
   data () {
@@ -30,7 +32,17 @@ export default {
         mail: null,
         password: null
       },
-      error: null
+      error: null,
+      success: null
+    }
+  },
+  methods: {
+    async login () {
+      try {
+        this.success = (await AuthenticationService.login(this.user)).data
+      } catch (error) {
+        this.error = "error"
+      }
     }
   }
 }
