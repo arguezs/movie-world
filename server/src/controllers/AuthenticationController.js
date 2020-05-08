@@ -41,12 +41,20 @@ module.exports = {
       }
 
       if (!user) {
-        return res.status(400).send([user, "Cannot log in", info])
+        return res.status(400).send({
+          success: false,
+          result: "Cannot log in",
+          info
+        })
       }
 
       req.login(user, (err) => {
         if (err) return next(err)
-        return res.send(user)
+        return res.send({
+          success: true,
+          result: "Logged in",
+          info
+        })
       })
 
     })(req, res, next)
