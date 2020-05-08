@@ -55,5 +55,6 @@ module.exports = (app) => {
   app.get('/logout',
     AuthenticationController.logout)
   app.get('/user',
+    AuthenticationController.authMiddleware,
     AuthenticationController.fetchUser)
 }

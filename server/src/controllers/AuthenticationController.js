@@ -36,7 +36,7 @@ module.exports = {
 
   login (req, res, next) {
     console.log(req.body)
-    
+
     passport.authenticate("local", (err, user, info) => {
       if (err) {
         return next(err)
@@ -53,9 +53,9 @@ module.exports = {
       req.login(user, (err) => {
         if (err) return next(err)
         return res.send({
-          success: true,
-          result: "Logged in",
-          info
+          id: user.id,
+          mail: user.mail,
+          name: user.name
         })
       })
 
@@ -75,5 +75,13 @@ module.exports = {
       .then(user => {
         res.send(user)
       })
+  },
+
+  authMiddleware: (req, res, next) => {
+    if (!req.isAuthenticated()) {
+      res.status(401).send('You are not authenticated')
+    } else {
+      return next()
+    }
   }
 }
