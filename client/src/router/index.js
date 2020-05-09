@@ -8,6 +8,7 @@ import SingleMovie from '@/views/SingleMovie'
 import Theater from '@/views/Theater'
 import Sessions from '@/views/Sessions'
 import Login from '@/views/Login'
+import UserProfile from '@/views/UserProfile'
 
 Vue.use(VueRouter)
 
@@ -64,6 +65,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/profile',
+    name: 'Perfil',
+    component: UserProfile
   }
 ]
 
