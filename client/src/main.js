@@ -21,5 +21,6 @@ const store = new Vuex.Store({
 new Vue({
   router,
   vuetify,
+  store,
   render: h => h(App)
 }).$mount('#app')
