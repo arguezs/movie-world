@@ -7,5 +7,9 @@ export default {
 
   getUserData () {
     return Api().get('user')
+  },
+
+  logout () {
+    return Api().get('logout')
   }
 }

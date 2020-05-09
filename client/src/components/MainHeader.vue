@@ -22,8 +22,26 @@
     <v-spacer />
 
     <v-toolbar-items v-if="user">
-      <span v-if="user.name">{{ user.name }}</span>
-      <span v-else>{{ user.mail }}</span>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn text v-on="on">
+            <span v-if="user.name">{{ user.name }}</span>
+            <span v-else>{{ user.mail }}</span>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>Perfil</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item
+            @click="logout">
+            <v-list-item-title class="red--text">Cerrar sesión</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+      
     </v-toolbar-items>
 
     <v-toolbar-items v-else>
@@ -50,6 +68,14 @@ export default {
     const user = (await AuthenticationService.getUserData()).data
 
     this.$store.commit('updateUser', user)
+  },
+  methods: {
+    async logout () {
+      await AuthenticationService.logout()
+
+      this.$store.commit('updateUser', null)
+      this.$router.push('/')
+    }
   }
 }
 </script>
