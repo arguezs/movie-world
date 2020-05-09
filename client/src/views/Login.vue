@@ -47,7 +47,9 @@ export default {
   methods: {
     async login () {
       try {
-        await AuthenticationService.login(this.user)
+        const user = (await AuthenticationService.login(this.user)).data
+
+        this.$store.commit('updateUser', user)
 
         this.$router.push({name: "Home"})
       } catch (error) {
