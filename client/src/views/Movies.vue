@@ -29,7 +29,8 @@ export default {
     },
     components: { MoviePreview },
     async mounted () {
-        this.movies = (await MovieService.fetch()).data
+      this.$store.commit('updateUser')
+      this.movies = (await MovieService.fetch()).data
     }
 }
 </script>

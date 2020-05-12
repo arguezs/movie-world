@@ -24,6 +24,7 @@ export default {
     }
   },
   async mounted () {
+    this.$store.commit('updateUser')
     const sessionId = this.$route.params.sessionId
     this.session = (await SessionService.fetchOne(sessionId)).data
     this.theater = (await TheaterService.fetchTheater(this.session.theaterId)).data

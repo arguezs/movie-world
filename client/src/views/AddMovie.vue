@@ -110,6 +110,9 @@ export default {
           this.error = "Error al añadir la película"
         }
       }
+    },
+    mounted () {
+      this.$store.commit('updateUser')
     }
 }
 </script>

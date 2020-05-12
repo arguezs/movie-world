@@ -92,6 +92,7 @@ export default {
   },
   components: { SessionPreview, AddSession },
   async mounted () {
+    this.$store.commit('updateUser')
     this.theaters = (await TheaterService.fetchTheaters()).data
   },
   watch: {
