@@ -24,10 +24,7 @@
     <v-toolbar-items v-if="user">
       <v-menu offset-y>
         <template v-slot:activator="{ on }">
-          <v-btn text v-on="on">
-            <span v-if="user.name">{{ user.name }}</span>
-            <span v-else>{{ user.mail }}</span>
-          </v-btn>
+          <v-btn text v-on="on">{{ user }}</v-btn>
         </template>
 
         <v-list>
