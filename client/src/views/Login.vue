@@ -27,6 +27,13 @@
         required />
       <v-btn @click="login">Iniciar sesión</v-btn>
     </v-form>
+
+    <v-row class="my-3 text-center">
+      <v-col>
+        ¿No tienes cuenta? <router-link to="/register">Regístrate</router-link>
+      </v-col>
+    </v-row>
+    
   </v-container>
 </template>
 
