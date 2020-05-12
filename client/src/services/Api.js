@@ -1,7 +1,11 @@
 import Axios from 'axios'
 
 export default () => {
-    return Axios.create({
-        baseURL: 'http://localhost:8081/'
+    const Api = Axios.create({
+        baseURL: '/api/'
     })
+
+    Api.defaults.withCredentials = true
+
+    return Api
 }
