@@ -57,4 +57,7 @@ module.exports = (app) => {
   app.get('/user',
     AuthenticationController.authMiddleware,
     AuthenticationController.fetchUser)
+
+  app.put('/user',
+    UserController.updateProfile)
 }

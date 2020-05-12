@@ -27,10 +27,10 @@ module.exports = {
   },
   update (req, res) {
     User.update(
-      req.body,
+      req.body.user,
       {
         where: {
-          id: req.params.userId
+          id: req.user.id
         }
       }
     ).then((updatedRows) => {
@@ -51,5 +51,34 @@ module.exports = {
     (error) => {
       res.status(500).send({error: error})
     })
+  },
+
+  updateProfile (req, res) {
+    console.log(req.body)
+    User.findByPk(req.user.id)
+      .then((user) => {
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
+          if (result) {
+            User.update(
+              req.body.user,
+              { where: {
+                id: req.user.id
+              }}
+            ).then((rows) => {
+              res.send(rows)
+            }).catch((error) => {
+              console.log("Update error", error)
+              res.status(500).send("Update error")
+            })
+          } else {
+            console.log("Contraseña mal", err)
+            res.status(401).send('Contraseña mal')
+          }
+        })
+      })
+      .catch((error) => {
+        console.log("Error BD", error)
+        res.status(401).send('Error BD')
+      })
   }
 }

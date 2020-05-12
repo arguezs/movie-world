@@ -2,6 +2,16 @@
   <v-container>
     <v-toolbar-title flat>Perfil</v-toolbar-title>
 
+    <v-alert
+      v-if="alert"
+      class="mx-12 my-6"
+      outlined
+      dense
+      :type="alert.success?'success':'error'">
+      <span v-if="alert.success">Perfil actualizado</span>
+      <span v-else>Error al actualizar el perfil</span>
+    </v-alert>
+
     <v-form>
       
       <v-row align="center">
@@ -21,7 +31,22 @@
       <v-row align="center">
         <v-col cols="2" class="text-right">Fecha de nacimiento:</v-col>
         <v-col>
-          <v-text-field v-model="user.birthday" placeholder="Fecha de nacimeinto" />
+          <v-text-field v-model="user.birthday" type="date" placeholder="Fecha de nacimiento" />
+        </v-col>
+      </v-row>
+
+      <v-row align="center">
+        <v-col cols="2" class="text-right">Confirmar contraseña:</v-col>
+        <v-col>
+          <v-text-field v-model="password" type="password" placeholder="Contraseña" />
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col class="text-center">
+          <v-btn
+            :disabled="!password"
+            @click="updateProfile">Actualizar perfil</v-btn>
         </v-col>
       </v-row>
 
@@ -31,11 +56,14 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import UserService from '@/services/UserService'
 
 export default {
   data () {
     return {
-      user: null
+      user: null,
+      alert: null,
+      password: null
     }
   },
   async mounted () {
@@ -43,6 +71,30 @@ export default {
       this.$router.push({name: 'Login'})
 
     this.user = (await AuthenticationService.getUserData()).data
+  },
+  methods: {
+    updateProfile () {
+      const self = this
+      const body = { 
+        user: this.user,
+        password: this.password
+      }
+
+      UserService.updateProfile(body)
+        .then((response) => {
+          self.$store.commit('updateUser')
+          self.alert = {
+            success: true,
+            status: response
+          }
+        })
+        .catch((error) => {
+          self.alert = {
+            success: false,
+            status: error
+          }
+        })
+    }
   }
 }
 </script>
