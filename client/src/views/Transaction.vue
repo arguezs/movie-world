@@ -5,22 +5,30 @@
       <v-card-text class="pl-12">
         <v-row>
           <v-col>
-            <span
-              class="text--primary font-weight-bold">Película:</span> {{ session.Movie.title }}
-            </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <span
-              class="text--primary font-weight-bold">Fecha:</span> {{ session.date }}
-            </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <span
-              class="text--primary font-weight-bold">Sesión:</span> {{ session.time }}
-            </v-col>
-        </v-row>
+            <v-row>
+              <v-col class="text--primary font-weight-bold" cols="2">Película:</v-col>
+              <v-col>{{ session.Movie.title }}</v-col>
+            </v-row>
+            <v-row>
+              <v-col class="text--primary font-weight-bold" cols="2">Fecha:</v-col> 
+              <v-col>{{ dateString }}</v-col>
+            </v-row>
+            <v-row>
+              <v-col class="text--primary font-weight-bold" cols="2">Sesión:</v-col>
+              <v-col>{{ timeString }}</v-col>
+            </v-row>
+          </v-col>
+
+          <v-col align-self="center">
+            <v-card max-width="300" class="mx-auto text-center">
+              <v-toolbar color="primary" dark flat dense class="text-center">
+                <v-toolbar-title>Total</v-toolbar-title>
+              </v-toolbar>
+              <v-card-text class="text--primary display-1">{{ totalPrice.toFixed(2) }} €</v-card-text>
+            </v-card>
+          </v-col>
+          </v-row>
+          
       </v-card-text>
     </v-card>
 
@@ -39,12 +47,7 @@
         </v-stepper-content>
 
         <v-stepper-content step="2">
-          <v-container>
-            <v-row>
-              <v-btn @click="step = 3">Continuar</v-btn>
-              <v-btn @click="step = 1">Cancelar</v-btn>
-            </v-row>
-          </v-container>
+          <seat-selector />
         </v-stepper-content>
 
         <v-stepper-content step="3">
@@ -64,6 +67,7 @@
 import SessionService from '@/services/SessionService'
 
 import TicketSelector from '@/components/transactions/TicketSelector'
+import SeatSelector from '@/components/transactions/SeatSelector'
 
 export default {
   data () {
@@ -71,12 +75,26 @@ export default {
       step: 1,
       session: null,
       tickets: 0,
+      price: 9.5
     }
   },
   async mounted () {
     this.session = (await SessionService.fetchData(this.$route.params.sessionId)).data
   },
-  components: { TicketSelector }
+  components: { TicketSelector, SeatSelector },
+  computed: {
+    totalPrice () {
+      return this.tickets * this.price
+    },
+    dateString () {
+      const date = new Date(this.session.date + ' ' + this.session.time)
+      return date.toLocaleDateString(undefined, {dateStyle: 'long'})
+    },
+    timeString () {
+      const date = new Date(this.session.date + ' ' + this.session.time)
+      return date.toLocaleTimeString(undefined, {timeStyle: 'short'})
+    }
+  }
 }
 </script>
 

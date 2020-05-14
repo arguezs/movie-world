@@ -13,7 +13,7 @@
 <script>
 export default {
   props: ['disable'],
-    methods: {
+  methods: {
     nextStep () {
       this.$emit('nextStep')
     },
