@@ -33,41 +33,9 @@
 
       <v-stepper-items>
         <v-stepper-content step="1">
-          <v-container>
-            <v-row class="text-center">
-              <v-col>Selecciona cuántas entradas quieres</v-col>
-            </v-row>
-            <v-row align="center" justify="center" class="text-center">
-              <v-col cols="3">Entradas</v-col>
-              <v-col cols="2">Precio</v-col>
-              <v-col cols="2">Total</v-col>
-            </v-row>
-            <v-row align="center" justify="center" class="text-center">
-              <v-col cols="1">
-                <v-btn
-                  fab outlined x-small
-                  :disabled="tickets==0"
-                  @click="tickets-=1"><v-icon>remove</v-icon></v-btn>
-              </v-col>
-              <v-col cols="1">{{ tickets }}</v-col>
-              <v-col cols="1">
-                <v-btn
-                  fab outlined x-small
-                  :disabled="tickets==10"
-                  @click="tickets+=1"><v-icon>add</v-icon></v-btn>
-              </v-col>
-              <v-col cols="2">{{ price.toFixed(2) }} €</v-col>
-              <v-col cols="2">{{ totalPrice.toFixed(2) }} €</v-col>
-            </v-row>
-            <v-row class="mt-6" justify="end">
-              <v-col cols="auto">
-                <v-btn to="/">Cancelar</v-btn>
-              </v-col>
-              <v-col cols="auto">
-                <v-btn color="primary" @click="step = 2">Continuar</v-btn>
-              </v-col>
-            </v-row>
-          </v-container>
+          <ticket-selector
+            :tickets.sync="tickets" :step="step"
+            @nextStep="step+=1" />
         </v-stepper-content>
 
         <v-stepper-content step="2">
@@ -95,23 +63,20 @@
 <script>
 import SessionService from '@/services/SessionService'
 
+import TicketSelector from '@/components/transactions/TicketSelector'
+
 export default {
   data () {
     return {
       step: 1,
       session: null,
       tickets: 0,
-      price: 9.5
-    }
-  },
-  computed: {
-    totalPrice () {
-      return this.tickets * this.price
     }
   },
   async mounted () {
     this.session = (await SessionService.fetchData(this.$route.params.sessionId)).data
-  }
+  },
+  components: { TicketSelector }
 }
 </script>
 
