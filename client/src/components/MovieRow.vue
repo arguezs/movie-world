@@ -1,13 +1,5 @@
 <template>
   <v-container>
-    <v-row>
-      <v-toolbar flat>
-        <v-toolbar-title>
-          <slot name="row-title"></slot>
-        </v-toolbar-title>
-      </v-toolbar>
-    </v-row>
-
     <v-row v-if="movies.length">
       <v-col
         cols="auto"

@@ -1,14 +1,24 @@
 <template>
   <v-container>
-    <movie-row :movies="currentListing">
-      <span slot="row-title">Cartelera</span>
-      <span slot="empty-message">No hay películas</span>
-    </movie-row>
+    <v-tabs v-model="tab">
+      <v-tab>Carterlera</v-tab>
+      <v-tab>Próximos estrenos</v-tab>
+    </v-tabs>
 
-    <movie-row :movies="nextReleases">
-      <span slot="row-title">Próximos estrenos</span>
-      <span slot="empty-message">No hay próximos estrenos</span>
-    </movie-row>
+    <v-tabs-items v-model="tab">
+      <v-tab-item>
+        <movie-row :movies="currentListing">
+          <span slot="empty-message">No hay películas</span>
+        </movie-row>
+      </v-tab-item>
+      
+      <v-tab-item>
+        <movie-row :movies="nextReleases">
+          <span slot="empty-message">No hay próximos estrenos</span>
+        </movie-row>
+      </v-tab-item>
+    </v-tabs-items>
+
   </v-container>
 </template>
 
@@ -21,6 +31,7 @@ export default {
   name: 'Home',
   data () {
     return {
+      tab: null,
       currentListing: [],
       nextReleases: []
     }
