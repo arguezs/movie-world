@@ -9,6 +9,7 @@ import Theater from '@/views/Theater'
 import Sessions from '@/views/Sessions'
 import Login from '@/views/Login'
 import UserProfile from '@/views/UserProfile'
+import Transaction from '@/views/Transaction'
 
 Vue.use(VueRouter)
 
@@ -70,6 +71,11 @@ const routes = [
     path: '/profile',
     name: 'Perfil',
     component: UserProfile
+  },
+  {
+    path:'/session/:sessionId/buy',
+    name: 'Transaction',
+    component: Transaction
   }
 ]
 

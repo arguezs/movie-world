@@ -143,5 +143,18 @@ module.exports = {
     }
 
     res.send(sessions)
+  },
+  fetchSessionData (req, res) {
+    Session.findByPk(req.params.sessionId, {
+      attributes: ['date', 'time', 'TheaterId'],
+      include: [{
+        model: Movie,
+        attributes: ['title']
+      }]
+    }).then(session => {
+      res.send(session)
+    }).catch(error => {
+      res.status(500).send(error)
+    })
   }
 }

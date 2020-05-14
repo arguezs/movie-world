@@ -32,6 +32,8 @@ module.exports = (app) => {
     SessionController.create)
   app.delete('/session/:sessionId',
     SessionController.delete)
+  app.get('/session-data/:sessionId',
+    SessionController.fetchSessionData)
 
   app.get('/session/:sessionId/seats',
     SessionController.fetchSessionSeat)

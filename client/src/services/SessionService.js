@@ -18,5 +18,8 @@ export default {
   },
   remove (sessionId) {
     return Api().delete(`session/${sessionId}`)
+  },
+  fetchData (sessionId) {
+    return Api().get(`session-data/${sessionId}`)
   }
 }
