@@ -89,9 +89,8 @@ module.exports = {
       const todayString = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
 
       const nextReleases = await sequelize.query(`SELECT movie.* FROM movies AS movie
-      INNER JOIN sessions ON sessions.MovieId = movie.id
-      WHERE sessions.date IN (SELECT min(date) FROM sessions GROUP BY MovieId)
-      AND sessions.date > '${todayString}'`, {type: Sequelize.QueryTypes.SELECT})
+      WHERE movie.id IN (SELECT MovieId FROM sessions GROUP BY MovieId HAVING min(date) > '${todayString}')
+      GROUP BY movie.id`, {type: Sequelize.QueryTypes.SELECT})
 
       res.send(nextReleases)
     } catch (error) {
