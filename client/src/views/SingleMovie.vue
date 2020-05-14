@@ -16,6 +16,7 @@
             {{movie.cast}}
           </v-card-text>
         </v-col>
+
         <v-col cols="auto">
           <v-img
             class="ma-2"
@@ -28,24 +29,42 @@
     </v-card>
 
     <v-card outlined class="mt-6">
-      <v-row>
-        <v-col>
-          <v-card-title>Sesiones</v-card-title>
-        </v-col>
-        <v-col
-          cols="auto"
-          class="pa-6">
-          <add-session-dialog :movie="movie" />
-        </v-col>
-      </v-row>
-      <v-row class="mx-1">
+      <v-container>
+        <v-row>
+          <v-col>
+            <v-card-title>Sesiones</v-card-title>
+          </v-col>
+          <v-col
+            cols="auto"
+            class="pa-6">
+            <add-session-dialog :movie="movie" />
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="6" v-for="day in sessions" :key="day.date">
+            <v-row>
+              <v-col>{{day.date}}</v-col>
+            </v-row>
+            <v-row>
+              <v-col v-for="session in day.sessions" :key="session.id" cols="auto" class="text-center">
+                <session-chip :session="session" />
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
+      
+      
+
+      <!-- <v-row class="mx-1">
         <v-col
           v-for="session in sessions"
           :key="session.id"
           cols="auto">
           <session-chip :session="session" />
         </v-col>
-      </v-row>
+      </v-row> -->
       
     </v-card>
   </v-container>

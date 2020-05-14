@@ -24,7 +24,7 @@ module.exports = (app) => {
     MovieController.fetchNextReleases)
 
   app.get('/movies/:movieId/sessions',
-    SessionController.fetchAll)
+    SessionController.fetchNextWeek)
 
   app.get('/session/:sessionId',
     SessionController.read)

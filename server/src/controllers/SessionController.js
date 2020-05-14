@@ -1,4 +1,5 @@
 const {Movie, Session, Seat} = require('../models')
+const { Op } = require('sequelize')
 
 module.exports = {
   async create (req, res) {
@@ -109,4 +110,38 @@ module.exports = {
       })
     }
   },
+  async fetchNextWeek (req, res) {
+    const today = new Date(Date.now())
+    const tomorrow = new Date(Date.now())
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    const sessions = []
+
+    for (let i=0; i<7; i++) {
+      
+      sessions.push({
+        date: today.toLocaleDateString(undefined, {day: '2-digit', month: 'short'}),
+        sessions: await Session.findAll({
+          attributes: ['id', 'time'],
+          where: {
+            MovieId: req.params.movieId,
+            [Op.or]: [
+              { [Op.and]: [
+                {date: today},
+                {time: {[Op.gte]: '12:00'}}
+              ] },
+              { [Op.and]: [
+                {date: tomorrow},
+                {time: {[Op.lt]: '12:00'}}
+              ]}
+            ]
+          }
+        })
+      })
+
+      today.setDate(today.getDate() + 1)
+      tomorrow.setDate(tomorrow.getDate() + 1)
+    }
+
+    res.send(sessions)
+  }
 }
