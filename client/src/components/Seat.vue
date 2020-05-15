@@ -24,9 +24,9 @@ export default {
       this.selected = !this.selected
 
       if (this.selected)
-        this.$emit('select', this.seat)
+        this.$store.commit('addSeat', this.seat)
       else
-        this.$emit('deselect', this.seat.id)
+        this.$store.commit('removeSeat', this.seat.id)
     }
   }
 }

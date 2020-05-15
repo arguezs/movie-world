@@ -24,7 +24,7 @@
               <v-toolbar color="primary" dark flat dense class="text-center">
                 <v-toolbar-title>Total</v-toolbar-title>
               </v-toolbar>
-              <v-card-text class="text--primary display-1">{{ totalPrice.toFixed(2) }} €</v-card-text>
+              <v-card-text class="text--primary display-1">{{ $store.state.transaction.price.toFixed(2) }} €</v-card-text>
             </v-card>
           </v-col>
           </v-row>
@@ -79,9 +79,6 @@ import SeatSelector from '@/components/transactions/SeatSelector'
 export default {
   data () {
     return {
-      transaction: {
-        price: this.totalPrice
-      },
       step: 1,
       session: null,
       tickets: 0,
@@ -93,9 +90,6 @@ export default {
   },
   components: { TicketSelector, SeatSelector },
   computed: {
-    totalPrice () {
-      return this.tickets * this.price
-    },
     dateString () {
       const date = new Date(this.session.date + ' ' + this.session.time)
       return date.toLocaleDateString(undefined, {dateStyle: 'long'})

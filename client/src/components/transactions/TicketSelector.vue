@@ -15,7 +15,7 @@
         <v-btn
           fab outlined x-small
           :disabled="actualTickets==0"
-          @click="ticketsDown"><v-icon>remove</v-icon></v-btn>
+          @click="actualTickets-=1"><v-icon>remove</v-icon></v-btn>
       </v-col>
 
       <v-col cols="1">{{ actualTickets }}</v-col>
@@ -24,7 +24,7 @@
         <v-btn
           fab outlined x-small
           :disabled="actualTickets==10"
-          @click="ticketsUp"><v-icon>add</v-icon></v-btn>
+          @click="actualTickets+=1"><v-icon>add</v-icon></v-btn>
       </v-col>
 
       <v-col cols="2">{{ price.toFixed(2) }} €</v-col>
@@ -32,7 +32,10 @@
       <v-col cols="2">{{ totalPrice.toFixed(2) }} €</v-col>
     </v-row>
 
-    <step-buttons @prevStep="this.$emit('prevStep')" @nextStep="nextStep" :disable="actualTickets == 0" />
+    <step-buttons
+      @prevStep="prevStep"
+      @nextStep="nextStep"
+      :disable="actualTickets == 0" />
 
   </v-container>
 </template>
@@ -48,6 +51,11 @@ export default {
       actualTickets: this.tickets
     }
   },
+  watch: {
+    actualTickets () {
+      this.$store.commit('updatePrice', this.totalPrice)
+    }
+  },
   computed: {
     totalPrice () {
       return this.actualTickets * this.price
@@ -55,16 +63,11 @@ export default {
   },
   components: { StepButtons },
   methods: {
-    ticketsUp () {
-      this.actualTickets += 1
-      this.$emit('update:tickets', this.actualTickets)
-    },
-    ticketsDown () {
-      this.actualTickets -= 1
-      this.$emit('update:tickets', this.actualTickets)
-    },
     nextStep () {
       this.$emit('nextStep')
+    },
+    prevStep () {
+      this.$emit('prevStep')
     }
   }
 }

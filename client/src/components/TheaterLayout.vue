@@ -12,8 +12,6 @@
         v-for="seat in row.Seats"
         :key="seat.id">
         <seat
-          @select="addSeat"
-          @deselect="removeSeat"
           :seat="seat" :disabled="isOccupied(seat) || allSeatsPicked" />
       </v-col>
     </v-row>
@@ -33,21 +31,13 @@ export default {
   components: { Seat },
   computed: {
     allSeatsPicked () {
-      return this.selectedSeats.length == this.tickets
+      return this.$store.state.transaction.seats.length == this.tickets
     }
   },
   methods: {
     isOccupied (seat) {
       return this.sessionSeats
         .filter((sessionSeat) => sessionSeat.id == seat.id).length == 1
-    },
-    addSeat (seat) {
-      this.selectedSeats.push(seat)
-      this.$emit('seatClicked', this.allSeatsPicked)
-    },
-    removeSeat (id) {
-      this.selectedSeats = this.selectedSeats.filter(seat => seat.id != id)
-      this.$emit('seatClicked', this.allSeatsPicked)
     }
   }
 }

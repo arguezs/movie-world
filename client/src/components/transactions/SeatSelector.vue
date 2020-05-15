@@ -7,8 +7,7 @@
     <theater-layout
       :rows="session.Theater.Rows"
       :sessionSeats="session.Seats"
-      :tickets="tickets"
-      @seatClicked="seatClicked" />
+      :tickets="tickets" />
 
     <step-buttons
       :disable="!canProceed"
@@ -24,9 +23,9 @@ import StepButtons from './StepButtons'
 export default {
   components: { StepButtons, TheaterLayout },
   props: ['session', 'tickets'],
-  data () {
-    return {
-      canProceed: false
+  computed: {
+    canProceed () {
+      return this.$store.state.transaction.seats.length == this.tickets
     }
   },
   methods: {
@@ -35,9 +34,6 @@ export default {
     },
     prevStep () {
       this.$emit('prevStep')
-    },
-    seatClicked (allSelected) {
-      this.canProceed = allSelected
     }
   }
 }

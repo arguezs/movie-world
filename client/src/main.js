@@ -13,7 +13,11 @@ Vue.use(VueCookies)
 
 const store = new Vuex.Store({
   state: {
-    user: null
+    user: null,
+    transaction: {
+      price: 0,
+      seats: []
+    }
   },
   mutations: {
     updateUser (state) {
@@ -24,6 +28,18 @@ const store = new Vuex.Store({
         .catch(() => {
           state.user = null
         })
+    },
+
+    updatePrice (state, price) {
+      state.transaction.price = price
+    },
+
+    addSeat (state, seat) {
+      state.transaction.seats.push(seat)
+    },
+
+    removeSeat (state, id) {
+      state.transaction.seats = state.transaction.seats.filter(seat => seat.id != id)
     }
   }
 })
