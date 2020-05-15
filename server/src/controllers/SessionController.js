@@ -1,4 +1,4 @@
-const {Movie, Session, Seat} = require('../models')
+const {Movie, Session, Seat, Theater} = require('../models')
 const { Op } = require('sequelize')
 
 module.exports = {
@@ -146,11 +146,23 @@ module.exports = {
   },
   fetchSessionData (req, res) {
     Session.findByPk(req.params.sessionId, {
-      attributes: ['date', 'time', 'TheaterId'],
+      attributes: ['date', 'time'],
       include: [{
         model: Movie,
         attributes: ['title']
-      }]
+      }, {
+        model: Theater,
+        attributes: ['id'],
+        include: [{
+          model: Seat,
+          attributes: ['id', 'row', 'seat', 'disabled']
+        }]
+      }, {
+        model: Seat,
+        attributes: ['id'],
+        through: {attributes: []}
+      }
+    ]
     }).then(session => {
       res.send(session)
     }).catch(error => {
