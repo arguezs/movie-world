@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Theater.associate = function(models) {
     Theater.hasMany(models.Session)
-    Theater.hasMany(models.Seat)
+    Theater.hasMany(models.Row)
   }
 
   return Theater
