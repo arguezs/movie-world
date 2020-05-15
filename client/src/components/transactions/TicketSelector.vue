@@ -14,16 +14,16 @@
       <v-col cols="1">
         <v-btn
           fab outlined x-small
-          :disabled="tickets==0"
+          :disabled="actualTickets==0"
           @click="ticketsDown"><v-icon>remove</v-icon></v-btn>
       </v-col>
 
-      <v-col cols="1">{{ tickets }}</v-col>
+      <v-col cols="1">{{ actualTickets }}</v-col>
 
       <v-col cols="1">
         <v-btn
           fab outlined x-small
-          :disabled="tickets==10"
+          :disabled="actualTickets==10"
           @click="ticketsUp"><v-icon>add</v-icon></v-btn>
       </v-col>
 

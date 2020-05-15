@@ -4,13 +4,17 @@
       v-for="row in rows"
       :key="row.row"
       justify="center"
-      align="center">
-      <v-col cols="1" class="text-secondary">{{ row.row }}</v-col>
+      align="center"
+      no-gutters>
+      <v-col cols="1" class="text-secondary text-center">{{ row.row }}</v-col>
       <v-col
         cols="auto"
         v-for="seat in row.Seats"
         :key="seat.id">
-        <seat :seat="seat" :occupied="isOccupied(seat)" />
+        <seat
+          @select="addSeat"
+          @deselect="removeSeat"
+          :seat="seat" :disabled="isOccupied(seat) || allSeatsPicked" />
       </v-col>
     </v-row>
   </v-container>
@@ -20,12 +24,30 @@
 import Seat from './Seat'
 
 export default {
-  props: [ 'rows', 'sessionSeats' ],
+  props: [ 'rows', 'sessionSeats', 'tickets' ],
+  data () {
+    return {
+      selectedSeats: []
+    }
+  },
   components: { Seat },
+  computed: {
+    allSeatsPicked () {
+      return this.selectedSeats.length == this.tickets
+    }
+  },
   methods: {
     isOccupied (seat) {
       return this.sessionSeats
-        .filter((sessionSeat) => sessionSeat.id == seat.id).length
+        .filter((sessionSeat) => sessionSeat.id == seat.id).length == 1
+    },
+    addSeat (seat) {
+      this.selectedSeats.push(seat)
+      this.$emit('seatClicked', this.allSeatsPicked)
+    },
+    removeSeat (id) {
+      this.selectedSeats = this.selectedSeats.filter(seat => seat.id != id)
+      this.$emit('seatClicked', this.allSeatsPicked)
     }
   }
 }

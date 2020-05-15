@@ -49,6 +49,7 @@
         <v-stepper-content step="2">
           <seat-selector
             :session="session"
+            :tickets="tickets"
             @nextStep="step+=1"
             @prevStep="step-=1" />
         </v-stepper-content>
@@ -75,6 +76,9 @@ import SeatSelector from '@/components/transactions/SeatSelector'
 export default {
   data () {
     return {
+      transaction: {
+        price: this.totalPrice
+      },
       step: 1,
       session: null,
       tickets: 0,
