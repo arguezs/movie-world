@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card>
-      <v-card-title>Compra tus entradas</v-card-title>
+      <v-card-title><v-icon>theaters</v-icon> Compra tus entradas</v-card-title>
       <v-card-text class="pl-12">
         <v-row>
           <v-col>
@@ -47,7 +47,10 @@
         </v-stepper-content>
 
         <v-stepper-content step="2">
-          <seat-selector />
+          <seat-selector
+            :session="session"
+            @nextStep="step+=1"
+            @prevStep="step-=1" />
         </v-stepper-content>
 
         <v-stepper-content step="3">

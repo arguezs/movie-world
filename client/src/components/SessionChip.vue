@@ -1,7 +1,7 @@
 <template>
   <v-chip
     :to="{
-      name: 'Session',
+      name: 'Transaction',
       params: {sessionId: session.id} }"
     :color="afterMidnight ? 'deep-purple darken-3' : ''"
     :dark="afterMidnight">
