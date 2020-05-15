@@ -32,7 +32,7 @@
       <v-col cols="2">{{ totalPrice.toFixed(2) }} €</v-col>
     </v-row>
 
-    <step-buttons @prevStep="this.$emit('prevStep')" @nextStep="nextStep" :disable="tickets == 0" />
+    <step-buttons @prevStep="this.$emit('prevStep')" @nextStep="nextStep" :disable="actualTickets == 0" />
 
   </v-container>
 </template>
@@ -41,26 +41,27 @@
 import StepButtons from './StepButtons'
 
 export default {
+  props: ['tickets', 'step'],
   data () {
     return {
-      price: 9.5
+      price: 9.5,
+      actualTickets: this.tickets
     }
   },
-  props: ['tickets', 'step'],
   computed: {
     totalPrice () {
-      return this.tickets * this.price
+      return this.actualTickets * this.price
     }
   },
   components: { StepButtons },
   methods: {
     ticketsUp () {
-      this.tickets += 1
-      this.$emit('update:tickets', this.tickets)
+      this.actualTickets += 1
+      this.$emit('update:tickets', this.actualTickets)
     },
     ticketsDown () {
-      this.tickets -= 1
-      this.$emit('update:tickets', this.tickets)
+      this.actualTickets -= 1
+      this.$emit('update:tickets', this.actualTickets)
     },
     nextStep () {
       this.$emit('nextStep')
