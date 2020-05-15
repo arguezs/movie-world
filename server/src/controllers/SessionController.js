@@ -1,4 +1,4 @@
-const {Movie, Session, Seat, Theater} = require('../models')
+const {Movie, Session, Row, Seat, Theater} = require('../models')
 const { Op } = require('sequelize')
 
 module.exports = {
@@ -154,8 +154,12 @@ module.exports = {
         model: Theater,
         attributes: ['id'],
         include: [{
-          model: Seat,
-          attributes: ['id', 'row', 'seat', 'disabled']
+          model: Row,
+          attributes: ['row'],
+          include: [{
+            model: Seat,
+            attributes: ['id', 'seat', 'disabled']
+          }]
         }]
       }, {
         model: Seat,

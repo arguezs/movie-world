@@ -1,6 +1,11 @@
 <template>
   <v-container>
-    <theater-layout :seats="session.Theater.Seats" :sessionSeats="session.Seats" />
+    <v-row class="text-center">
+      <v-col>Selecciona tus asientos</v-col>
+    </v-row>
+
+    <theater-layout :rows="session.Theater.Rows" :sessionSeats="session.Seats" />
+
     <step-buttons @prevStep="prevStep" @nextStep="nextStep" />
   </v-container>
 </template>
@@ -22,7 +27,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

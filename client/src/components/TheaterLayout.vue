@@ -1,10 +1,14 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row
+      v-for="row in rows"
+      :key="row.row"
+      justify="center"
+      align="center">
+      <v-col cols="1" class="text-secondary">{{ row.row }}</v-col>
       <v-col
-        class="pa-1"
         cols="auto"
-        v-for="seat in seats"
+        v-for="seat in row.Seats"
         :key="seat.id">
         <seat :seat="seat" :occupied="isOccupied(seat)" />
       </v-col>
@@ -16,7 +20,7 @@
 import Seat from './Seat'
 
 export default {
-  props: [ 'seats', 'sessionSeats' ],
+  props: [ 'rows', 'sessionSeats' ],
   components: { Seat },
   methods: {
     isOccupied (seat) {
