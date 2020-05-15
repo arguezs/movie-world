@@ -40,10 +40,12 @@
       </v-stepper-header>
 
       <v-stepper-items>
+
         <v-stepper-content step="1">
           <ticket-selector
             :tickets.sync="tickets" :step="step"
-            @nextStep="step+=1" />
+            @nextStep="step+=1" 
+            @prevStep="backHome"/>
         </v-stepper-content>
 
         <v-stepper-content step="2">
@@ -62,6 +64,7 @@
             </v-row>
           </v-container>
         </v-stepper-content>
+
       </v-stepper-items>
     </v-stepper>
   </v-container>
@@ -100,6 +103,11 @@ export default {
     timeString () {
       const date = new Date(this.session.date + ' ' + this.session.time)
       return date.toLocaleTimeString(undefined, {timeStyle: 'short'})
+    }
+  },
+  methods: {
+    backHome () {
+      this.$router.push('/')
     }
   }
 }
