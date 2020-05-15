@@ -53,6 +53,7 @@ export default {
   },
   watch: {
     actualTickets () {
+      this.$emit('update:tickets', this.actualTickets)
       this.$store.commit('updatePrice', this.totalPrice)
     }
   },
