@@ -1,13 +1,13 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col>Asientos:</v-col>
-      <v-col>
+    <v-row justify="center">
+      <v-col cols="2">Asientos:</v-col>
+      <v-col cols="auto">
         <v-row
         v-for="seat in transaction.seats"
         :key="seat.id">
-        <v-col>Fila: {{ seat.row }}</v-col>
-        <v-col>Asiento: {{ seat.seat }}</v-col>
+        <v-col cols="auto">Fila: {{ seat.row }}</v-col>
+        <v-col cols="auto">Asiento: {{ seat.seat }}</v-col>
       </v-row>
       </v-col>
     </v-row>

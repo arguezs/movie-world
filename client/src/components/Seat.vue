@@ -10,10 +10,7 @@
 
 <script>
 export default {
-  props: {
-    seat: {},
-    disabled: Boolean
-  },
+  props: ['seat', 'disabled', 'row'],
   data () {
     return {
       selected: false
@@ -24,7 +21,12 @@ export default {
       this.selected = !this.selected
 
       if (this.selected)
-        this.$store.commit('addSeat', this.seat)
+        this.$store.commit('addSeat', {
+          id: this.seat.id,
+          row: this.row,
+          seat: this.seat.seat,
+          disabled: this.seat.disabled
+        })
       else
         this.$store.commit('removeSeat', this.seat.id)
     }

@@ -12,7 +12,7 @@
         v-for="seat in row.Seats"
         :key="seat.id">
         <seat
-          :seat="seat" :disabled="isOccupied(seat) || allSeatsPicked" />
+          :seat="seat" :row="row.row" :disabled="isOccupied(seat) || allSeatsPicked" />
       </v-col>
     </v-row>
   </v-container>
