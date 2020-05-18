@@ -44,10 +44,10 @@ const store = new Vuex.Store({
     },
 
     stepUp (state) {
-      state.transaction.step +=1
+      state.transaction.step += 1
     },
-    stepDonw (state) {
-      state.transaction.step -=1
+    stepDown (state) {
+      state.transaction.step -= 1
     }
   }
 })
