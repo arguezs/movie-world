@@ -53,12 +53,7 @@
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          <v-container>
-            <v-row>
-              <v-btn>Continuar</v-btn>
-              <v-btn @click="step = 2">Cancelar</v-btn>
-            </v-row>
-          </v-container>
+          <transaction-confirmation />
         </v-stepper-content>
 
       </v-stepper-items>
@@ -71,6 +66,7 @@ import SessionService from '@/services/SessionService'
 
 import TicketSelector from '@/components/transactions/TicketSelector'
 import SeatSelector from '@/components/transactions/SeatSelector'
+import TransactionConfirmation from '@/components/transactions/TransactionConfirmation'
 
 export default {
   data () {
@@ -83,7 +79,7 @@ export default {
   async mounted () {
     this.session = (await SessionService.fetchData(this.$route.params.sessionId)).data
   },
-  components: { TicketSelector, SeatSelector },
+  components: { TicketSelector, SeatSelector, TransactionConfirmation },
   computed: {
     step () {
       return this.$store.state.transaction.step
