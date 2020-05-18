@@ -65,10 +65,10 @@ export default {
   components: { StepButtons },
   methods: {
     nextStep () {
-      this.$emit('nextStep')
+      this.$store.commit('stepUp')
     },
     prevStep () {
-      this.$emit('prevStep')
+      this.$router.push('/')
     }
   }
 }

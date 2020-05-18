@@ -30,10 +30,10 @@ export default {
   },
   methods: {
     nextStep () {
-      this.$emit('nextStep')
+      this.$store.commit('stepUp')
     },
     prevStep () {
-      this.$emit('prevStep')
+      this.$store.commit('stepDown')
     }
   }
 }

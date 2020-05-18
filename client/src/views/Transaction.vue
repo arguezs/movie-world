@@ -43,17 +43,13 @@
 
         <v-stepper-content step="1">
           <ticket-selector
-            :tickets.sync="tickets" :step="step"
-            @nextStep="step+=1" 
-            @prevStep="backHome"/>
+            :tickets.sync="tickets" :step="step" />
         </v-stepper-content>
 
         <v-stepper-content step="2">
           <seat-selector
             :session="session"
-            :tickets="tickets"
-            @nextStep="step+=1"
-            @prevStep="step-=1" />
+            :tickets="tickets"/>
         </v-stepper-content>
 
         <v-stepper-content step="3">
@@ -79,7 +75,6 @@ import SeatSelector from '@/components/transactions/SeatSelector'
 export default {
   data () {
     return {
-      step: 1,
       session: null,
       tickets: 0,
       price: 9.5
@@ -90,6 +85,9 @@ export default {
   },
   components: { TicketSelector, SeatSelector },
   computed: {
+    step () {
+      return this.$store.state.transaction.step
+    },
     dateString () {
       const date = new Date(this.session.date + ' ' + this.session.time)
       return date.toLocaleDateString(undefined, {dateStyle: 'long'})
@@ -97,11 +95,6 @@ export default {
     timeString () {
       const date = new Date(this.session.date + ' ' + this.session.time)
       return date.toLocaleTimeString(undefined, {timeStyle: 'short'})
-    }
-  },
-  methods: {
-    backHome () {
-      this.$router.push('/')
     }
   }
 }

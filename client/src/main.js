@@ -15,6 +15,7 @@ const store = new Vuex.Store({
   state: {
     user: null,
     transaction: {
+      step: 1,
       price: 0,
       seats: []
     }
@@ -40,6 +41,13 @@ const store = new Vuex.Store({
 
     removeSeat (state, id) {
       state.transaction.seats = state.transaction.seats.filter(seat => seat.id != id)
+    },
+
+    stepUp (state) {
+      state.transaction.step +=1
+    },
+    stepDonw (state) {
+      state.transaction.step -=1
     }
   }
 })
