@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <v-row justify="center">
+
+    <v-container v-if="user">
+      <v-row justify="center">
       <v-col cols="2">Asientos:</v-col>
       <v-col cols="auto">
         <v-row
@@ -15,17 +17,24 @@
     <step-buttons
       @nextStep="nextStep"
       @prevStep="prevStep" />
+    </v-container>
+
+    <guest-or-sign-up v-else />
   </v-container>
 </template>
 
 <script>
 import StepButtons from './StepButtons'
+import GuestOrSignUp from './GuestOrSignUp'
 
 export default {
-  components: { StepButtons },
+  components: { StepButtons, GuestOrSignUp },
   computed: {
     transaction () {
       return this.$store.state.transaction
+    },
+    user () {
+      return this.$store.state.user
     }
   },
   methods: {
