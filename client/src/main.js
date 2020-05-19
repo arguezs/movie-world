@@ -14,6 +14,7 @@ Vue.use(VueCookies)
 const store = new Vuex.Store({
   state: {
     user: null,
+    route: null,
     transaction: {
       step: 1,
       mail: null,
@@ -38,6 +39,10 @@ const store = new Vuex.Store({
 
     updateMail (state, mail) {
       state.transaction.mail = mail
+    },
+
+    updateRoute (state, route) {
+      state.route = route
     },
 
     addSeat (state, seat) {

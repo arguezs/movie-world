@@ -56,7 +56,10 @@ export default {
       try {
         await AuthenticationService.login(this.user)
 
-        this.$router.push('/')
+        if (this.route)
+          this.$router.push(this.route)
+        else
+          this.$router.push('/')
       } catch (error) {
         this.error = error
       }
@@ -67,6 +70,11 @@ export default {
 
     if (this.$store.state.user)
       this.$router.push('/')
+  },
+  computed: {
+    route () {
+      return this.$store.state.route
+    }
   }
 }
 </script>
