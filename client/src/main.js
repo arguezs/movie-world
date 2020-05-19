@@ -60,6 +60,15 @@ const store = new Vuex.Store({
     },
     stepDown (state) {
       state.transaction.step -= 1
+    },
+
+    resetTransaction (state) {
+      state.transaction = {
+        step: 1,
+        mail: null,
+        price: 0,
+        seats: []
+      }
     }
   }
 })

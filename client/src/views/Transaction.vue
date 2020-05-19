@@ -93,6 +93,32 @@ export default {
       const date = new Date(this.session.date + ' ' + this.session.time)
       return date.toLocaleTimeString(undefined, {timeStyle: 'short'})
     }
+  },
+  beforeRouteUpdate (to, from, next) {
+    const confirm = window.confirm('¿Está seguro de que desea dejar esta página?')
+
+    if (confirm){
+      this.$store.commit('resetTransaction')
+      next()
+    } else {
+      next(from)
+    }
+  },
+  beforeRouteLeave (to, from, next) {
+    if (to.name == 'Login') {
+      this.$store.commit('updateRoute', from.path)
+      next ()
+    } else {
+      const confirm = window.confirm('¿Está seguro de que desea dejar esta página?')
+
+      if (confirm){
+        this.$store.commit('resetTransaction')
+        next()
+      } else {
+        next(from)
+      }
+    }
+    
   }
 }
 </script>

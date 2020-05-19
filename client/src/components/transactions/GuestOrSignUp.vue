@@ -7,7 +7,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-btn color="primary" text @click="chooseLogin">Accede para continuar</v-btn>
+            <v-btn color="primary" text to="/login">Accede para continuar</v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -68,10 +68,6 @@ export default {
   methods: {
     chooseGuest () {
       this.guest = true
-    },
-    chooseLogin () {
-      this.$store.commit('updateRoute', this.$route.path)
-      this.$router.push('/login')
     }
   }
 
