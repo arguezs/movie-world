@@ -42,7 +42,7 @@
 
 <script>
 import {required, email, sameAs, helpers} from 'vuelidate/lib/validators'
-const passRegEx = helpers.regex('passRegEx', /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+const passRegEx = helpers.regex('passRegEx', /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
 import UserService from '@/services/UserService'
 
 export default {
