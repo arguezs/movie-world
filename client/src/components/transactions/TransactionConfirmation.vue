@@ -1,7 +1,9 @@
 <template>
   <v-container>
 
-    <v-container v-if="user">
+    <guest-or-sign-up v-if="!user" />
+
+    <v-container v-if="userOrGuest">
       <v-row justify="center">
       <v-col cols="2">Asientos:</v-col>
       <v-col cols="auto">
@@ -19,7 +21,7 @@
       @prevStep="prevStep" />
     </v-container>
 
-    <guest-or-sign-up v-else />
+    
   </v-container>
 </template>
 
@@ -35,6 +37,9 @@ export default {
     },
     user () {
       return this.$store.state.user
+    },
+    userOrGuest () {
+      return this.user || this.$store.state.transaction.mail
     }
   },
   methods: {

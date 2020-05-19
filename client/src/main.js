@@ -16,6 +16,7 @@ const store = new Vuex.Store({
     user: null,
     transaction: {
       step: 1,
+      mail: null,
       price: 0,
       seats: []
     }
@@ -33,6 +34,10 @@ const store = new Vuex.Store({
 
     updatePrice (state, price) {
       state.transaction.price = price
+    },
+
+    updateMail (state, mail) {
+      state.transaction.mail = mail
     },
 
     addSeat (state, seat) {
