@@ -30,6 +30,7 @@
     <v-row v-else justify="center">
       <v-col cols="6">
         <v-text-field
+          :error="!validMail"
           label="Dirección de correo"
           v-model="mail"
           type="mail" />
@@ -39,6 +40,8 @@
 </template>
 
 <script>
+import {required, email} from 'vuelidate/lib/validators'
+
 export default {
   data () {
     return {
@@ -46,18 +49,20 @@ export default {
       mail: null
     }
   },
+  validations: {
+    mail: {required, email}
+  },
   watch: {
     mail () {
+      this.$v.$touch()
+
       if (this.validMail)
         this.$store.commit('updateMail', this.mail)
     }
   },
   computed: {
     validMail () {
-      const RegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-      console.log(this.mail, this.mail.match(RegEx))
-      return this.mail.match(RegEx)
+      return !this.$v.$invalid
     }
   },
   methods: {
