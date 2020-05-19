@@ -1,4 +1,4 @@
-const {Seat} = require('../models')
+const {Seat, Transaction} = require('../models')
 
 module.exports = {
   async fetch (req, res) {
@@ -42,5 +42,23 @@ module.exports = {
         error: 'Se ha producido un error'
       })
     }
+  },
+
+  fetchUnavailableSeats (req, res) {
+    Seat.findAll({
+      where: {
+        '$Transactions.SessionId$': req.params.sessionId
+      },
+      include: [{
+        model: Transaction,
+        required: true
+      }]
+    })
+      .then(seats => {
+        res.send(seats)
+      })
+      .catch(error => {
+        res.status(500).send(error)
+      })
   }
 }

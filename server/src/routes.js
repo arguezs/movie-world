@@ -36,7 +36,7 @@ module.exports = (app) => {
     SessionController.fetchSessionData)
 
   app.get('/session/:sessionId/seats',
-    SessionController.fetchSessionSeat)
+    SeatController.fetchUnavailableSeats)
   app.post('/session/:sessionId/seats',
     SessionController.addSessionSeats)
   

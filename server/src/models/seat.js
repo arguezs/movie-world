@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     Seat.belongsTo(models.Row)
 
     Seat.belongsToMany(models.Session, {through: 'SessionSeat'})
-    Seat.belongsToMany(models.Session, {through: 'TransactionSeat'})
+    Seat.belongsToMany(models.Transaction, {through: 'TransactionSeat'})
   }
 
   return Seat
