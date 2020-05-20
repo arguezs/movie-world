@@ -46,11 +46,13 @@ module.exports = {
 
   fetchUnavailableSeats (req, res) {
     Seat.findAll({
+      attributes: ['id'],
       where: {
         '$Transactions.SessionId$': req.params.sessionId
       },
       include: [{
         model: Transaction,
+        attributes: [],
         required: true
       }]
     })

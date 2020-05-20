@@ -29,6 +29,8 @@
 import StepButtons from './StepButtons'
 import GuestOrSignUp from './GuestOrSignUp'
 
+import TransactionService from '@/services/TransactionService'
+
 export default {
   components: { StepButtons, GuestOrSignUp },
   computed: {
@@ -40,11 +42,22 @@ export default {
     },
     userOrGuest () {
       return this.user || this.$store.state.transaction.mail
+    },
+    request () {
+      return {
+        transaction: {
+          total: this.transaction.price,
+          guest: this.transaction.mail,
+          SessionId: this.$route.params.sessionId,
+          UserId: null
+        },
+        seats: this.transaction.seats.map(seat => seat.id)
+      }
     }
   },
   methods: {
     nextStep () {
-
+      TransactionService.create(this.request)
     },
     prevStep () {
       this.$store.commit('stepDown')

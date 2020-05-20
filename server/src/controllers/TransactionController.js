@@ -2,12 +2,23 @@ const {Transaction} = require('../models')
 
 module.exports = {
   create (req, res) {
-    Transaction.create(req.body)
-      .then((transaction) => {
-        res.send(transaction)
+    const newTransaction = req.body.transaction
+
+    if (!newTransaction.guest)
+      newTransaction.UserId = req.user.id
+
+    Transaction.create(newTransaction)
+      .then(transaction => {
+        transaction.addSeats(req.body.seats)
+          .then(() => {
+            res.send(transaction)
+          })
+          .catch(error => {
+            res.status(500).send(error)
+          })
       })
       .catch((error) => {
-        res.status(500).send({error: error})
+        res.status(500).send(error)
       })
   },
   read (req, res) {

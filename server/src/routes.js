@@ -4,6 +4,7 @@ const SeatController = require('./controllers/SeatController')
 const TheaterController = require('./controllers/TheaterController')
 const UserController = require('./controllers/UserController')
 const AuthenticationController = require('./controllers/AuthenticationController')
+const TransactionController = require('./controllers/TransactionController')
 
 module.exports = (app) => {
   app.get('/movies',
@@ -62,4 +63,7 @@ module.exports = (app) => {
 
   app.put('/user',
     UserController.updateProfile)
+
+  app.post('/transaction',
+    TransactionController.create)
 }
