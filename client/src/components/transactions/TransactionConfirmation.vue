@@ -57,7 +57,15 @@ export default {
   },
   methods: {
     nextStep () {
+      const vue = this
+
       TransactionService.create(this.request)
+        .then(() => {
+          vue.$emit('success')
+        })
+        .catch(() => {
+          vue.$emit('error')
+        })
     },
     prevStep () {
       this.$store.commit('stepDown')

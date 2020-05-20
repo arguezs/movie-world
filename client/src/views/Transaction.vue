@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card>
+    <v-card class="mb-6">
       <v-card-title><v-icon>theaters</v-icon> Compra tus entradas</v-card-title>
       <v-card-text class="pl-12">
         <v-row>
@@ -32,7 +32,17 @@
       </v-card-text>
     </v-card>
 
-    <v-stepper v-model="step" class="mt-12">
+    <v-alert
+      v-if="result"
+      class="mx-12 mb-6"
+      outlined
+      dense
+      :type="result.success?'success':'error'">
+      <span v-if="result.success">Transacción realizada con éxito. Redirigiendo.</span>
+      <span v-else>No se ha podido realizar la compra. Inténtalo de nuevo más tarde.</span>
+    </v-alert>
+
+    <v-stepper v-model="step" class="mt-6">
       <v-stepper-header>
         <v-stepper-step :complete="step > 1" step="1">Entradas</v-stepper-step>
         <v-stepper-step :complete="step > 2" step="2">Asientos</v-stepper-step>
@@ -53,7 +63,9 @@
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          <transaction-confirmation />
+          <transaction-confirmation
+            @success="transactionSuccess"
+            @error="transactionError" />
         </v-stepper-content>
 
       </v-stepper-items>
@@ -73,7 +85,8 @@ export default {
     return {
       session: null,
       tickets: 0,
-      price: 9.5
+      price: 9.5,
+      result: null
     }
   },
   async mounted () {
@@ -94,6 +107,19 @@ export default {
       return date.toLocaleTimeString(undefined, {timeStyle: 'short'})
     }
   },
+  methods: {
+    transactionSuccess () {
+      this.result = {success: true}
+      const vue = this
+
+      window.setTimeout(() => {
+        vue.$router.push('/')
+      }, 10000)
+    },
+    transtionError () {
+      this.result = {error: true}
+    }
+  },
   beforeRouteUpdate (to, from, next) {
     const confirm = window.confirm('¿Está seguro de que desea dejar esta página?')
 
@@ -108,15 +134,11 @@ export default {
     if (to.name == 'Login') {
       this.$store.commit('updateRoute', from.path)
       next ()
+    } else if (this.result || window.confirm('¿Está seguro de que desea dejar esta página?')){
+      this.$store.commit('resetTransaction')
+      next()
     } else {
-      const confirm = window.confirm('¿Está seguro de que desea dejar esta página?')
-
-      if (confirm){
-        this.$store.commit('resetTransaction')
-        next()
-      } else {
-        next(from)
-      }
+      next(false)
     }
     
   }
