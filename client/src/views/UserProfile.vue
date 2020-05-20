@@ -57,6 +57,7 @@
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 import UserService from '@/services/UserService'
+import store from '@/store'
 
 export default {
   data () {
@@ -67,9 +68,6 @@ export default {
     }
   },
   async mounted () {
-    if (!this.$store.state.user)
-      this.$router.push({name: 'Login'})
-
     this.user = (await AuthenticationService.getUserData()).data
   },
   methods: {
@@ -95,6 +93,12 @@ export default {
           }
         })
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    if (store.getters.isAuthenticated)
+      next()
+    else
+      next('/login')
   }
 }
 </script>
