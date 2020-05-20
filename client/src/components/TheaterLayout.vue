@@ -20,15 +20,20 @@
 
 <script>
 import Seat from './Seat'
+import SessionService from '@/services/SessionService'
 
 export default {
-  props: [ 'rows', 'sessionSeats', 'tickets' ],
+  props: [ 'rows', 'tickets' ],
   data () {
     return {
-      selectedSeats: []
+      selectedSeats: [],
+      sessionSeats: []
     }
   },
   components: { Seat },
+  async mounted () {
+    this.sessionSeats = (await SessionService.fetchSeats(this.$route.params.sessionId)).data
+  },
   computed: {
     allSeatsPicked () {
       return this.$store.state.transaction.seats.length == this.tickets

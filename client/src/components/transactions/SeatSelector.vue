@@ -6,7 +6,6 @@
 
     <theater-layout
       :rows="session.Theater.Rows"
-      :sessionSeats="session.Seats"
       :tickets="tickets" />
 
     <step-buttons
