@@ -1,9 +1,9 @@
 <template>
-  <v-app-bar app>
+  <div>
     <user-header />
 
     <admin-header v-if="isAdmin" />
-  </v-app-bar>
+  </div>
 </template>
 
 <script>
