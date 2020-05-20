@@ -66,7 +66,7 @@ export default {
     }
   },
   mounted () {
-    if (this.$store.state.user)
+    if (this.$store.getters.isAuthenticated)
       this.$router.push('/')
   },
   computed: {

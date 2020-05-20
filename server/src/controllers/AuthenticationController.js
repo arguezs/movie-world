@@ -71,7 +71,7 @@ module.exports = {
   },
 
   fetchUser (req, res) {
-    User.findByPk(req.user.id, { attributes: ['mail', 'name', 'birthday'] })
+    User.findByPk(req.user.id, { attributes: ['mail', 'name', 'birthday', 'role'] })
       .then(user => {
         res.send(user)
       })

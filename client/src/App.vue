@@ -9,13 +9,10 @@
 </template>
 
 <script>
-import MainHeader from './components/MainHeader'
+import MainHeader from './components/header/MainHeader'
 
 export default {
   name: 'App',
-  components: { MainHeader },
-  data: () => ({
-    //
-  }),
+  components: { MainHeader }
 };
 </script>

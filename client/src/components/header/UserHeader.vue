@@ -1,22 +1,10 @@
 <template>
-  <v-app-bar
-    app
-    color="primary"
-    dark>
-
+  <v-toolbar color="primary" dark>
     <v-toolbar-items>
       <v-btn
         text
         exact
         :to="{name: 'Home'}">Inicio</v-btn>
-      <v-btn
-        text
-        exact
-        :to="{name: 'Movies'}">Películas</v-btn>
-      <v-btn
-        text
-        exact
-        :to="{name: 'Sessions'}">Sesiones</v-btn>
     </v-toolbar-items>
 
     <v-spacer />
@@ -47,24 +35,17 @@
         exact
         :to="{name: 'Login'}">Login</v-btn>
     </v-toolbar-items>
-
-  </v-app-bar>
+  </v-toolbar>
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
-  name: 'MainHeader',
   computed: {
     user () {
-      return this.$store.state.user
+      return this.$store.state.user.name
     } 
-  },
-  async mounted () {
-    const user = (await AuthenticationService.getUserData()).data
-
-    this.$store.commit('updateUser', user)
   },
   methods: {
     async logout () {
@@ -76,7 +57,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
