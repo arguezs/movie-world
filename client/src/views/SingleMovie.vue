@@ -29,18 +29,9 @@
     </v-card>
 
     <v-card outlined class="mt-6">
-      <v-container>
-        <v-row>
-          <v-col>
-            <v-card-title>Sesiones</v-card-title>
-          </v-col>
-          <v-col
-            cols="auto"
-            class="pa-6">
-            <add-session-dialog :movie="movie" />
-          </v-col>
-        </v-row>
+      <v-card-title>Sesiones</v-card-title>
 
+      <v-card-text>
         <v-row>
           <v-col cols="6" v-for="day in sessions" :key="day.date">
             <v-row>
@@ -53,18 +44,7 @@
             </v-row>
           </v-col>
         </v-row>
-      </v-container>
-      
-      
-
-      <!-- <v-row class="mx-1">
-        <v-col
-          v-for="session in sessions"
-          :key="session.id"
-          cols="auto">
-          <session-chip :session="session" />
-        </v-col>
-      </v-row> -->
+      </v-card-text>
       
     </v-card>
   </v-container>
@@ -74,7 +54,6 @@
 import MovieService from '@/services/MovieService'
 import SessionService from '@/services/SessionService'
 
-import AddSessionDialog from '@/components/AddSessionDialog'
 import SessionChip from '@/components/SessionChip'
 
 export default {
@@ -89,13 +68,6 @@ export default {
     this.movie = (await MovieService.fetch(movieId)).data
     this.sessions = (await SessionService.fetchAll(movieId)).data
   },
-  components: {
-    AddSessionDialog,
-    SessionChip
-  }
+  components: { SessionChip }
 }
 </script>
-
-<style>
-
-</style>
