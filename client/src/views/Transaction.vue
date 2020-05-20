@@ -90,7 +90,6 @@ export default {
     }
   },
   async mounted () {
-    this.$store.commit('updateUser')
     this.session = (await SessionService.fetchData(this.$route.params.sessionId)).data
   },
   components: { TicketSelector, SeatSelector, TransactionConfirmation },

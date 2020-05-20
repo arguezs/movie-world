@@ -99,8 +99,6 @@ export default {
     }
   },
   mounted () {
-    this.$store.commit('updateUser')
-
     if (this.$store.state.user)
       this.$router.push('/')
   }

@@ -85,7 +85,6 @@ export default {
     }
   },
   async mounted () {
-    this.$store.commit('updateUser')
     const movieId = this.$route.params.movieId
     this.movie = (await MovieService.fetch(movieId)).data
     this.sessions = (await SessionService.fetchAll(movieId)).data

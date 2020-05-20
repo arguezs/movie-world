@@ -10,6 +10,11 @@ Vue.config.productionTip = false
 Vue.use(VueCookies)
 Vue.use(Vuelidate)
 
+router.beforeEach((to, from, next) => {
+  store.commit('updateUser')
+  next()
+})
+
 new Vue({
   router,
   vuetify,
