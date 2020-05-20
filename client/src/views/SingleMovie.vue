@@ -1,7 +1,6 @@
 <template>
   <v-container>
-    <v-card
-      outlined>
+    <v-card outlined>
       <v-row dense>
         <v-col>
           <v-card-title>{{movie.title}}</v-card-title>
