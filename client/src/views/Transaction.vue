@@ -120,13 +120,11 @@ export default {
     }
   },
   beforeRouteUpdate (to, from, next) {
-    const confirm = window.confirm('¿Está seguro de que desea dejar esta página?')
-
-    if (confirm){
-      this.$store.commit('resetTransaction')
+    if (window.confirm('¿Está seguro de que desea dejar esta página?')){
+      this.$store.dispatch('resetTransaction')
       next()
     } else {
-      next(from)
+      next(false)
     }
   },
   beforeRouteLeave (to, from, next) {
@@ -134,7 +132,7 @@ export default {
       this.$store.commit('updateRoute', from.path)
       next ()
     } else if (this.result || window.confirm('¿Está seguro de que desea dejar esta página?')){
-      this.$store.commit('resetTransaction')
+      this.$store.dispatch('resetTransaction')
       next()
     } else {
       next(false)

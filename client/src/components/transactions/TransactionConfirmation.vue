@@ -51,7 +51,7 @@ export default {
           SessionId: this.$route.params.sessionId,
           UserId: null
         },
-        seats: this.transaction.seats.map(seat => seat.id)
+        seats: this.$store.getters.seatIds
       }
     }
   },
