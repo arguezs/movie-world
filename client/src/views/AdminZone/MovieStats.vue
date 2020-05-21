@@ -3,7 +3,10 @@
   <v-data-table
     :headers="headers"
     :items="movies"
-    :loading="loadingState" />
+    :items-per-page="15"
+    :loading="loadingState"
+    loading-text="Cargando estadísticas..."
+    :footer-props="footerProps" />
   </v-container>
 </template>
 
@@ -19,6 +22,9 @@ export default {
         { text: 'Sesiones', align: 'end', value: 'sessionCount' },
         { text: 'Recaudación', align: 'end', value: 'totalEarnings' }
       ],
+      footerProps: {
+        itemsPerPageText: 'Filas por página'
+      },
       movies: [],
       loadingState: true
     }
