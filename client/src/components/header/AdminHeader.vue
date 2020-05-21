@@ -1,5 +1,6 @@
 <template>
-  <v-toolbar dense>
+  <v-toolbar dense color="#ccc">
+    <v-toolbar-title class="mr-6">Administración</v-toolbar-title>
     <v-toolbar-items>
       <v-btn
         text
@@ -9,6 +10,10 @@
         text
         exact
         :to="{name: 'Sessions'}">Sesiones</v-btn>
+      <v-btn
+        text
+        exact
+        :to="{name: 'Movie Stats'}">Estadísticas</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>

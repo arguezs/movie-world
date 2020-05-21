@@ -1,8 +1,10 @@
 <template>
+  <v-container>
   <v-data-table
     :headers="headers"
     :items="movies"
     :loading="loadingState" />
+  </v-container>
 </template>
 
 <script>
