@@ -44,7 +44,7 @@ const routes = [
   {
     path: '/session',
     component: ParentView,
-    beforeEnter () {
+    beforeEnter (to, from, next) {
       if (store.getters.isAuthenticated)
         next('/')
       else
