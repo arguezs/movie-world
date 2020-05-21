@@ -56,6 +56,9 @@ import SessionService from '@/services/SessionService'
 import SessionChip from '@/components/SessionChip'
 
 export default {
+  title () {
+    return this.movie.title
+  },
   data () {
     return {
       movie: {},

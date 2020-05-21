@@ -29,17 +29,20 @@ const routes = [
   {
     path: '/movies/:movieId',
     name: 'SingleMovie',
-    component: SingleMovie
+    component: SingleMovie,
+    meta: {title: 'Película'}
   },
   {
     path: '/profile',
     name: 'Perfil',
-    component: UserProfile
+    component: UserProfile,
+    meta: {title: 'Perfil'}
   },
   {
     path:'/buy/:sessionId/',
     name: 'Transaction',
-    component: Transaction
+    component: Transaction,
+    meta: {title: 'Compra tus entradas'}
   },
   {
     path: '/session',
@@ -54,12 +57,14 @@ const routes = [
       {
         path: 'sign-in',
         name: 'Login',
-        component: Login
+        component: Login,
+        meta: {title: 'Iniciar sesión'}
       },
       {
         path: 'sign-up',
         name: 'Register',
-        component: Register
+        component: Register,
+        meta: {title: 'Registro'}
       }
     ]
   },
@@ -78,21 +83,25 @@ const routes = [
       {
         path: 'movie-stats',
         name: 'Movie Stats',
-        component: MovieStats
+        component: MovieStats,
+        meta: {title: 'Estadísticas'}
       },
       {
         path: 'sessions',
         name: 'Sessions',
-        component: Sessions
+        component: Sessions,
+        meta: {title: 'Sesiones'}
       },
       {
         path: 'movies',
         name: 'Movies',
         component: Movies,
+        meta: {title: 'Películas'},
         children: [{
           path: 'add',
           name: 'AddMovie',
-          component: AddMovie
+          component: AddMovie,
+          meta: {title: 'Añadir película'}
         }]
       },
     ]
