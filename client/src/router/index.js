@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import Home from '../views/Home.vue'
-import Register from '../views/Register'
 import SingleMovie from '@/views/SingleMovie'
-import Login from '@/views/Login'
 import UserProfile from '@/views/UserProfile'
 import Transaction from '@/views/Transaction'
 
-import AdminZone from '@/views/AdminZone/AdminZone'
+import ParentView from '@/views/ParentView'
+
+import Login from '@/views/Session/Login'
+import Register from '@/views/Session/Register'
+
 import MovieStats from '@/views/AdminZone/MovieStats'
 import Sessions from '@/views/AdminZone/Sessions'
 import Movies from '@/views/AdminZone/Movies'
@@ -24,19 +27,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: Register
-  },
-  {
     path: '/movies/:movieId',
     name: 'SingleMovie',
     component: SingleMovie
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login
   },
   {
     path: '/profile',
@@ -44,14 +37,35 @@ const routes = [
     component: UserProfile
   },
   {
-    path:'/session/:sessionId/buy',
+    path:'/buy/:sessionId/',
     name: 'Transaction',
     component: Transaction
   },
   {
+    path: '/session',
+    component: ParentView,
+    beforeEnter () {
+      if (store.getters.isAuthenticated)
+        next('/')
+      else
+        next ()
+    },
+    children: [
+      {
+        path: 'sign-in',
+        name: 'Login',
+        component: Login
+      },
+      {
+        path: 'sign-up',
+        name: 'Register',
+        component: Register
+      }
+    ]
+  },
+  {
     path: '/admin',
-    name: 'Admin Zone',
-    component: AdminZone,
+    component: ParentView,
     beforeEnter (to, from, next) {
       if (store.getters.isAdmin) {
         console.log('Entering Admin zone...')
