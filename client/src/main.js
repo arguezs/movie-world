@@ -5,12 +5,10 @@ import vuetify from './plugins/vuetify'
 import store from './store'
 import VueCookies from 'vue-cookies'
 import Vuelidate from 'vuelidate'
-// import titleMixin from './mixins/titleMixin'
 
 Vue.config.productionTip = false
 Vue.use(VueCookies)
 Vue.use(Vuelidate)
-// Vue.mixin(titleMixin)
 
 router.beforeEach((to, from, next) => {
   store.commit('updateUser')
