@@ -66,4 +66,9 @@ module.exports = (app) => {
 
   app.post('/transaction',
     TransactionController.create)
+
+  app.get('/movie-stats',
+    MovieController.fetchMovieStats)
+  app.get('/movie-stats/:movieId/earnings',
+    SessionController.fetchMovieEarnings)
 }

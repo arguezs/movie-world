@@ -98,5 +98,20 @@ module.exports = {
         error: error
       })
     }
+  },
+  fetchMovieStats (req, res) {
+    Movie.findAll({
+      attributes: ['id', 'title',
+        [Sequelize.fn("COUNT", Sequelize.col("sessions.id")), "sessionCount"]
+      ],
+      include: [{ model: Session, attributes: [] }],
+      group: ['id']
+    })
+      .then(movies => {
+        res.send(movies)
+      })
+      .catch(error => {
+        res.status(500).send(error)
+      })
   }
 }

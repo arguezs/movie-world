@@ -1,5 +1,5 @@
-const {Movie, Session, Row, Seat, Theater} = require('../models')
-const { Op } = require('sequelize')
+const {Movie, Session, Transaction, Row, Seat, Theater} = require('../models')
+const Sequelize = require('sequelize')
 
 module.exports = {
   async create (req, res) {
@@ -124,14 +124,14 @@ module.exports = {
           attributes: ['id', 'time'],
           where: {
             MovieId: req.params.movieId,
-            [Op.or]: [
-              { [Op.and]: [
+            [Sequelize.Op.or]: [
+              { [Sequelize.Op.and]: [
                 {date: today},
-                {time: {[Op.gte]: '12:00'}}
+                {time: {[Sequelize.Op.gte]: '12:00'}}
               ] },
-              { [Op.and]: [
+              { [Sequelize.Op.and]: [
                 {date: tomorrow},
-                {time: {[Op.lt]: '12:00'}}
+                {time: {[Sequelize.Op.lt]: '12:00'}}
               ]}
             ]
           }
@@ -172,5 +172,21 @@ module.exports = {
     }).catch(error => {
       res.status(500).send(error)
     })
+  },
+
+  fetchMovieEarnings (req, res) {
+    Session.findAll({
+      attributes: [[Sequelize.fn('SUM', Sequelize.col('Transactions.total')), 'totalEarnings']],
+      where: {
+        MovieId: req.params.movieId
+      },
+      include: [{model: Transaction, attributes: []}]
+    })
+      .then(sessions => {
+        res.send(sessions[0])
+      })
+      .catch(error => {
+        res.status(500).send(error)
+      })
   }
 }
