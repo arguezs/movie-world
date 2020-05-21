@@ -15,5 +15,8 @@ export default {
   },
   post (movie) {
     return Api().post('movies', movie)
+  },
+  fetchMovieStats () {
+    return Api().get('movie-stats')
   }
 }

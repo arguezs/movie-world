@@ -21,5 +21,8 @@ export default {
   },
   fetchData (sessionId) {
     return Api().get(`session-data/${sessionId}`)
+  },
+  fetchTotalEarnings (movieId) {
+    return Api().get(`movie-stats/${movieId}/earnings`)
   }
 }

@@ -10,6 +10,7 @@ import Sessions from '@/views/Sessions'
 import Login from '@/views/Login'
 import UserProfile from '@/views/UserProfile'
 import Transaction from '@/views/Transaction'
+import MovieStats from '@/views/MovieStats'
 
 Vue.use(VueRouter)
 
@@ -76,6 +77,11 @@ const routes = [
     path:'/session/:sessionId/buy',
     name: 'Transaction',
     component: Transaction
+  },
+  {
+    path: '/admin/movie-stats',
+    name: 'Movie Stats',
+    component: MovieStats
   }
 ]
 
