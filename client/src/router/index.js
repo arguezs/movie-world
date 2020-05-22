@@ -15,6 +15,7 @@ import MovieStats from '@/views/AdminZone/MovieStats'
 import Sessions from '@/views/AdminZone/Sessions'
 import Movies from '@/views/AdminZone/Movies'
 import AddMovie from '@/views/AdminZone/AddMovie'
+import UserList from '@/views/AdminZone/UserList'
 
 import store from '../store'
 
@@ -104,6 +105,12 @@ const routes = [
           meta: {title: 'Añadir película'}
         }]
       },
+      {
+        path: 'users',
+        name: 'User List',
+        component: UserList,
+        meta:{title: 'Lista de usuarios'}
+      }
     ]
   }
 ]
