@@ -68,6 +68,9 @@ module.exports = (app) => {
 
   app.post('/transaction',
     TransactionController.create)
+  app.get('/transaction/all',
+    AuthenticationController.adminMiddleware,
+    TransactionController.fetchAll)
 
   app.get('/movie-stats',
     MovieController.fetchMovieStats)
