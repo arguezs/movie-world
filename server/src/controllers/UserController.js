@@ -86,11 +86,7 @@ module.exports = {
     User.findAll({
       attributes: ['id', 'mail', 'name', 'role']
     })
-      .then(users => {
-        res.send(users)
-      })
-      .catch(error => {
-        res.status(500).send(error)
-      })
+      .then(users => { res.send(users) })
+      .catch(error => { res.status(500).send(error) })
   }
 }

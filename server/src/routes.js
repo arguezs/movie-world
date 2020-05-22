@@ -63,6 +63,8 @@ module.exports = (app) => {
 
   app.put('/user',
     UserController.updateProfile)
+  app.get('/user-list',
+    UserController.fetchAll)
 
   app.post('/transaction',
     TransactionController.create)

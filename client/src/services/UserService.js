@@ -7,5 +7,9 @@ export default {
 
   updateProfile (user) {
     return Api().put('user', user)
+  },
+
+  fetchUsers () {
+    return Api().get('user-list')
   }
 }

@@ -4,11 +4,17 @@
       :headers="headers"
       :items="users"
       :loading="loadingState"
-      loading-text="Cargando usuarios..."></v-data-table>
+      loading-text="Cargando usuarios...">
+
+      <template v-slot:item.name="{ item }"> {{ item.name || 'N/A' }}</template>
+
+    </v-data-table>
   </v-container>
 </template>
 
 <script>
+import UserService from '@/services/UserService'
+
 export default {
   data () {
     return {
@@ -21,6 +27,14 @@ export default {
       users: [],
       loadingState: true
     }
+  },
+  mounted () {
+    const vue = this
+
+    UserService.fetchUsers()
+      .then(users => { vue.users = users.data })
+      .catch(() => { vue.error = true })
+      .finally(() => { vue.loadingState = false })
   }
 }
 </script>
