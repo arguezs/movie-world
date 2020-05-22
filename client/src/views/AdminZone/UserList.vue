@@ -12,7 +12,10 @@
 
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn icon color="error" :disabled="item.role == 'ADMIN'" v-on="on">
+            <v-btn
+              icon color="error" v-on="on"
+              :disabled="item.role == 'ADMIN'"
+              @click="blockUser(item.id)">
               <v-icon>block</v-icon>
             </v-btn>
           </template>
@@ -22,7 +25,10 @@
 
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn icon color="success" :disabled="item.role == 'ADMIN'" v-on="on">
+            <v-btn
+              icon color="success" v-on="on"
+              :disabled="item.role == 'ADMIN'"
+              @click="makeAdmin(item.id)">
               <v-icon>add</v-icon>
             </v-btn>
           </template>
@@ -31,7 +37,7 @@
         </v-tooltip>
             
       </template>
-      
+
     </v-data-table>
   </v-container>
 </template>
@@ -52,13 +58,34 @@ export default {
       loadingState: true
     }
   },
-  mounted () {
-    const vue = this
+  mounted () { this.updateUserList() },
+  methods: {
+    blockUser (userId) {
+      const vue = this
 
-    UserService.fetchUsers()
-      .then(users => { vue.users = users.data })
-      .catch(() => { vue.error = true })
-      .finally(() => { vue.loadingState = false })
+      if (window.confirm('¿Desea eliminar este usuario?'))
+        UserService.deleteUser(userId)
+          .then(() => { vue.updateUserList() })
+          .catch(() => { vue.error = true })
+    },
+    makeAdmin (userId) {
+      const vue = this
+
+      if (window.confirm('¿Desea hacer administrador a este usuario?'))
+        UserService.makeAdmin(userId)
+          .then(() => { vue.updateUserList() })
+          .catch(() => { vue.error = true })
+    },
+
+    updateUserList () {
+      const vue = this
+      this.loadingState = true
+
+      UserService.fetchUsers()
+        .then(users => { vue.users = users.data })
+        .catch(() => { vue.error = true })
+        .finally(() => { vue.loadingState = false })
+    }
   }
 }
 </script>

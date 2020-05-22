@@ -73,4 +73,9 @@ module.exports = (app) => {
     MovieController.fetchMovieStats)
   app.get('/movie-stats/:movieId/earnings',
     SessionController.fetchMovieEarnings)
+
+  app.delete('/user/:userId',
+    UserController.delete)
+  app.get('/user/:userId/make-admin',
+    UserController.makeAdmin)
 }

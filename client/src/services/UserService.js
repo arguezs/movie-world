@@ -11,5 +11,9 @@ export default {
 
   fetchUsers () {
     return Api().get('user-list')
-  }
+  },
+
+  deleteUser (userId) { return Api().delete(`user/${userId}`) },
+
+  makeAdmin (userId) { return Api().get(`user/${userId}/make-admin`) }
 }

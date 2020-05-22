@@ -41,16 +41,9 @@ module.exports = {
     })
   },
   delete (req, res) {
-    User.delete({
-      where: {
-        id: req.params.userId
-      }
-    }).then(() => {
-      res.send(true)
-    },
-    (error) => {
-      res.status(500).send({error: error})
-    })
+    User.destroy({ where: { id: req.params.userId } })
+      .then(() => { res.send(true) })
+      .catch(error => { res.status(500).send(error) })
   },
 
   updateProfile (req, res) {
@@ -88,5 +81,13 @@ module.exports = {
     })
       .then(users => { res.send(users) })
       .catch(error => { res.status(500).send(error) })
+  },
+
+  makeAdmin (req, res) {
+    User.update({ role: 'ADMIN' }, {
+      where: { id: req.params.userId } 
+    })
+      .then(() => { res.send(true) })
+      .catch(error => { res.status(500).send(error)})
   }
 }
