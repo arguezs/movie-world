@@ -1,4 +1,4 @@
-const {Transaction, User, Seat, Row, Theater} = require('../models')
+const {Transaction, User, Seat, Row} = require('../models')
 
 module.exports = {
   create (req, res) {
@@ -40,6 +40,7 @@ module.exports = {
 
   fetchAll (req, res) {
     Transaction.findAll({
+      attributes: ['id', 'total', 'SessionId'],
       include: [{
         model: User,
         attributes: ['id', 'mail']
@@ -48,9 +49,9 @@ module.exports = {
         attributes: ['seat'],
         include: [{
           model: Row,
-          attributes: ['row'],
-          include: [{ model: Theater, attributes: ['name'] }]
-        }]
+          attributes: ['row', 'TheaterId']
+        }],
+        through: {attributes: []}
       }]
     })
       .then(transactions => { res.send(transactions) })
