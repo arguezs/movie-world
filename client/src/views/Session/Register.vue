@@ -63,7 +63,7 @@ export default {
     },
     repeatPassword: {
       required,
-      sameAsPassword: sameAs('user.password')
+      sameAsPassword: sameAs(function() { return this.user.password })
     }
   },
   methods: {

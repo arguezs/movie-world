@@ -30,7 +30,7 @@
 
     <v-row class="my-3 text-center">
       <v-col>
-        ¿No tienes cuenta? <router-link to="/register">Regístrate</router-link>
+        ¿No tienes cuenta? <router-link :to="{name: 'Register'}">Regístrate</router-link>
       </v-col>
     </v-row>
     

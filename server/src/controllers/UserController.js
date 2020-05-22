@@ -80,5 +80,17 @@ module.exports = {
         console.log("Error BD", error)
         res.status(401).send('Error BD')
       })
+  },
+
+  fetchAll (req, res) {
+    User.findAll({
+      attributes: ['id', 'mail', 'name', 'role']
+    })
+      .then(users => {
+        res.send(users)
+      })
+      .catch(error => {
+        res.status(500).send(error)
+      })
   }
 }
