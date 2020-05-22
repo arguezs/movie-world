@@ -86,7 +86,7 @@ module.exports = {
   },
 
   adminMiddleware: (req, res, next) => {
-    if (!req.isAuthenticated() || !req.user.role === 'ADMIN')
+    if (!req.isAuthenticated() || req.user.role !== 'ADMIN')
       res.status(401).send('Not allowed')
     else
       return next()
