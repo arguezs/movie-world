@@ -75,7 +75,9 @@ module.exports = (app) => {
     SessionController.fetchMovieEarnings)
 
   app.delete('/user/:userId',
+    AuthenticationController.adminMiddleware,
     UserController.delete)
   app.get('/user/:userId/make-admin',
+    AuthenticationController.adminMiddleware,
     UserController.makeAdmin)
 }
