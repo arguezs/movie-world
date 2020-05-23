@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <v-btn @click="loadTransactions">
+      <v-icon>autorenew</v-icon>
+    </v-btn>
     <v-data-table
       :headers="headers"
       :items="transactions"
