@@ -40,7 +40,7 @@ module.exports = {
 
   fetchAll (req, res) {
     Transaction.findAll({
-      attributes: ['id', 'total', 'SessionId'],
+      attributes: ['id', 'total', 'guest', 'SessionId'],
       include: [{
         model: User,
         attributes: ['id', 'mail']

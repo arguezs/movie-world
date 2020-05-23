@@ -16,6 +16,7 @@ import Sessions from '@/views/AdminZone/Sessions'
 import Movies from '@/views/AdminZone/Movies'
 import AddMovie from '@/views/AdminZone/AddMovie'
 import UserList from '@/views/AdminZone/UserList'
+import TransactionList from '@/views/AdminZone/TransactionList'
 
 import store from '../store'
 
@@ -110,6 +111,12 @@ const routes = [
         name: 'User List',
         component: UserList,
         meta:{title: 'Lista de usuarios'}
+      },
+      {
+        path: 'transactions',
+        name: 'Transaction List',
+        component: TransactionList,
+        meta: {title: 'Lista de transacciones'}
       }
     ]
   }
