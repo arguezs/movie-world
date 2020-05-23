@@ -4,6 +4,16 @@
       :headers="headers"
       :items="transactions"
       :loading="loadingState">
+
+      <template v-slot:item.user="{ item }">
+        <span v-if="item.User">{{ item.User.mail }}</span>
+        <span v-else>{{ item.guest }}</span>
+      </template>
+
+      <template v-slot:item.type="{ item }">
+        <span v-if="item.User">Usuario</span>
+        <span v-else>Anónimo</span>
+      </template>
     </v-data-table>
   </v-container>
 </template>
@@ -18,7 +28,8 @@ export default {
         { text: 'Transacción', value: 'id' },
         { text: 'Dirección de correo', value: 'user' },
         { text: 'Tipo', value: 'type' },
-        { text: 'Sesión', value: 'SessionId' }
+        { text: 'Sesión', value: 'SessionId' },
+        { text: 'Total', value: 'total'}
       ],
       transactions: [],
       loadingState: true
