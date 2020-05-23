@@ -14,6 +14,9 @@
       <v-btn
         text exact
         :to="{name: 'User List'}">Usuarios</v-btn>
+      <v-btn
+        text exact
+        :to="{name: 'Transaction List'}">Transacciones</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
