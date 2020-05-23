@@ -41,7 +41,7 @@ module.exports = {
   fetchAll (req, res) {
     Transaction.findAll({
       attributes: ['id', 'total', 'guest', 'SessionId'],
-      order: ['createdAt', 'DESC'],
+      order: [['createdAt', 'DESC']],
       include: [{
         model: User,
         attributes: ['id', 'mail']
