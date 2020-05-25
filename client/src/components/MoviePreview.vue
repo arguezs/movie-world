@@ -4,8 +4,7 @@
     <v-img
       class="white--text align-end"
       height="300px"
-      :src="movie.poster">
-    </v-img>
+      :src="`http://localhost:8081/${movie.poster}`" />
     <v-btn
       small
       text

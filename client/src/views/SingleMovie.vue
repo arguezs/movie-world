@@ -22,7 +22,7 @@
             max-height="300px"
             max-width="250px"
             contain
-            :src="movie.poster"></v-img>
+            :src="`http://localhost:8081/${movie.poster}`"></v-img>
         </v-col>
       </v-row>
     </v-card>
