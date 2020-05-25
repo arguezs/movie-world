@@ -2,15 +2,23 @@ const {Movie, Session, sequelize} = require('../models')
 const Sequelize = require('sequelize')
 
 module.exports = {
-  async create (req, res) {
-    try {
-      const movie = await Movie.create(req.body)
-      res.send(movie)
-    } catch (error) {
-      res.status(500).send({
-        error: 'Se ha producido un error al añadir la película'
-      })
-    }
+  create (req, res) {
+
+    const file = req.files.poster
+
+    console.log('\n', file, '\n')
+
+    file.mv(`./src/assets/${file.name}`, err => {
+      if (err)
+        console.log(err)
+    })
+
+    const movieData = req.body
+    movieData.poster = file.name
+
+    Movie.create(movieData)
+      .then(movie => { res.send(movie) })
+      .catch(error => { res.status(500).send(error) })
   },
   async read (req, res) {
     try {

@@ -16,7 +16,10 @@ const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
-app.use(fileUpload())
+app.use(fileUpload({safeFileNames: true, preserveExtension: true}))
+
+const publicDir = require('path').join(__dirname,'/assets')
+app.use(express.static(publicDir))
 
 app.use(cookieSession({
   name: 'mw-session',
