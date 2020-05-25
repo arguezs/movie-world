@@ -4,11 +4,11 @@
       <v-toolbar-title>Añadir Película</v-toolbar-title>
     </v-toolbar>
 
-    <v-form>
+    <v-form name="form">
       <v-row>
         <v-col>
           <v-text-field
-            v-model="movie.title"
+            name="title"
             counter
             label="Título" />
         </v-col>
@@ -16,19 +16,19 @@
       <v-row>
         <v-col>
           <v-text-field
-            v-model="movie.duration"
+            name="duration"
             type="number"
             label="Duración" />
         </v-col>
         <v-col>
           <v-select
             :items="ratings"
-            v-model="movie.rating"
+            name="rating"
             label="Rating" />
         </v-col>
         <v-col>
           <v-text-field
-            v-model="movie.genre"
+            name="genre"
             label="Género" />
         </v-col>
       </v-row>
@@ -36,31 +36,31 @@
         <v-col>
           <v-text-field
             type="number"
-            v-model="movie.year"
+            name="year"
             label="Año" />
         </v-col>
         <v-col>
           <v-text-field
-            v-model="movie.trailer"
+            name="trailer"
             label="Trailer" />
         </v-col>
         <v-col>
           <v-file-input
-            v-model="movie.poster"
+            name="poster"
             accept="image/*"
             label="Poster" />
         </v-col>
         <v-col>
           <v-text-field
-            v-model="movie.director"
+            name="director"
             label="Dirección" />
         </v-col>
       </v-row>
       <v-textarea
-        v-model="movie.sinopsis"
+        name="sinopsis"
         label="Sinopsis" />
       <v-textarea
-        v-model="movie.cast"
+        name="cast"
         label="Reparto" />
     </v-form>
     <span
@@ -77,34 +77,23 @@
 import MovieService from '@/services/MovieService'
 
 export default {
-    data () {
-        return {
-            movie: {
-                title: null,
-                duration: null,
-                year: null,
-                rating: null,
-                trailer: null,
-                poster: null,
-                director: null,
-                sinopsis: null,
-                cast: null
-            },
-            ratings: [ 'TP', 'M-7', 'M-12', 'M-16', 'M-18' ],
-            error: null
-        }
-    },
-    methods: {
-      async add () {
-        this.error = null
-
-        try {
-          await MovieService.post(this.movie)
-          this.$router.push({ name: 'Movies' })
-        } catch (error) {
-          this.error = "Error al añadir la película"
-        }
-      }
+  data () {
+    return {
+      ratings: [ 'TP', 'M-7', 'M-12', 'M-16', 'M-18' ],
+      error: null
     }
+  },
+  methods: {
+    add () {
+      this.error = null
+      const vue = this
+      const formData = new FormData(document.forms.namedItem('form'))
+
+      MovieService.post(formData)
+        .then(() => { vue.$router.push({name: 'Movies'}) })
+        .catch(() => { vue.error = "Error al añadir la película" })
+
+    }
+  }
 }
 </script>

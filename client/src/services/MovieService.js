@@ -14,7 +14,7 @@ export default {
     return Api().get('next-releases')
   },
   post (movie) {
-    return Api().post('movies', movie)
+    return Api().post('movies', movie, { headers: { 'Content-Type': 'multipart/form-data' }})
   },
   fetchMovieStats () {
     return Api().get('movie-stats')
