@@ -48,9 +48,10 @@
             label="Trailer"></v-text-field>
         </v-col>
         <v-col>
-          <v-text-field
+          <v-file-input
             v-model="movie.poster"
-            label="Poster"></v-text-field>
+            accept="image/*"
+            label="Poster" />
         </v-col>
         <v-col>
           <v-text-field
