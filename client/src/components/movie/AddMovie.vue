@@ -14,40 +14,40 @@
         <v-form name="form" ref="form">
           <v-row>
             <v-col>
-              <v-text-field name="title" counter label="Título" />
+              <v-text-field dense name="title" counter label="Título" />
             </v-col>
           </v-row>
 
           <v-row>
             <v-col>
-              <v-text-field name="duration" type="number" label="Duración" />
+              <v-text-field dense name="duration" type="number" label="Duración" />
             </v-col>
             <v-col>
-              <v-select :items="ratings" name="rating" label="Rating" />
+              <v-select dense :items="ratings" name="rating" label="Rating" />
             </v-col>
             <v-col>
-              <v-text-field name="genre" label="Género" />
+              <v-text-field dense name="genre" label="Género" />
             </v-col>
           </v-row>
 
-          <v-row>
+          <v-row align="end">
             <v-col>
-              <v-text-field type="number" name="year" label="Año" />
+              <v-text-field dense type="number" name="year" label="Año" />
             </v-col>
             <v-col>
-              <v-text-field name="trailer" label="Trailer" />
+              <v-text-field dense name="trailer" label="Trailer" />
             </v-col>
             <v-col>
-              <v-file-input name="poster" accept="image/*" label="Poster" />
+              <v-file-input dense name="poster" accept="image/*" label="Poster" />
             </v-col>
             <v-col>
-              <v-text-field name="director" label="Dirección" />
+              <v-text-field dense name="director" label="Dirección" />
             </v-col>
           </v-row>
 
-          <v-textarea name="sinopsis" label="Sinopsis" />
+          <v-textarea dense name="sinopsis" label="Sinopsis" />
 
-          <v-textarea name="cast" label="Reparto" />
+          <v-textarea dense name="cast" label="Reparto" />
         </v-form>
 
         <span v-if="error" class="red--text">{{error}}</span>
@@ -83,8 +83,9 @@ export default {
       const formData = new FormData(document.forms.namedItem('form'))
 
       MovieService.post(formData)
-        .then(() => { vue.$router.push({name: 'Movies'}) })
-        .catch(() => { vue.error = "Error al añadir la película" })
+        .then(() => { vue.$emit('success') })
+        .catch(() => { vue.$emit('fail') })
+        .finally(() => { vue.dissmiss() })
 
     },
     dissmiss () {
