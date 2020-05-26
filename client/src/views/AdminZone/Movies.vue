@@ -1,30 +1,20 @@
 <template>
   <v-container>
-    <router-view v-if="childrenRoute" />
+    <add-movie />
 
-    <template v-else>
-      <v-btn
-        :to="{name: 'AddMovie'}"
-        color="primary">
-        <v-icon left>add</v-icon>
-        Añadir
-      </v-btn>
-      <v-row>
-        <v-col
-          cols="auto"
-          v-for="movie in movies"
-          :key="movie.id" >
-          <movie-preview :movie="movie" />
-        </v-col>
-      </v-row>
-    </template>
-    
+    <v-row>
+      <v-col cols="auto" v-for="movie in movies" :key="movie.id">
+        <movie-preview :movie="movie" />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-import MoviePreview from '@/components/MoviePreview'
 import MovieService from '@/services/MovieService'
+
+import MoviePreview from '@/components/MoviePreview'
+import AddMovie from '@/components/movie/AddMovie'
 
 export default {
   data () {
@@ -32,18 +22,9 @@ export default {
       movies: []
     }
   },
-  components: { MoviePreview },
-  computed: {
-    childrenRoute () {
-      return this.$route.matched.length > 2
-    }
-  }, 
+  components: { MoviePreview, AddMovie },
   async mounted () {
     this.movies = (await MovieService.fetch()).data
   }
 }
 </script>
-
-<style>
-
-</style>

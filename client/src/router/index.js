@@ -14,7 +14,6 @@ import Register from '@/views/Session/Register'
 import MovieStats from '@/views/AdminZone/MovieStats'
 import Sessions from '@/views/AdminZone/Sessions'
 import Movies from '@/views/AdminZone/Movies'
-import AddMovie from '@/views/AdminZone/AddMovie'
 import UserList from '@/views/AdminZone/UserList'
 import TransactionList from '@/views/AdminZone/TransactionList'
 
@@ -98,13 +97,7 @@ const routes = [
         path: 'movies',
         name: 'Movies',
         component: Movies,
-        meta: {title: 'Películas'},
-        children: [{
-          path: 'add',
-          name: 'AddMovie',
-          component: AddMovie,
-          meta: {title: 'Añadir película'}
-        }]
+        meta: {title: 'Películas'}
       },
       {
         path: 'users',
