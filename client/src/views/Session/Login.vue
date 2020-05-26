@@ -65,10 +65,6 @@ export default {
       }
     }
   },
-  mounted () {
-    if (this.$store.getters.isAuthenticated)
-      this.$router.push('/')
-  },
   computed: {
     route () {
       return this.$store.state.route
