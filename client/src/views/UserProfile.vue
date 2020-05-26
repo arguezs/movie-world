@@ -2,15 +2,10 @@
   <v-container>
     <v-toolbar-title flat>Perfil</v-toolbar-title>
 
-    <v-alert
-      v-if="alert"
-      class="mx-12 my-6"
-      outlined
-      dense
-      :type="alert.success?'success':'error'">
-      <span v-if="alert.success">Perfil actualizado</span>
-      <span v-else>Error al actualizar el perfil</span>
-    </v-alert>
+    <dismissible-alert :alert="alert">
+      <span slot="success">Perfil actualizado</span>
+      <span slot="fail">Error al actualizar el perfil</span>
+    </dismissible-alert>
 
     <v-form>
       
@@ -59,7 +54,10 @@ import AuthenticationService from '@/services/AuthenticationService'
 import UserService from '@/services/UserService'
 import store from '@/store'
 
+import DismissibleAlert from '@/components/DismissibleAlert'
+
 export default {
+  components: { DismissibleAlert },
   data () {
     return {
       user: null,

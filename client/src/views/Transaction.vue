@@ -32,15 +32,10 @@
       </v-card-text>
     </v-card>
 
-    <v-alert
-      v-if="result"
-      class="mx-12 mb-6"
-      outlined
-      dense
-      :type="result.success?'success':'error'">
-      <span v-if="result.success">Transacción realizada con éxito. Redirigiendo.</span>
-      <span v-else>No se ha podido realizar la compra. Inténtalo de nuevo más tarde.</span>
-    </v-alert>
+    <dismissible-alert :alert="result">
+      <span slot="success">Transacción realizada con éxito. Redirigiendo.</span>
+      <span slot="fail">No se ha podido realizar la compra. Inténtalo de nuevo más tarde.</span>
+    </dismissible-alert>
 
     <v-stepper v-model="step" class="mt-6">
       <v-stepper-header>
@@ -76,6 +71,7 @@
 <script>
 import SessionService from '@/services/SessionService'
 
+import DismissibleAlert from '@/components/DismissibleAlert'
 import TicketSelector from '@/components/transactions/TicketSelector'
 import SeatSelector from '@/components/transactions/SeatSelector'
 import TransactionConfirmation from '@/components/transactions/TransactionConfirmation'
@@ -92,7 +88,7 @@ export default {
   async mounted () {
     this.session = (await SessionService.fetchData(this.$route.params.sessionId)).data
   },
-  components: { TicketSelector, SeatSelector, TransactionConfirmation },
+  components: { DismissibleAlert, TicketSelector, SeatSelector, TransactionConfirmation },
   computed: {
     step () {
       return this.$store.state.transaction.step

@@ -2,13 +2,10 @@
   <v-container>
     <add-movie @success="onSuccess" @fail="onFail" />
 
-    <v-alert
-      v-if="result"
-      class="mx-12 my-6" outlined dense
-      :type="result.success?'success':'error'">
-      <span v-if="result.success">Película creada</span>
-      <span v-else>Error al crear la película</span>
-    </v-alert>
+    <dismissible-alert :alert="result">
+      <span slot="success">Película creada</span>
+      <span slot="fail">Error al crear la película</span>
+    </dismissible-alert>
 
     <v-row>
       <v-col cols="auto" v-for="movie in movies" :key="movie.id">
@@ -23,6 +20,7 @@ import MovieService from '@/services/MovieService'
 
 import MoviePreview from '@/components/MoviePreview'
 import AddMovie from '@/components/movie/AddMovie'
+import DismissibleAlert from '@/components/DismissibleAlert'
 
 export default {
   data () {
@@ -31,7 +29,7 @@ export default {
       result: null
     }
   },
-  components: { MoviePreview, AddMovie },
+  components: { MoviePreview, AddMovie, DismissibleAlert },
   mounted () {
     this.loadMovies()
   },

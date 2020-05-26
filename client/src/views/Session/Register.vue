@@ -5,18 +5,14 @@
       <v-toolbar-title>Registro</v-toolbar-title>
     </v-toolbar>
 
-    <v-alert
-      v-if="result"
-      class="mx-12 mb-6"
-      outlined
-      dense
-      :type="result.success?'success':'error'">
-      <span v-if="result.success">Registro completo</span>
-      <ul v-else-if="result.invalid">
+    <dismissible-alert :alert="result">
+      <span slot="success">Registro completo</span>
+      <span slot="fail">Error al registrar</span>
+
+      <ul v-if="result && result.invalid">
         <li v-for="message in result.message" :key="message">{{message}}</li>
       </ul>
-      <span v-else>Error al registrar</span>
-    </v-alert>
+    </dismissible-alert>
 
     <v-form
       class="mx-12">
@@ -45,7 +41,10 @@ import {required, email, sameAs, helpers} from 'vuelidate/lib/validators'
 const passRegEx = helpers.regex('passRegEx', /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
 import UserService from '@/services/UserService'
 
+import DismissibleAlert from '@/components/DismissibleAlert'
+
 export default {
+  components: { DismissibleAlert },
   data() {
     return {
       user: {
