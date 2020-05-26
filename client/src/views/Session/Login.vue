@@ -1,21 +1,14 @@
 <template>
-  <v-container
-    class="elevation-2 mt-5">
+  <v-container class="elevation-2 mt-5">
     <v-toolbar flat>
       <v-toolbar-title>Inicio de sesión</v-toolbar-title>
     </v-toolbar>
 
-    <v-alert
-      v-if="error"
-      class="mx-12 mb-6"
-      outlined
-      dense
-      type="error">
-      Email o contraseña incorrectos
-    </v-alert>
+    <dismissible-alert :alert="error">
+      <span slot="fail">Email o contraseña incorrectos</span>
+    </dismissible-alert>
 
-    <v-form
-      class="mx-12">
+    <v-form class="mx-12">
       <v-text-field
         label="Dirección de correo"
         v-model="user.mail"
@@ -40,7 +33,10 @@
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 
+import DismissibleAlert from '@/components/DismissibleAlert'
+
 export default {
+  components: {DismissibleAlert},
   name: 'Login',
   data () {
     return {
