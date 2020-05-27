@@ -20,7 +20,7 @@ export default {
       headers: [
         { text: 'Película', align: 'start', value: 'title' },
         { text: 'Sesiones', align: 'end', value: 'sessionCount' },
-        { text: 'Recaudación', align: 'end', value: 'totalEarnings' }
+        { text: 'Recaudación (€)', align: 'end', value: 'totalEarnings' }
       ],
       footerProps: {
         itemsPerPageText: 'Filas por página'
@@ -40,7 +40,7 @@ export default {
           try {
             const earnings = (await SessionService.fetchTotalEarnings(movie.id)).data.totalEarnings
 
-            movie.totalEarnings = (earnings ? parseFloat(earnings) : 0).toFixed(2) + ' €'
+            movie.totalEarnings = (earnings ? parseFloat(earnings) : 0).toFixed(2)
           } catch (error) { vue.error = error }
         }
 
