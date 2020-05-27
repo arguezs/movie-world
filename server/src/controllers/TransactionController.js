@@ -1,4 +1,4 @@
-const {Transaction, User, Seat, Row} = require('../models')
+const {Transaction, User, Seat, Row, Session, Movie} = require('../models')
 const MailController = require('./MailController')
 
 module.exports = {
@@ -12,7 +12,29 @@ module.exports = {
       .then(transaction => {
         transaction.addSeats(req.body.seats)
           .then(() => { 
-            MailController.sendEmail(MailController.createTransactionMail(transaction, req.user))
+            Transaction.findByPk(transaction.id, {
+              attributes: ['id', 'total', 'guest'],
+              include: [{
+                model: Session,
+                attributes: ['date', 'time'],
+                include: [{
+                  model: Movie,
+                  attributes: ['title']
+                }],
+              }, {
+                model: Seat,
+                attributes: ['seat'],
+                include: [{
+                  model: Row,
+                  attributes: ['row']
+                }],
+                through: {attributes: []}
+              }]
+            })
+              .then(data => {
+                MailController.sendEmail(MailController.createTransactionMail(data, req.user))
+              })
+
             res.send(transaction)
           })
           .catch(error => { res.status(500).send(error) })
