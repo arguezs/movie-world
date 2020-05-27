@@ -3,3 +3,4 @@ node_modules
 database.json
 
 src/assets/*
+src/config/mail.json
