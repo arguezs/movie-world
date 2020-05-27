@@ -1,4 +1,5 @@
 const {Transaction, User, Seat, Row} = require('../models')
+const MailController = require('./MailController')
 
 module.exports = {
   create (req, res) {
@@ -10,7 +11,10 @@ module.exports = {
     Transaction.create(newTransaction)
       .then(transaction => {
         transaction.addSeats(req.body.seats)
-          .then(() => { res.send(transaction) })
+          .then(() => { 
+            MailController.sendEmail(MailController.createTransactionMail(transaction, req.user))
+            res.send(transaction)
+          })
           .catch(error => { res.status(500).send(error) })
       })
       .catch((error) => { res.status(500).send(error) })
