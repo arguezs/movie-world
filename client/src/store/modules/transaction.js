@@ -1,10 +1,12 @@
 // Initial state
-const state = () => ({
+const getDefaultState = () => ({
   step: 1,
   mail: null,
   price: 0,
   seats: []
 })
+
+const state = getDefaultState()
 
 // Getters
 const getters = {
@@ -13,13 +15,16 @@ const getters = {
 
  // Actions
  const actions = {
-   resetTransaction (context) {
-    context.state = context.rootState
+   resetTransactionState ({ commit }) {
+    commit('resetState')
    }
  }
 
 // Mutations
 const mutations = {
+  resetState (state) {
+    Object.assign(state, getDefaultState())
+  },
   updatePrice (state, price) {
     state.price = price
   },

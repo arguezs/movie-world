@@ -117,7 +117,7 @@ export default {
   },
   beforeRouteUpdate (to, from, next) {
     if (window.confirm('¿Está seguro de que desea dejar esta página?')){
-      this.$store.dispatch('resetTransaction')
+      this.$store.dispatch('resetTransactionState')
       next()
     } else {
       next(false)
@@ -128,7 +128,7 @@ export default {
       this.$store.commit('updateRoute', from.path)
       next ()
     } else if (this.result || window.confirm('¿Está seguro de que desea dejar esta página?')){
-      this.$store.dispatch('resetTransaction')
+      this.$store.dispatch('resetTransactionState')
       next()
     } else {
       next(false)
