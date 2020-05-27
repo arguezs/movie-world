@@ -38,7 +38,7 @@ export default {
       return this.$store.state.transaction
     },
     user () {
-      return this.$store.state.user
+      return this.$store.getters.isAuthenticated
     },
     userOrGuest () {
       return this.user || this.$store.state.transaction.mail
