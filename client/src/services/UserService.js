@@ -15,5 +15,7 @@ export default {
 
   deleteUser (userId) { return Api().delete(`user/${userId}`) },
 
-  makeAdmin (userId) { return Api().get(`user/${userId}/make-admin`) }
+  makeAdmin (userId) { return Api().get(`user/${userId}/make-admin`) },
+
+  generateCode (mail) { return Api().post('user/recovery/generate', mail) }
 }
