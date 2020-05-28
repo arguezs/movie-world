@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import UserService from '@/services/UserService'
 import DismissibleAlert from '@/components/DismissibleAlert'
 import {required, sameAs, helpers} from 'vuelidate/lib/validators'
 const passRegEx = helpers.regex('passRegEx', /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
@@ -69,9 +70,33 @@ export default {
 
         this.loadingState = false
       } else {
-        console.log('Good to go')
+        const vue = this
+
+        UserService.restorePassword({password: this.password, code: this.$route.params.recoveryCode})
+          .then(result => {
+            if (result.data){
+              vue.result = {success: true}
+              vue.password = null
+              vue.repeatPass = null
+            }
+          })
+          .catch(() => { vue.result = {error: true} })
+          .finally(() => { vue.loadingState = false })
       }
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    const code = to.params.recoveryCode
+    console.log(to)
+
+    UserService.checkCode(code)
+      .then(result => {
+        if (!result.data)
+          next('/')
+        else
+          next()
+      })
+      .catch(() => { next('/') })
   }
 }
 </script>
