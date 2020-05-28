@@ -93,7 +93,7 @@ module.exports = {
   },
 
   createRecoveryCode (req, res) {
-    User.findOne({where: {mail: req.body}})
+    User.findOne({where: {mail: req.body.mail}})
       .then(user => {
         if (!user)
           res.send({error: 'No existe un usuario con esa dirección de correo'})
@@ -103,7 +103,9 @@ module.exports = {
 
           user.update({ recovery: code })
             .then(() => {
-              MailController.sendEmail(MailController.createRecoveryMail(user))
+              MailController.transporter.sendMail(MailController.createRecoveryMail(user), (error, info) =>{
+                res.send({error, info})
+              })
             })
         }
       })
