@@ -123,9 +123,9 @@ module.exports = {
   },
 
   restorePassword (req, res) {
-    bcrypt.hash(req.body.password, (err, hash) => {
+    bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
       if (err)
-        res.status(500).send(err)
+        res.status(500).send({ err })
       else {
         User.update({
           password: hash,
@@ -136,7 +136,7 @@ module.exports = {
           }
         })
           .then(() => { res.send(true) })
-          .catch(error => { res.status(500).send(error) })
+          .catch(error => { res.status(500).send({ error }) })
       }
     })
   }
