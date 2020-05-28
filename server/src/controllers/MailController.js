@@ -54,7 +54,15 @@ module.exports = {
   createRecoveryMail (user) {
     basicMail.to = user.mail
     basicMail.subject = 'Recuperación de contraseña'
-    basicMail.text = ``
+    basicMail.html = `<div style="text-align: center; background-color: #f2f2f2; padding: 2vh; margin: 2vh">
+      <h1>Movie <span style="color: purple;">World</span></h1>
+    
+      <div style="margin-top: 5px;">Enlace para reestablecer tu contraseña en Movie World</div>
+    
+      <a href="http://localhost:8080/session/recovery/${user.recovery}">Recuperar contraseña</a>
+    
+      <div style="font-size: small;">Si no has solicitado reestablecer tu contraseña, por favor, ignora este mensaje.</div>
+    </div>`
 
     return basicMail
   },

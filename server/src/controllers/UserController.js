@@ -1,6 +1,7 @@
 const {User} = require('../models')
 const bcrypt = require('bcrypt')
 const saltRounds = 10
+const MailController = require('./MailController')
 
 module.exports = {
   create (req, res) {
@@ -89,5 +90,22 @@ module.exports = {
     })
       .then(() => { res.send(true) })
       .catch(error => { res.status(500).send(error)})
+  },
+
+  createRecoveryCode (req, res) {
+    User.findOne({where: {mail: req.body}})
+      .then(user => {
+        if (!user)
+          res.send({error: 'No existe un usuario con esa dirección de correo'})
+
+        else {
+          let code = [...Array(15)].map(()=>(~~(Math.random()*36)).toString(36)).join('')
+
+          user.update({ recovery: code })
+            .then(() => {
+              MailController.sendEmail(MailController.createRecoveryMail(user))
+            })
+        }
+      })
   }
 }
