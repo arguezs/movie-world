@@ -83,4 +83,7 @@ module.exports = (app) => {
   app.get('/user/:userId/make-admin',
     AuthenticationController.adminMiddleware,
     UserController.makeAdmin)
+
+  app.post('/user/recovery/generate',
+    UserController.createRecoveryCode)
 }
