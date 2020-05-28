@@ -86,4 +86,8 @@ module.exports = (app) => {
 
   app.post('/user/recovery/generate',
     UserController.createRecoveryCode)
+  app.get('/user/recovery/check/:code',
+    UserController.checkCodeValidity)
+  app.post('/user/recovery/restore',
+    UserController.restorePassword)
 }

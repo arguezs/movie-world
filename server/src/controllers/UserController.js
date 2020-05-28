@@ -109,5 +109,35 @@ module.exports = {
             })
         }
       })
+  },
+
+  checkCodeValidity (req, res) {
+    User.findOne({where: {recovery: req.params.code}})
+      .then(user => {
+        if (!user)
+          res.send(false)
+        else
+          res.send(true)
+      })
+      .catch(error => { res.status(500).send(error) })
+  },
+
+  restorePassword (req, res) {
+    bcrypt.hash(req.body.password, (err, hash) => {
+      if (err)
+        res.status(500).send(err)
+      else {
+        User.update({
+          password: hash,
+          recovery: null
+        }, {
+          where: {
+            recovery: req.body.code
+          }
+        })
+          .then(() => { res.send(true) })
+          .catch(error => { res.status(500).send(error) })
+      }
+    })
   }
 }
