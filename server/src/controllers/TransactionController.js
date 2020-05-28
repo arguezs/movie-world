@@ -32,7 +32,7 @@ module.exports = {
               }]
             })
               .then(data => {
-                MailController.sendEmail(MailController.createTransactionMail(data, req.user))
+                MailController.transporter.sendMail(MailController.createTransactionMail(data, req.user))
               })
 
             res.send(transaction)

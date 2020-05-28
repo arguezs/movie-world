@@ -1,8 +1,6 @@
 const nodemailer = require('nodemailer')
 const config = require('../config/mail.json')
 
-const transporter = nodemailer.createTransport(config)
-
 const basicMail = {
   from: 'MovieWorld',
   to: null,
@@ -11,6 +9,8 @@ const basicMail = {
 }
 
 module.exports = {
+  transporter: nodemailer.createTransport(config),
+
   createTransactionMail (transaction, user) {
     basicMail.to = user ? user : transaction.guest
 
@@ -65,15 +65,5 @@ module.exports = {
     </div>`
 
     return basicMail
-  },
-
-  sendEmail (mailOptions) {
-    transporter.sendMail(mailOptions, (error) => {
-      if (error) {
-        console.log(error)
-      } else {
-        console.log('Success')
-      }
-    })
   }
 }
