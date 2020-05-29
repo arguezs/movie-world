@@ -6,7 +6,8 @@
 
     <theater-layout
       :rows="session.Theater.Rows"
-      :tickets="tickets" />
+      :tickets="tickets"
+      :complete="canProceed" />
 
     <step-buttons
       :disable="!canProceed"

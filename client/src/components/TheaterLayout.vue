@@ -12,7 +12,7 @@
         v-for="seat in row.Seats"
         :key="seat.id">
         <seat
-          :seat="seat" :row="row.row" :disabled="isOccupied(seat) || allSeatsPicked" />
+          :seat="seat" :row="row.row" :disabled="isOccupied(seat) || complete" />
       </v-col>
     </v-row>
   </v-container>
@@ -23,7 +23,7 @@ import Seat from './Seat'
 import SessionService from '@/services/SessionService'
 
 export default {
-  props: [ 'rows', 'tickets' ],
+  props: [ 'rows', 'tickets', 'complete' ],
   data () {
     return {
       selectedSeats: [],
@@ -33,11 +33,6 @@ export default {
   components: { Seat },
   async mounted () {
     this.sessionSeats = (await SessionService.fetchSeats(this.$route.params.sessionId)).data
-  },
-  computed: {
-    allSeatsPicked () {
-      return this.$store.state.transaction.seats.length == this.tickets
-    }
   },
   methods: {
     isOccupied (seat) {
