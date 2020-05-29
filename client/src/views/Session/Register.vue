@@ -7,6 +7,7 @@
     success-msg="Registro completo"
     fail-msg="Error al registrar"
     submit-text="Crear cuenta"
+    :loading="loadingState"
     @submit="register">
 
     <v-text-field label="Dirección de correo" v-model="user.mail" />
@@ -33,7 +34,8 @@ export default {
         password: null
       },
       repeatPassword: null,
-      result: null
+      result: null,
+      loadingState: false
     }
   },
   validations: {
@@ -47,7 +49,8 @@ export default {
     }
   },
   methods: {
-    async register () {
+    register () {
+      this.loadingState = true
       this.$v.$touch()
 
       if (this.$v.$invalid){
@@ -65,15 +68,22 @@ export default {
           this.result.message.push("La contraseña debe contener al menos una letra, un número y un símbol especial, y tener al menos ocho carácteres de longitud")
         if (!this.$v.repeatPassword.sameAsPassword)
           this.result.message.push('Las contraseñas no coinciden')
-      } else {
-        try {
-          this.result = (await UserService.register(this.user)).data
 
-          this.user.mail = null
-          this.user.password = null
-        } catch (error) {
-          this.result = {error: error}
-        }
+        this.loadingState = false
+
+      } else {
+        const vue = this
+
+        UserService.register(this.user)
+          .then(result => {
+            vue.result = result.data
+
+            vue.user = {mail: null, password: null}
+            vue.repeatPassword = null
+          })
+          .catch(error => { vue.result = {error: error} })
+          .finally(() => { vue.loadingState = false })
+
       }    
     }
   }
