@@ -1,39 +1,20 @@
 <template>
-  <v-container
-    class="elevation-2 mt-5">
-    <v-toolbar flat>
-      <v-toolbar-title>Registro</v-toolbar-title>
-    </v-toolbar>
 
-    <dismissible-alert :alert="result">
-      <span slot="success">Registro completo</span>
-      <span slot="fail">Error al registrar</span>
+  <form-layout
+    max-width="60rem"
+    :alert="result"
+    form-title="Registro"
+    success-msg="Registro completo"
+    fail-msg="Error al registrar"
+    submit-text="Crear cuenta"
+    @submit="register">
 
-      <ul v-if="result && result.invalid">
-        <li v-for="message in result.message" :key="message">{{message}}</li>
-      </ul>
-    </dismissible-alert>
+    <v-text-field label="Dirección de correo" v-model="user.mail" />
+    <v-text-field label="Contraseña" v-model="user.password" type="password" />
+    <v-text-field label="Repetir contraseña" v-model="repeatPassword" type="password" />
 
-    <v-form
-      class="mx-12">
-      <v-text-field
-        label="Dirección de correo"
-        v-model="user.mail"
-        required />
-      <v-text-field
-        label="Contraseña"
-        v-model="user.password"
-        type="password"
-        required />
-      <v-text-field
-        label="Repetir contraseña"
-        v-model="repeatPassword"
-        type="password"
-        required />
-      <v-btn
-        @click="register">Crear cuenta</v-btn>
-    </v-form>
-  </v-container>
+  </form-layout>
+
 </template>
 
 <script>
@@ -41,10 +22,10 @@ import {required, email, sameAs, helpers} from 'vuelidate/lib/validators'
 const passRegEx = helpers.regex('passRegEx', /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
 import UserService from '@/services/UserService'
 
-import DismissibleAlert from '@/components/DismissibleAlert'
+import FormLayout from '@/components/FormLayout'
 
 export default {
-  components: { DismissibleAlert },
+  components: { FormLayout },
   data() {
     return {
       user: {

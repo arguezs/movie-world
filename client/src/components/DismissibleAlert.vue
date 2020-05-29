@@ -1,6 +1,6 @@
 <template>
   <v-alert v-if="alert" v-model="state" dismissible
-    class="mx-12 my-6" outlined dense
+    class="mx-auto my-6" outlined dense :max-width="maxWidth"
     :type="alert.success?'success':'error'">
     <slot v-if="alert.success" name="success"/>
     <slot v-else name="fail" />
@@ -18,6 +18,6 @@ export default {
   watch: {
     alert () { this.state = true }
   },
-  props: ['alert']
+  props: ['alert', 'maxWidth']
 }
 </script>

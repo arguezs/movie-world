@@ -1,38 +1,29 @@
 <template>
-  <v-container>
-    <dismissible-alert :alert="result">
-      <span slot="success">Se ha enviado un enlace a {{ mail }}</span>
-      <span slot="fail">{{ errorMessage }}</span>
-    </dismissible-alert>
 
-    <v-card max-width="30rem" class="mx-auto my-6">
-      <v-card-title>Recuperar contraseña</v-card-title>
+  <form-layout
+    max-width="30rem"
+    :alert="result"
+    :success-msg="`Se ha enviado un mensaje a ${mail}`"
+    :fail-msg="errorMessage"
+    form-title="Recuperar contraseña"
+    :disabled="invalidMail"
+    :loading="loadingState"
+    submit-text="Enviar"
+    @submit="sendRecoveryCode">
+    <span slot="subtitle">Introduce tu dirección de correo y te mandaremos un enlace para reestablecer tu contraseña.</span>
 
-      <v-card-subtitle>Introduce tu dirección de correo y te mandaremos un enlace para reestablecer tu contraseña.</v-card-subtitle>
-
-      <v-card-text>
-        <v-text-field label="Dirección de correo" v-model="mail" />
-      </v-card-text>
-
-      <v-card-actions>
-        <v-btn
-          class="mx-auto mb-3"
-          :disabled="invalidMail"
-          color="primary"
-          :loading="loadingState"
-          @click="sendRecoveryCode">Enviar</v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-container>
+    <v-text-field label="Dirección de correo" v-model="mail" />
+  </form-layout>
+  
 </template>
 
 <script>
 import {required, email} from 'vuelidate/lib/validators'
 import UserService from '@/services/UserService'
-import DismissibleAlert from '@/components/DismissibleAlert'
+import FormLayout from '@/components/FormLayout'
 
 export default {
-  components: { DismissibleAlert },
+  components: { FormLayout },
   data () {
     return {
       mail: null,

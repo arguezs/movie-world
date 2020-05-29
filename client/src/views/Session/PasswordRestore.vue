@@ -1,43 +1,31 @@
 <template>
-  <v-container>
 
-    <dismissible-alert :alert="result">
-      <span slot="success">Contraseña restaurada</span>
-      <span slot="fail">Error al cambiar la contraseña</span>
+  <form-layout
+    max-width="30rem"
+    :alert="result"
+    succes-msg="Contraseña restaurada"
+    fail-msg="Error al cambiar la contraseña"
+    form-title="Reestablecer contraseña"
+    :disabled="requiredPass"
+    :loading="loadingState"
+    submit-text="Restaurar"
+    @submit="restorePassword">
+    <span slot="subtitle">Introduce una nueva contraseña para tu cuenta</span>
 
-      <ul v-if="result && result.invalid">
-        <li v-for="message in result.message" :key="message">{{message}}</li>
-      </ul>
-    </dismissible-alert>
+    <v-text-field label="Nueva contraseña" type="password" v-model="password" />
+    <v-text-field label="Repetir contraseña" type="password" v-model="repeatPass" />  
+  </form-layout>
 
-    <v-card max-width="30rem" class="mx-auto my-6">
-      <v-card-title>Reestablecer contraseña</v-card-title>
-
-      <v-card-text>
-        <v-text-field label="Nueva contraseña" type="password" v-model="password" />
-        <v-text-field label="Repetir contraseña" type="password" v-model="repeatPass" />
-      </v-card-text>
-
-      <v-card-actions>
-        <v-btn
-          class="mx-auto mb-3"
-          :disabled="requiredPass"
-          color="primary"
-          :loading="loadingState"
-          @click="restorePassword">Reestablecer</v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-container>
 </template>
 
 <script>
 import UserService from '@/services/UserService'
-import DismissibleAlert from '@/components/DismissibleAlert'
+import FormLayout from '@/components/FormLayout'
 import {required, sameAs, helpers} from 'vuelidate/lib/validators'
 const passRegEx = helpers.regex('passRegEx', /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
 
 export default {
-  components: {DismissibleAlert},
+  components: { FormLayout },
   data () {
     return {
       password: null,

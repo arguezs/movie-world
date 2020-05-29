@@ -1,42 +1,37 @@
 <template>
-  <v-container class="elevation-2 mt-5">
-    <v-toolbar flat>
-      <v-toolbar-title>Inicio de sesión</v-toolbar-title>
-    </v-toolbar>
 
-    <dismissible-alert :alert="error">
-      <span slot="fail">Email o contraseña incorrectos</span>
-    </dismissible-alert>
+  <form-layout
+    @submit="login" max-width="60rem"
+    :alert="error" fail-msg="Email o contraseña incorrectos"
+    form-title="Inicio de sesión" submit-text="Iniciar sesión">
+    <v-text-field
+      label="Dirección de correo"
+      v-model="user.mail" required />
+    <v-text-field
+      label="Contraseña" v-model="user.password"
+      type="password" required />
 
-    <v-form class="mx-12">
-      <v-text-field
-        label="Dirección de correo"
-        v-model="user.mail"
-        required />
-      <v-text-field
-        label="Contraseña"
-        v-model="user.password"
-        type="password"
-        required />
-      <v-btn @click="login">Iniciar sesión</v-btn>
-    </v-form>
+    <template slot="extra">
+      <v-divider class="mx-12" />
+      <div class="py-6 text-center">
+        ¿Aún no tienes cuenta? <router-link :to="{name: 'Register'}">Regístrate</router-link>
+      </div>
 
-    <v-row class="my-3 text-center">
-      <v-col>
-        ¿No tienes cuenta? <router-link :to="{name: 'Register'}">Regístrate</router-link>
-      </v-col>
-    </v-row>
-    
-  </v-container>
+      <div class="text-center pb-3">
+        <router-link :to="{name: 'Password Recovery'}">Recuperar contraseña</router-link>
+      </div>
+    </template>
+  </form-layout>
+
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 
-import DismissibleAlert from '@/components/DismissibleAlert'
+import FormLayout from '@/components/FormLayout'
 
 export default {
-  components: {DismissibleAlert},
+  components: { FormLayout },
   name: 'Login',
   data () {
     return {
@@ -68,7 +63,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
