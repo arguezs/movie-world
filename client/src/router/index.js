@@ -27,25 +27,21 @@ import store from '../store'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     name: 'Home',
     component: Home
-  },
-  {
+  }, {
     path: '/movies/:movieId',
     name: 'SingleMovie',
     component: SingleMovie,
     meta: {title: 'Película'}
-  },
-  {
+  }, {
     path: '/profile',
     name: 'Perfil',
     component: UserProfile,
     meta: {title: 'Perfil'}
-  },
-  {
+  }, {
     path:'/buy/:sessionId/',
     name: 'Transaction',
     component: Transaction,
@@ -60,8 +56,7 @@ const routes = [
         })
         .catch(() => { next({name: 'Error page', params: {errorCode: 500}}) })
     }
-  },
-  {
+  }, {
     path: '/session',
     component: ParentView,
     beforeEnter (to, from, next) {
@@ -70,78 +65,66 @@ const routes = [
       else
         next ()
     },
-    children: [
-      {
+    children: [{
         path: 'sign-in',
         name: 'Login',
         component: Login,
         meta: {title: 'Iniciar sesión'}
-      },
-      {
+      }, {
         path: 'sign-up',
         name: 'Register',
         component: Register,
         meta: {title: 'Registro'}
-      },
-      {
+      }, {
         path: 'recovery',
         name: 'Password Recovery',
         component: PasswordRecovery,
         meta: {title: 'Recuperar contraseña'}
-      },
-      {
+      }, {
         path: 'recovery/:recoveryCode',
         name: 'Password Restore',
         component: PasswordRestore,
         meta: {title: 'Reestablecer contraseña'}
       }
     ]
-  },
-  {
+  }, {
     path: '/admin',
     component: ParentView,
     beforeEnter (to, from, next) {
       if (store.getters.isAdmin) {
         console.log('Entering Admin zone...')
         next()
-      } else {
+      } else
         next({name: 'Error page', params: {errorCode: 401}})
-      }
     },
-    children: [
-      {
+    children: [{
         path: 'movie-stats',
         name: 'Movie Stats',
         component: MovieStats,
         meta: {title: 'Estadísticas'}
-      },
-      {
+      }, {
         path: 'sessions',
         name: 'Sessions',
         component: Sessions,
         meta: {title: 'Sesiones'}
-      },
-      {
+      }, {
         path: 'movies',
         name: 'Movies',
         component: Movies,
         meta: {title: 'Películas'}
-      },
-      {
+      }, {
         path: 'users',
         name: 'User List',
         component: UserList,
         meta:{title: 'Lista de usuarios'}
-      },
-      {
+      }, {
         path: 'transactions',
         name: 'Transaction List',
         component: TransactionList,
         meta: {title: 'Lista de transacciones'}
       }
     ]
-  },
-  {
+  }, {
     path: '/error/:errorCode',
     name: 'Error page',
     component: ErrorPage

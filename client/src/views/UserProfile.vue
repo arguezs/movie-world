@@ -96,7 +96,7 @@ export default {
     if (store.getters.isAuthenticated)
       next()
     else
-      next('/login')
+      next({name: 'Login'})
   }
 }
 </script>
