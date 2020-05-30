@@ -59,7 +59,7 @@ module.exports = {
     
       <div style="margin-top: 5px;">Enlace para reestablecer tu contraseña en Movie World</div>
     
-      <a href="http://localhost:8080/session/recovery/${user.recovery}">Recuperar contraseña</a>
+      <a href="http://localhost:8080/#/session/recovery/${user.recovery}">Recuperar contraseña</a>
     
       <div style="font-size: small;">Si no has solicitado reestablecer tu contraseña, por favor, ignora este mensaje.</div>
     </div>`
