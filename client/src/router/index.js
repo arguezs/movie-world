@@ -21,6 +21,8 @@ import Movies from '@/views/AdminZone/Movies'
 import UserList from '@/views/AdminZone/UserList'
 import TransactionList from '@/views/AdminZone/TransactionList'
 
+import ErrorPage from '@/views/ErrorPage'
+
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -54,9 +56,9 @@ const routes = [
           if (result.data)
             next()
           else
-            next('/')
+            next({name: 'Error page', params: {errorCode: 404}})
         })
-        .catch(() => { next('/') })
+        .catch(() => { next({name: 'Error page', params: {errorCode: 500}}) })
     }
   },
   {
@@ -103,7 +105,7 @@ const routes = [
         console.log('Entering Admin zone...')
         next()
       } else {
-        next('/')
+        next({name: 'Error page', params: {errorCode: 401}})
       }
     },
     children: [
@@ -138,6 +140,11 @@ const routes = [
         meta: {title: 'Lista de transacciones'}
       }
     ]
+  },
+  {
+    path: '/error/:errorCode',
+    name: 'Error page',
+    component: ErrorPage
   }
 ]
 
