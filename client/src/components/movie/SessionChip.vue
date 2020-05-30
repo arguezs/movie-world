@@ -4,7 +4,8 @@
       name: 'Transaction',
       params: {sessionId: session.id} }"
     :color="afterMidnight ? 'deep-purple darken-3' : ''"
-    :dark="afterMidnight">
+    :dark="afterMidnight"
+    :disabled="disabled">
     {{timeString}}
   </v-chip>
 </template>
@@ -20,6 +21,10 @@ export default {
     },
     afterMidnight () {
       return this.session.time.substring(0, 2) == '00'
+    },
+    disabled () {
+      const date = new Date(this.session.date + ' ' + this.session.time)
+      return date.getTime() < Date.now()
     }
   }
 }

@@ -121,7 +121,7 @@ module.exports = {
       sessions.push({
         date: today.toLocaleDateString(undefined, {day: '2-digit', month: 'short'}),
         sessions: await Session.findAll({
-          attributes: ['id', 'time'],
+          attributes: ['id', 'time', 'date'],
           where: {
             MovieId: req.params.movieId,
             [Sequelize.Op.or]: [
