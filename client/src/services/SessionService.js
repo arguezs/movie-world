@@ -24,5 +24,6 @@ export default {
   },
   fetchTotalEarnings (movieId) {
     return Api().get(`movie-stats/${movieId}/earnings`)
-  }
+  },
+  isAvailable (sessionId) { return Api().get(`session/${sessionId}/available`) }
 }

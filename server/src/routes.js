@@ -40,6 +40,8 @@ module.exports = (app) => {
     SeatController.fetchUnavailableSeats)
   app.post('/session/:sessionId/seats',
     SessionController.addSessionSeats)
+  app.get('/session/:sessionId/available',
+    SessionController.isAvailable)
   
   app.get('/sessions/:date/:theaterId',
     SessionController.fetchWithDayAndTheater)

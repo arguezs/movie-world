@@ -188,5 +188,14 @@ module.exports = {
       .catch(error => {
         res.status(500).send(error)
       })
+  },
+
+  isAvailable (req, res) {
+    Session.findByPk(req.params.sessionId)
+      .then(session => {
+        const date = new Date(session.date + ' ' + session.time)
+        res.send(date.getTime() > Date.now())
+      })
+      .catch(error => { res.status(500).send(error) })
   }
 }

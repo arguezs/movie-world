@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import SessionService from '@/services/SessionService'
+
 import Home from '../views/Home.vue'
 import SingleMovie from '@/views/SingleMovie'
 import UserProfile from '@/views/UserProfile'
@@ -45,7 +47,17 @@ const routes = [
     path:'/buy/:sessionId/',
     name: 'Transaction',
     component: Transaction,
-    meta: {title: 'Compra tus entradas'}
+    meta: {title: 'Compra tus entradas'},
+    beforeEnter (to, from, next) {
+      SessionService.isAvailable(to.params.sessionId)
+        .then(result => {
+          if (result.data)
+            next()
+          else
+            next('/')
+        })
+        .catch(() => { next('/') })
+    }
   },
   {
     path: '/session',
