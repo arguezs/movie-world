@@ -1,11 +1,6 @@
 <template>
   <v-toolbar color="primary" dark>
-    <v-toolbar-items>
-      <v-btn
-        text
-        exact
-        :to="{name: 'Home'}">Inicio</v-btn>
-    </v-toolbar-items>
+    <router-link to="/" class="display-1 white--text td-none ma-6">Movie World</router-link>
 
     <v-spacer />
 
@@ -57,3 +52,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .td-none{text-decoration: none;}
+</style>
