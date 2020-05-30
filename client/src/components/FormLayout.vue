@@ -25,7 +25,7 @@
         <v-btn
           class="mx-auto mb-3"
           :disabled="disabled"
-          color="primary"
+          color="accent"
           :loading="loading"
           @click="submit">{{ submitText }}</v-btn>
       </v-card-actions>

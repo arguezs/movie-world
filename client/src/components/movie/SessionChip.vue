@@ -3,7 +3,7 @@
     :to="{
       name: 'Transaction',
       params: {sessionId: session.id} }"
-    :color="afterMidnight ? 'deep-purple darken-3' : ''"
+    :color="afterMidnight ? 'accent' : ''"
     :dark="afterMidnight"
     :disabled="disabled">
     {{timeString}}

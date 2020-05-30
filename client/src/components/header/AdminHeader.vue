@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar dense color="#ccc">
+  <v-toolbar dense color="secondary">
     <v-toolbar-title class="mr-6">Administración</v-toolbar-title>
     <v-toolbar-items>
       <v-btn

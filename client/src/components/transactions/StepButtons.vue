@@ -5,7 +5,7 @@
       </v-col>
 
       <v-col cols="auto">
-        <v-btn color="primary" @click="nextStep" :disabled="disable">Continuar</v-btn>
+        <v-btn color="accent" @click="nextStep" :disabled="disable">Continuar</v-btn>
       </v-col>
     </v-row>
 </template>
