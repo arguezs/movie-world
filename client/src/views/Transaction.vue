@@ -111,7 +111,7 @@ export default {
         vue.$router.push('/')
       }, 10000)
     },
-    transtionError () {
+    transactionError () {
       this.result = {error: true}
     }
   },
