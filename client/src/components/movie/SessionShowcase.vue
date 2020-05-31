@@ -3,7 +3,7 @@
 
     <v-card-title>Sesiones</v-card-title>
 
-    <v-card-text>
+    <v-card-text v-if="filteredSessions.length">
       <v-row>
         <v-col cols="6" v-for="day in filteredSessions" :key="day.date">
           <v-row>
@@ -16,6 +16,10 @@
           </v-row>
         </v-col>
       </v-row>
+    </v-card-text>
+
+    <v-card-text v-else class="subtitle-1">
+      No hay sesiones disponibles
     </v-card-text>
 
   </v-card>
