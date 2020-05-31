@@ -125,9 +125,7 @@ export default {
       error: null
     }
   },
-  props: {
-    movie: {}
-  },
+  props: { movie: Object },
   watch: {
     date: function (val) {
       this.session.date = `${val} ${this.time}`

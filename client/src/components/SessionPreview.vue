@@ -20,9 +20,7 @@
 import SessionService from '@/services/SessionService'
 
 export default {
-  props: {
-    session: {}
-  },
+  props: { session: Object },
   methods: {
     async deleteSession () {
       const confirm = window.confirm('¿Deseas eliminar esta sesión?')

@@ -12,9 +12,7 @@
 
 <script>
 export default {
-  props: {
-    session: {}
-  },
+  props: { session: Object },
   computed: {
     timeString () {
       return this.session.time.substring(0, 5)

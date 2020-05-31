@@ -19,14 +19,12 @@
       </v-card>
     </template>
   </v-hover>
-  
+
 </template>
 
 <script>
 export default {
-    props: {
-        movie: {}
-    }
+    props: { movie: Object }
 }
 </script>
 

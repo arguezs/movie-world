@@ -29,7 +29,7 @@
 import SessionChip from './SessionChip'
 
 export default {
-  props: ['sessions'],
+  props: { sessions: Array },
   components: { SessionChip },
   computed: {
     filteredSessions () {

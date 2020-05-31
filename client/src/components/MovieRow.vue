@@ -24,9 +24,7 @@
 import MoviePreview from './MoviePreview'
 
 export default {
-  props: {
-    movies: []
-  },
+  props: { movies: Array },
   components: { MoviePreview }
 }
 </script>

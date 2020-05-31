@@ -68,7 +68,7 @@ export default {
       error: null
     }
   },
-  props: ['theater', 'date'],
+  props: { theater: Object, date: String },
   async mounted () {
     this.movies = (await MovieService.fetch()).data
   },

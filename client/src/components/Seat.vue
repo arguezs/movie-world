@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  props: ['seat', 'disabled', 'row'],
+  props: { seat: Object, disabled: Boolean, row: String },
   data () {
     return {
       selected: false

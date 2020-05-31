@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  props: ['disable'],
+  props: { disable: Boolean },
   methods: {
     nextStep () {
       this.$emit('nextStep')

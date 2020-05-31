@@ -23,7 +23,7 @@ import Seat from './Seat'
 import SessionService from '@/services/SessionService'
 
 export default {
-  props: [ 'rows', 'tickets', 'complete' ],
+  props: { rows: Array, tickets: Number, complete: Boolean},
   data () {
     return {
       selectedSeats: [],

@@ -22,7 +22,7 @@ import StepButtons from './StepButtons'
 
 export default {
   components: { StepButtons, TheaterLayout },
-  props: ['session', 'tickets'],
+  props: { session: Object, tickets: Number },
   computed: {
     canProceed () {
       return this.$store.state.transaction.seats.length == this.tickets

@@ -18,6 +18,6 @@ export default {
   watch: {
     alert () { this.state = true }
   },
-  props: ['alert', 'maxWidth']
+  props: { alert: Object, maxWidth: String }
 }
 </script>

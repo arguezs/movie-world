@@ -28,6 +28,6 @@
 
 <script>
 export default {
-  props: ['movie']
+  props: { movie: Object }
 }
 </script>

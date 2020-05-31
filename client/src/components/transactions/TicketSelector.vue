@@ -44,7 +44,7 @@
 import StepButtons from './StepButtons'
 
 export default {
-  props: ['tickets', 'step'],
+  props: { tickets: Number, step: Number },
   data () {
     return {
       price: 9.5,

@@ -42,8 +42,8 @@ import DismissibleAlert from './DismissibleAlert'
 
 export default {
   components: { DismissibleAlert },
-  props: ['maxWidth', 'alert', 'successMsg', 'failMsg', 'formTitle', 'disabled',
-  'loading', 'submitText'],
+  props: { maxWidth: String, alert: Object, successMsg: String, failMsg: String,
+    formTitle: String, disabled: Boolean, loading: Boolean, submitText: String},
   methods: {
     submit () { this.$emit('submit') }
   }
