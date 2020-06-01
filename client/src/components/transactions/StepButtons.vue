@@ -1,11 +1,11 @@
 <template>
   <v-row class="mt-6" justify="end">
       <v-col cols="auto">
-        <v-btn @click="prevStep">Cancelar</v-btn>
+        <v-btn ref="prevStep" @click="prevStep">Cancelar</v-btn>
       </v-col>
 
       <v-col cols="auto">
-        <v-btn color="accent" @click="nextStep" :disabled="disable">Continuar</v-btn>
+        <v-btn ref="nextStep" color="accent" @click="nextStep" :disabled="disable">Continuar</v-btn>
       </v-col>
     </v-row>
 </template>

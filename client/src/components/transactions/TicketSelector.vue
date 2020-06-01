@@ -13,6 +13,7 @@
     <v-row align="center" justify="center" class="text-center">
       <v-col cols="1">
         <v-btn
+          ref="removeTicket"
           fab outlined x-small
           :disabled="actualTickets==0"
           @click="actualTickets-=1"><v-icon>remove</v-icon></v-btn>
@@ -22,6 +23,7 @@
 
       <v-col cols="1">
         <v-btn
+          ref="addTicket"
           fab outlined x-small
           :disabled="actualTickets==10"
           @click="actualTickets+=1"><v-icon>add</v-icon></v-btn>

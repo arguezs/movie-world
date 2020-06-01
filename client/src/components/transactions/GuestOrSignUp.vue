@@ -7,7 +7,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-btn color="primary" text to="/login">Accede para continuar</v-btn>
+            <v-btn ref="chooseUser" color="primary" text to="/login">Accede para continuar</v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -20,7 +20,7 @@
         </v-row>
         <v-row justify="center">
           <v-col>
-            <v-btn color="primary" text @click="chooseGuest">Continúa como invitado</v-btn>
+            <v-btn ref="chooseGuest" color="primary" text @click="chooseGuest">Continúa como invitado</v-btn>
           </v-col>
           <span class="text--secondary caption">Tendrás que introducir una cuenta de correo válida</span>
         </v-row>
