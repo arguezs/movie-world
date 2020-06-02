@@ -1,52 +1,45 @@
 <template>
-  <v-container>
-    <v-toolbar-title flat>Perfil</v-toolbar-title>
 
-    <dismissible-alert :alert="alert">
-      <span slot="success">Perfil actualizado</span>
-      <span slot="fail">Error al actualizar el perfil</span>
-    </dismissible-alert>
+  <form-layout
+    @submit="updateProfile" max-width="60rem"
+    :alert="alert" fail-msg="Error al actualizar el perfil"
+    success-msg="Perfil actualizado" form-title="Perfil"
+    submit-text="Actualizar perfil" :disabled="!password">
 
-    <v-form>
-      
-      <v-row align="center">
-        <v-col cols="2" class="text-right">Nombre:</v-col>
-        <v-col>
-          <v-text-field v-model="user.name" placeholder="Nombre" />
-        </v-col>
-      </v-row>
+    <v-row align="center">
+      <v-col cols="12" sm="3"
+        :class="$vuetify.breakpoint.xs ? 'pb-0' : 'text-right'">Nombre:</v-col>
+      <v-col>
+        <v-text-field v-model="user.name" placeholder="Nombre" />
+      </v-col>
+    </v-row>
 
-      <v-row align="center">
-        <v-col cols="2" class="text-right">Correo:</v-col>
-        <v-col>
-          <v-text-field v-model="user.mail" placeholder="Correo" />
-        </v-col>
-      </v-row>
+    <v-row align="center">
+      <v-col cols="12" sm="3"
+        :class="$vuetify.breakpoint.xs ? 'pb-0' : 'text-right'">Correo:</v-col>
+      <v-col>
+        <v-text-field v-model="user.mail" placeholder="Correo" />
+      </v-col>
+    </v-row>
 
-      <v-row align="center">
-        <v-col cols="2" class="text-right">Fecha de nacimiento:</v-col>
-        <v-col>
-          <v-text-field v-model="user.birthday" type="date" placeholder="Fecha de nacimiento" />
-        </v-col>
-      </v-row>
+    <v-row align="center">
+      <v-col cols="12" sm="3"
+        :class="$vuetify.breakpoint.xs ? 'pb-0' : 'text-right'">Fecha de nacimiento:</v-col>
+      <v-col>
+        <v-text-field v-model="user.birthday" type="date" placeholder="Fecha de nacimiento" />
+      </v-col>
+    </v-row>
 
-      <v-row align="center">
-        <v-col cols="2" class="text-right">Confirmar contraseña:</v-col>
-        <v-col>
-          <v-text-field v-model="password" type="password" placeholder="Contraseña" />
-        </v-col>
-      </v-row>
+    <v-divider />
 
-      <v-row>
-        <v-col class="text-center">
-          <v-btn
-            :disabled="!password"
-            @click="updateProfile">Actualizar perfil</v-btn>
-        </v-col>
-      </v-row>
+    <v-row align="center">
+      <v-col>
+        <v-text-field v-model="password" type="password" placeholder="Confirmar contraseña" />
+      </v-col>
+    </v-row>
 
-    </v-form>
-  </v-container>
+  </form-layout>
+
 </template>
 
 <script>
@@ -54,10 +47,10 @@ import AuthenticationService from '@/services/AuthenticationService'
 import UserService from '@/services/UserService'
 import store from '@/store'
 
-import DismissibleAlert from '@/components/DismissibleAlert'
+import FormLayout from '@/components/FormLayout'
 
 export default {
-  components: { DismissibleAlert },
+  components: { FormLayout },
   data () {
     return {
       user: null,
