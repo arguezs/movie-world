@@ -6,15 +6,15 @@
         <v-row>
           <v-col>
             <v-row>
-              <v-col class="text--primary font-weight-bold" cols="2">Película:</v-col>
+              <v-col class="text--primary font-weight-bold" lg="2" md="4">Película:</v-col>
               <v-col>{{ session.Movie.title }}</v-col>
             </v-row>
             <v-row>
-              <v-col class="text--primary font-weight-bold" cols="2">Fecha:</v-col> 
+              <v-col class="text--primary font-weight-bold" lg="2" md="4">Fecha:</v-col> 
               <v-col>{{ dateString }}</v-col>
             </v-row>
             <v-row>
-              <v-col class="text--primary font-weight-bold" cols="2">Sesión:</v-col>
+              <v-col class="text--primary font-weight-bold" lg="2" md="4">Sesión:</v-col>
               <v-col>{{ timeString }}</v-col>
             </v-row>
           </v-col>
