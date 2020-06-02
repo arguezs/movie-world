@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar color="primary" dark>
+  <v-app-bar color="primary" dark>
     <router-link to="/" class="display-1 white--text td-none ma-6">Movie World</router-link>
 
     <v-spacer />
@@ -21,6 +21,8 @@
           </v-list-item>
         </v-list>
       </v-menu>
+
+      <v-app-bar-nav-icon @click="drawerUpdate = true"></v-app-bar-nav-icon>
       
     </v-toolbar-items>
 
@@ -30,13 +32,25 @@
         exact
         :to="{name: 'Login'}">Login</v-btn>
     </v-toolbar-items>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
+  props: { drawer: Boolean, isAdmin: Boolean },
+  data () {
+    return { drawerUpdate: this.drawer }
+  },
+  watch: {
+    drawerUpdate () {
+      this.$emmit('update:drawer', this.drawerUpdate)
+    },
+    drawer () {
+      this.drawerUpdate = this.drawer
+    }
+  }, 
   computed: {
     user () {
       return this.$store.state.user.name
