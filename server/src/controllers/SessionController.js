@@ -91,24 +91,27 @@ module.exports = {
       })
     }
   },
-  async fetchWithDayAndTheater(req, res) {
-    try {
-      const sessions = await Session.findAll({
-        where: {
-          date: req.params.date,
-          TheaterId: req.params.theaterId
-        },
-        order: [['time']],
-        include: [{
-          model: Movie
-        }]
-      })
-      res.send(sessions)
-    } catch (error) {
-      res.status(500).send({
-        error: error
-      })
-    }
+  fetchWithDayAndTheater(req, res) {
+    Session.findAll({
+      where: {
+        date: req.params.date,
+        TheaterId: req.params.theaterId
+      },
+      order: [['time']],
+      group: [['id']],
+      attributes: {
+        include: [[Sequelize.fn("COUNT", Sequelize.col("transactions.id")), "transactionCount"]] 
+      },
+      include: [{
+        model: Movie,
+        attributes: ['title']
+      }, {
+        model: Transaction,
+        attributes: []
+      }]
+    })
+      .then(sessions => { res.send(sessions) })
+      .catch(error => { res.status(500).send(error) })
   },
   async fetchNextWeek (req, res) {
     const today = new Date(Date.now())
