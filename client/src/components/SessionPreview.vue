@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="auto">{{ session.time }}</v-col>
+      <v-col cols="auto">{{ session.time.substring(0,5) }}</v-col>
       <v-col>{{ session.Movie.title }}</v-col>
       <v-col cols="auto">
         <v-btn
-          outlined
-          small
+          outlined small
           color="error"
+          :disabled="disabled"
           @click="deleteSession">
           <v-icon>delete</v-icon>
         </v-btn>
@@ -30,6 +30,12 @@ export default {
 
         this.$emit('resync-sessions')
       }
+    }
+  },
+  computed: {
+    disabled () {
+      const sessionDate = new Date(this.session.date + ' ' + this.session.time)
+      return sessionDate.getTime() < Date.now() || this.session.transactionCount > 0
     }
   }
 }
