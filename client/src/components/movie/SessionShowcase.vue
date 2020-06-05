@@ -7,10 +7,10 @@
       <v-row>
         <v-col cols="6" v-for="day in filteredSessions" :key="day.date">
           <v-row>
-            <v-col>{{day.date}}</v-col>
+            <v-col class="py-1">{{day.date}}</v-col>
           </v-row>
           <v-row>
-            <v-col v-for="session in day.sessions" :key="session.id" cols="auto" class="text-center">
+            <v-col v-for="session in day.sessions" :key="session.id" cols="auto" class="text-center pa-1">
               <session-chip :session="session" />
             </v-col>
           </v-row>
