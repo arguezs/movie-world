@@ -35,9 +35,6 @@
               <v-text-field dense type="number" name="year" label="Año" />
             </v-col>
             <v-col>
-              <v-text-field dense name="trailer" label="Trailer" />
-            </v-col>
-            <v-col>
               <v-file-input dense name="poster" accept="image/*" label="Poster" />
             </v-col>
             <v-col>

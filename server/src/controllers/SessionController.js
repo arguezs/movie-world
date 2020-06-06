@@ -161,15 +161,10 @@ module.exports = {
           attributes: ['row'],
           include: [{
             model: Seat,
-            attributes: ['id', 'seat', 'disabled']
+            attributes: ['id', 'seat']
           }]
         }]
-      }, {
-        model: Seat,
-        attributes: ['id'],
-        through: {attributes: []}
-      }
-    ]
+      }]
     }).then(session => {
       res.send(session)
     }).catch(error => {

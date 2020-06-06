@@ -7,8 +7,6 @@ module.exports = (sequelize, DataTypes) => {
   Session.associate = function(models) {
     Session.belongsTo(models.Theater)
     Session.belongsTo(models.Movie)
-    
-    Session.belongsToMany(models.Seat, {through: 'SessionSeat'})
 
     Session.hasMany(models.Transaction)
   }

@@ -5,7 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     duration: DataTypes.INTEGER,
     year: DataTypes.INTEGER,
     rating: DataTypes.STRING,
-    trailer: DataTypes.STRING,
     poster: DataTypes.STRING,
     director: DataTypes.STRING,
     cast: DataTypes.STRING,

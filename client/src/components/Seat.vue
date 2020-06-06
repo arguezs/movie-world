@@ -2,7 +2,6 @@
   <v-btn
     icon
     :outlined="selected"
-    :color="seat.disabled ? 'primary' : ''"
     :disabled="disabled && !selected">
     <v-icon @click="selectSeat">event_seat</v-icon>
   </v-btn>
