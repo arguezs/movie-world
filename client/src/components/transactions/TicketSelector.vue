@@ -11,7 +11,7 @@
     </v-row>
 
     <v-row align="center" justify="center" class="text-center">
-      <v-col cols="1">
+      <v-col cols="auto" sm="1">
         <v-btn
           ref="removeTicket"
           fab outlined x-small
@@ -19,9 +19,9 @@
           @click="actualTickets-=1"><v-icon>remove</v-icon></v-btn>
       </v-col>
 
-      <v-col cols="1">{{ actualTickets }}</v-col>
+      <v-col cols="auto" sm="1">{{ actualTickets }}</v-col>
 
-      <v-col cols="1">
+      <v-col cols="auto" sm="1">
         <v-btn
           ref="addTicket"
           fab outlined x-small
