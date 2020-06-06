@@ -1,12 +1,13 @@
 <template>
-  <v-container>
+  <v-container :class="{'px-0': !atLeastMd}">
     <v-row
       v-for="row in rows"
       :key="row.row"
       justify="center"
       align="center"
       no-gutters>
-      <v-col cols="1" class="text-secondary text-center">{{ row.row }}</v-col>
+      <v-col cols="1" class="text-secondary text-center"
+        v-if="atLeastMd">{{ row.row }}</v-col>
       <v-col
         cols="auto"
         v-for="seat in row.Seats"
@@ -29,6 +30,9 @@ export default {
       selectedSeats: [],
       sessionSeats: []
     }
+  },
+  computed: {
+    atLeastMd () { return !(this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm) }
   },
   components: { Seat },
   async mounted () {

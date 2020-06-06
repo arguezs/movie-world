@@ -46,18 +46,18 @@
 
       <v-stepper-items>
 
-        <v-stepper-content step="1">
+        <v-stepper-content :class="{'px-0': !atLeastMd}" step="1">
           <ticket-selector
             :tickets.sync="tickets" :step="step" />
         </v-stepper-content>
 
-        <v-stepper-content step="2">
+        <v-stepper-content :class="{'px-0': !atLeastMd}" step="2">
           <seat-selector
             :session="session"
             :tickets="tickets"/>
         </v-stepper-content>
 
-        <v-stepper-content step="3">
+        <v-stepper-content :class="{'px-0': !atLeastMd}" step="3">
           <transaction-confirmation
             @success="transactionSuccess"
             @error="transactionError" />
@@ -100,6 +100,9 @@ export default {
     timeString () {
       const date = new Date(this.session.date + ' ' + this.session.time)
       return date.toLocaleTimeString(undefined, {timeStyle: 'short'})
+    },
+    atLeastMd () {
+      return !(this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm)
     }
   },
   methods: {

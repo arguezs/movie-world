@@ -1,7 +1,7 @@
 <template>
   <v-container class="text-center">
     <v-row justify="center" v-if="!guest">
-      <v-col cols="4">
+      <v-col md="4">
         <v-row>
           <v-col>¿Tienes una cuenta?</v-col>
         </v-row>
@@ -14,7 +14,7 @@
 
       <v-divider vertical />
 
-      <v-col cols="4">
+      <v-col md="4">
         <v-row>
           <v-col>O</v-col>
         </v-row>

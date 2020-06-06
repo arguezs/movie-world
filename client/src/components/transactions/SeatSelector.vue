@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="px-0">
     <v-row class="text-center">
       <v-col>Selecciona tus asientos</v-col>
     </v-row>
