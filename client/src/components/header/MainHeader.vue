@@ -35,7 +35,7 @@
       </v-toolbar-items>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary right v-if="isAdmin">
+    <v-navigation-drawer v-model="drawer" absolute bottom temporary right v-if="isAdmin">
       <v-list nav dense>
         <v-list-item-group>
           <v-list-item :to="{name: 'Movies'}">

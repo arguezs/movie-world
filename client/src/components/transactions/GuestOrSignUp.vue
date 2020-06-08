@@ -7,7 +7,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-btn ref="chooseUser" color="primary" text to="/login">Accede para continuar</v-btn>
+            <v-btn ref="chooseUser" color="primary" text :to="{name: 'Login'}">Accede para continuar</v-btn>
           </v-col>
         </v-row>
       </v-col>
