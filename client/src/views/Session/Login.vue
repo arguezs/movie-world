@@ -48,7 +48,8 @@ export default {
         await AuthenticationService.login(this.user)
 
         if (this.route)
-          this.$router.push(this.route)
+          this.$router.push(this.route),
+          this.$store.commit('updateRoute', null)
         else
           this.$router.push('/')
       } catch (error) {

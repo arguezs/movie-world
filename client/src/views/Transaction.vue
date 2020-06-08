@@ -131,6 +131,7 @@ export default {
       this.$store.commit('updateRoute', from.path)
       next ()
     } else if (this.result || window.confirm('¿Está seguro de que desea dejar esta página?')){
+      this.$store.commit('updateRoute', null)
       this.$store.dispatch('resetTransactionState')
       next()
     } else {

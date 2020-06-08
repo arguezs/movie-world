@@ -33,10 +33,6 @@ const mutations = {
     state.mail = mail
   },
 
-  updateRoute (state, route) {
-    state.route = route
-  },
-
   addSeat (state, seat) {
     state.seats.push(seat)
   },
