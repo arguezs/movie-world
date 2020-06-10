@@ -80,11 +80,11 @@ export default {
     UserService.checkCode(code)
       .then(result => {
         if (!result.data)
-          next('/')
+          next({name: 'Error page', params: {errorCode: 404}})
         else
           next()
       })
-      .catch(() => { next('/') })
+      .catch(() => { next({name: 'Error page', params: {errorCode: 500}}) })
   }
 }
 </script>
