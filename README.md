@@ -10,8 +10,6 @@ This application will allow the user to browse the movie listing select any movi
 
 It will also allow admin members to alter movie listings and sessions, and visualize statistics on present and previous movie listings and sessions.
 
-**This is currently a work in progress.**
-
 ## Technologies
 
 The main purpose behind this project is to familiarize myself with the use of different frameworks and libraries.
