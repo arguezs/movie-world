@@ -10,8 +10,6 @@ La apliación permitirá a los usuarios ver las carteleras de distintos días,  
 
 También permitirá a los administradores modificar las carteleras y sesiones, y ver estadísticas las mismas.
 
-**Este proyecto está actualmente en desarrollo.**
-
 ## Tecnologías
 
 El propósito principal este proyecto es el de familiarizarme con el uso de distintos frameworks y librerías.
